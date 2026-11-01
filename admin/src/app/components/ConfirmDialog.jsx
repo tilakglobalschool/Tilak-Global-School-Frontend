@@ -43,7 +43,7 @@ export default function ConfirmDialog({
                 : 'bg-navy hover:bg-navy-2'
               }`}
           >
-            {loading ? 'ProcessingΓÇª' : 'Yes, Confirm'}
+            {loading ? 'Processing...' : 'Yes, Confirm'}
           </button>
         </div>
       </div>

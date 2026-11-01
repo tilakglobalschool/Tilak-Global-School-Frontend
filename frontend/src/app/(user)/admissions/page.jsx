@@ -3,7 +3,7 @@ import AdmissionProcess from "@/components/admissions/AdmissionProcess";
 import EligibilityDocumentsSection from "@/components/admissions/EligibilityDocumentsSection";
 import ApplyOnlineSection from "@/components/admissions/ApplyOnlineSection";
 import FeeStructureSection from "@/components/admissions/FeeStructureSection";
-import AdmissionsFaqSection from "@/components/admissions/AdmissionsFaqSection";
+import AdmissionsFaqWrapper from "@/components/admissions/AdmissionsFaqWrapper";
 import CtaBanner from "@/components/shared/CtaBanner";
 import { admissionsPage, admissionsHero, admissionsCta } from "@/data/admissions";
 
@@ -21,7 +21,7 @@ export default function AdmissionsPage() {
       <EligibilityDocumentsSection />
       <ApplyOnlineSection />
       <FeeStructureSection />
-      <AdmissionsFaqSection />
+      <AdmissionsFaqWrapper />
       <CtaBanner data={admissionsCta} />
     </>
   );

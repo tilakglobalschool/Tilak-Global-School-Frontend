@@ -131,7 +131,7 @@ export default function ContentPage() {
             <div>
               <p className="text-xs text-muted dark:text-gray-400 mb-1">Key: <code className="bg-sky dark:bg-gray-700 px-1 rounded">{editing.key}</code></p>
               <label className="block text-xs font-medium text-ink dark:text-gray-300 mb-1">
-                Value (saved as draft ΓÇö publish to make live)
+                Value (saved as draft - publish to make live)
               </label>
               {editing.type === 'list' ? (
                 <textarea value={draft} onChange={e=>setDraft(e.target.value)} rows={6}
@@ -157,7 +157,7 @@ export default function ContentPage() {
                 }}
                 disabled={saving}
                 className="flex-1 py-2 rounded-xl bg-navy text-white text-xs font-medium hover:bg-navy-2 disabled:opacity-50">
-                {saving ? 'SavingΓÇª' : 'Save & Publish'}
+                {saving ? 'Saving...' : 'Save & Publish'}
               </button>
             </div>
           </div>

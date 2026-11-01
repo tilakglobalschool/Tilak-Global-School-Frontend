@@ -12,7 +12,7 @@ import {
   TrendingUp, BarChart2, Activity, Calendar,
 } from 'lucide-react';
 
-// Recharts ΓÇö loaded client-side only
+// Recharts - loaded client-side only
 import {
   ResponsiveContainer,
   PieChart, Pie, Cell, Tooltip as PieTooltip, Legend as PieLegend,
@@ -20,7 +20,7 @@ import {
   LineChart, Line, Tooltip as LineTool, Legend as LineLegend,
 } from 'recharts';
 
-// ΓöÇΓöÇ Donut chart ΓÇö status breakdown ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+// -- Donut chart - status breakdown -----------------------------------------
 const DONUT_COLORS = ['#D98A1F', '#2E8B57', '#C0392B', '#3E7BC4'];
 
 function StatusDonut({ stats }) {
@@ -85,7 +85,7 @@ function StatusDonut({ stats }) {
   );
 }
 
-// ΓöÇΓöÇ Bar chart ΓÇö enquiries by class ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+// -- Bar chart - enquiries by class -----------------------------------------
 function ClassBarChart({ byClass = [] }) {
   // Only show classes with data, max 10
   const data = byClass
@@ -133,7 +133,7 @@ function ClassBarChart({ byClass = [] }) {
   );
 }
 
-// ΓöÇΓöÇ Line chart ΓÇö 30-day trend ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+// -- Line chart - 30-day trend -----------------------------------------------
 function TrendLineChart({ trend = [] }) {
   // Show last 30 days, format date as "DD MMM"
   const data = trend.map(d => ({
@@ -150,7 +150,7 @@ function TrendLineChart({ trend = [] }) {
         <div className="flex items-center gap-2">
           <TrendingUp size={16} className="text-navy dark:text-blue-300" />
           <span className="text-xs font-semibold text-ink dark:text-gray-200">
-            Enquiry Trend ΓÇö Last 30 Days
+            Enquiry Trend - Last 30 Days
           </span>
         </div>
         <span className="text-xs text-muted dark:text-gray-400">
@@ -191,7 +191,7 @@ function TrendLineChart({ trend = [] }) {
   );
 }
 
-// ΓöÇΓöÇ Main dashboard ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+// -- Main dashboard ----------------------------------------------------------
 export default function DashboardPage() {
   const { can } = useAuth();
   const [stats,    setStats]    = useState(null);
@@ -227,10 +227,10 @@ export default function DashboardPage() {
     <div>
       <PageHeader
         title="Overview"
-        subtitle="Welcome back ΓÇö here's what's happening today."
+        subtitle="Welcome back - here's what's happening today."
       />
 
-      {/* ΓöÇΓöÇ Row 1: Stat cards ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
+      {/* -- Row 1: Stat cards ------------------------------------------- */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
         <StatCard label="Total Enquiries" value={stats?.total}       icon={Users}       color="navy" />
         <StatCard label="Pending"         value={bs.pending}         icon={Clock}       color="warning" />
@@ -238,24 +238,24 @@ export default function DashboardPage() {
         <StatCard label="Info Requested"  value={bs.info_requested}  icon={Info}        color="gold" />
       </div>
 
-      {/* ΓöÇΓöÇ Row 2: Donut + Bar chart side by side ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
+      {/* -- Row 2: Donut + Bar chart side by side ------------------------ */}
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mb-5">
-        {/* Donut ΓÇö 2/5 width */}
+        {/* Donut - 2/5 width */}
         <div className="lg:col-span-2">
           <StatusDonut stats={stats} />
         </div>
-        {/* Bar ΓÇö 3/5 width */}
+        {/* Bar - 3/5 width */}
         <div className="lg:col-span-3">
           <ClassBarChart byClass={byClass} />
         </div>
       </div>
 
-      {/* ΓöÇΓöÇ Row 3: Line chart ΓÇö full width ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
+      {/* -- Row 3: Line chart - full width ------------------------------ */}
       <div className="mb-5">
         <TrendLineChart trend={trend} />
       </div>
 
-      {/* ΓöÇΓöÇ Row 4: Quick stats ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
+      {/* -- Row 4: Quick stats ------------------------------------------ */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
         <StatCard label="Today"        value={stats?.today}                  icon={Calendar}   color="navy" />
         <StatCard label="This Month"   value={stats?.thisMonth}              icon={TrendingUp}  color="gold" />
@@ -263,7 +263,7 @@ export default function DashboardPage() {
         <StatCard label="Applications" value={stats?.bySource?.applications} icon={CheckCircle} color="success" />
       </div>
 
-      {/* ΓöÇΓöÇ Row 5: Recent activity ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
+      {/* -- Row 5: Recent activity -------------------------------------- */}
       <div className="bg-white dark:bg-gray-900 rounded-xl
         border border-line dark:border-gray-800 shadow-sm overflow-hidden">
         <div className="flex items-center gap-2 px-4 py-3

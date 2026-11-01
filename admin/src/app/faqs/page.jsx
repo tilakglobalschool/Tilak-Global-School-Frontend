@@ -130,7 +130,7 @@ export default function FAQsPage() {
             <button onClick={handleSave} disabled={saving}
               className="flex-1 py-2 rounded-xl bg-navy text-white text-xs font-medium
                 hover:bg-navy-2 disabled:opacity-50">
-              {saving ? 'SavingΓÇª' : 'Save FAQ'}
+              {saving ? 'Saving...' : 'Save FAQ'}
             </button>
           </div>
         </div>

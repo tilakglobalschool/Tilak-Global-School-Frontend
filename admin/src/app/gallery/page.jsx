@@ -9,13 +9,36 @@ import ConfirmDialog from '@/app/components/ConfirmDialog';
 import EmptyState    from '@/app/components/EmptyState';
 import { LoadingPage } from '@/app/components/Spinner';
 import { Upload, Trash2, Pencil } from 'lucide-react';
+import { getUploadUrl } from '@/lib/uploadUrl';
 
 const CATEGORIES = ['Campus','Classrooms','Sports','Events','Activities'];
 
-// Build base URL for image src — environment-aware
-function getFileBase() {
-  if (typeof window !== 'undefined') return ''; // browser: served via Vercel rewrite → relative path works
-  return process.env.API_URL?.replace('/api', '') || 'https://api.tilakglobalschool.com';
+// ── GalleryField is at MODULE SCOPE — stable identity across parent re-renders ──
+// Previously defined as `const FI = ...` INSIDE GalleryPage → caused remount + focus loss.
+function GalleryField({ label, name, form, setForm, type = 'text', opts }) {
+  return (
+    <div>
+      <label className="block text-xs font-medium text-ink dark:text-gray-300 mb-1">{label}</label>
+      {type === 'select' ? (
+        <select
+          value={form[name]}
+          onChange={e => setForm(f => ({ ...f, [name]: e.target.value }))}
+          className="w-full px-3 py-2 text-xs rounded-xl border border-line dark:border-gray-700
+            bg-white dark:bg-gray-800 text-ink dark:text-gray-100"
+        >
+          {opts.map(o => <option key={o}>{o}</option>)}
+        </select>
+      ) : (
+        <input
+          type={type}
+          value={form[name]}
+          onChange={e => setForm(f => ({ ...f, [name]: e.target.value }))}
+          className="w-full px-3 py-2 text-xs rounded-xl border border-line dark:border-gray-700
+            bg-white dark:bg-gray-800 text-ink dark:text-gray-100"
+        />
+      )}
+    </div>
+  );
 }
 
 export default function GalleryPage() {
@@ -76,27 +99,14 @@ export default function GalleryPage() {
     setDeleteId(null); load();
   };
 
-  const FI = ({ label, name, type='text', opts }) => (
-    <div>
-      <label className="block text-xs font-medium text-ink dark:text-gray-300 mb-1">{label}</label>
-      {type === 'select' ? (
-        <select value={form[name]} onChange={e=>setForm(f=>({...f,[name]:e.target.value}))}
-          className="w-full px-3 py-2 text-xs rounded-xl border border-line dark:border-gray-700 bg-white dark:bg-gray-800 text-ink dark:text-gray-100">
-          {opts.map(o=><option key={o}>{o}</option>)}
-        </select>
-      ) : (
-        <input type={type} value={form[name]} onChange={e=>setForm(f=>({...f,[name]:e.target.value}))}
-          className="w-full px-3 py-2 text-xs rounded-xl border border-line dark:border-gray-700 bg-white dark:bg-gray-800 text-ink dark:text-gray-100" />
-      )}
-    </div>
-  );
-
   return (
     <div>
       <PageHeader title="Gallery" subtitle="Upload and manage school photos"
         actions={
-          <button onClick={() => { setForm({ caption:'', category:'Campus', order:images.length, status:'published' }); setFile(null); setUploadModal(true); }}
-            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-navy text-white text-xs font-semibold hover:bg-navy-2">
+          <button
+            onClick={() => { setForm({ caption:'', category:'Campus', order:images.length, status:'published' }); setFile(null); setUploadModal(true); }}
+            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-navy text-white text-xs font-semibold hover:bg-navy-2"
+          >
             <Upload size={14}/> Upload Photo
           </button>
         }
@@ -116,7 +126,7 @@ export default function GalleryPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {images.map(img => (
             <div key={img._id} className="relative group rounded-xl overflow-hidden border border-line dark:border-gray-700 shadow-sm">
-              <img src={`${getFileBase()}${img.imageUrl}`} alt={img.caption}
+              <img src={getUploadUrl(img.imageUrl)} alt={img.caption}
                 className="w-full aspect-video object-cover bg-sky dark:bg-gray-800" />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100">
                 <button onClick={() => openEdit(img)} className="p-2 rounded-full bg-white/90 text-navy hover:bg-white"><Pencil size={14}/></button>
@@ -144,14 +154,14 @@ export default function GalleryPage() {
                 file:rounded-lg file:border-0 file:text-xs file:font-medium
                 file:bg-navy file:text-white hover:file:bg-navy-2" />
           </div>
-          <FI label="Caption"  name="caption" />
-          <FI label="Category" name="category" type="select" opts={CATEGORIES} />
-          <FI label="Status"   name="status"   type="select" opts={['published','draft']} />
+          <GalleryField label="Caption"  name="caption"  form={form} setForm={setForm} />
+          <GalleryField label="Category" name="category" form={form} setForm={setForm} type="select" opts={CATEGORIES} />
+          <GalleryField label="Status"   name="status"   form={form} setForm={setForm} type="select" opts={['published','draft']} />
           <div className="flex gap-2 pt-1">
             <button onClick={() => setUploadModal(false)} className="flex-1 py-2 rounded-xl border border-line text-xs">Cancel</button>
             <button onClick={handleUpload} disabled={!file || saving}
               className="flex-1 py-2 rounded-xl bg-navy text-white text-xs font-medium hover:bg-navy-2 disabled:opacity-50">
-              {saving ? 'UploadingΓÇª' : 'Upload'}
+              {saving ? 'Uploading...' : 'Upload'}
             </button>
           </div>
         </div>
@@ -160,14 +170,14 @@ export default function GalleryPage() {
       {/* Edit modal */}
       <Modal open={editModal} onClose={() => setEditModal(false)} title="Edit Photo" size="sm">
         <div className="space-y-3">
-          <FI label="Caption"  name="caption" />
-          <FI label="Category" name="category" type="select" opts={CATEGORIES} />
-          <FI label="Status"   name="status"   type="select" opts={['published','draft']} />
+          <GalleryField label="Caption"  name="caption"  form={form} setForm={setForm} />
+          <GalleryField label="Category" name="category" form={form} setForm={setForm} type="select" opts={CATEGORIES} />
+          <GalleryField label="Status"   name="status"   form={form} setForm={setForm} type="select" opts={['published','draft']} />
           <div className="flex gap-2 pt-1">
             <button onClick={() => setEditModal(false)} className="flex-1 py-2 rounded-xl border border-line text-xs">Cancel</button>
             <button onClick={handleEdit} disabled={saving}
               className="flex-1 py-2 rounded-xl bg-navy text-white text-xs font-medium hover:bg-navy-2 disabled:opacity-50">
-              {saving ? 'SavingΓÇª' : 'Save'}
+              {saving ? 'Saving...' : 'Save'}
             </button>
           </div>
         </div>
@@ -178,4 +188,3 @@ export default function GalleryPage() {
     </div>
   );
 }
-

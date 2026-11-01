@@ -77,14 +77,14 @@ export default function AdmissionsPage() {
     <div>
       <PageHeader
         title="Admissions"
-        subtitle={`${meta.total ?? 'ΓÇö'} total applications`}
+        subtitle={`${meta.total ?? '-'} total applications`}
       />
 
       {/* Filters */}
       <div className="flex flex-wrap gap-2 mb-4">
         <div className="relative flex-1 min-w-[180px]">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
-          <input type="search" placeholder="Search name, IDΓÇª" value={search}
+          <input type="search" placeholder="Search name, ID..." value={search}
             onChange={e => { setSearch(e.target.value); setPage(1); }}
             className="w-full pl-8 pr-3 py-2 text-xs rounded-xl border border-gray-200 dark:border-gray-700
               bg-white dark:bg-gray-900 text-ink dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-navy/30" />
@@ -140,7 +140,7 @@ export default function AdmissionsPage() {
         </>
       )}
 
-      {/* Detail modal ΓÇö opens on row click */}
+      {/* Detail modal - opens on row click */}
       <Modal open={!!detail} onClose={() => setDetail(null)} title="Application Detail" size="lg">
         {detail?._loading ? <LoadingPage /> : detail ? (
           <div className="space-y-2.5 text-xs">
@@ -149,12 +149,12 @@ export default function AdmissionsPage() {
               <Row label="Status"><Badge variant={detail.status}>{STATUS_LABELS[detail.status]}</Badge></Row>
               <Row label="Student Name"    value={detail.studentName} />
               <Row label="Class Applying"  value={detail.classApplying} />
-              <Row label="Date of Birth"   value={detail.dateOfBirth ? new Date(detail.dateOfBirth).toLocaleDateString() : 'ΓÇö'} />
-              <Row label="Previous School" value={detail.previousSchool || 'ΓÇö'} />
+              <Row label="Date of Birth"   value={detail.dateOfBirth ? new Date(detail.dateOfBirth).toLocaleDateString() : '-'} />
+              <Row label="Previous School" value={detail.previousSchool || '-'} />
               <Row label="Parent Name"  value={detail.parentName} />
               <Row label="Phone"        value={detail.phone} />
-              <Row label="Email"        value={detail.email || 'ΓÇö'} />
-              <Row label="Address"      value={detail.address || 'ΓÇö'} />
+              <Row label="Email"        value={detail.email || '-'} />
+              <Row label="Address"      value={detail.address || '-'} />
             </div>
             {detail.message    && <div className="pt-1"><Row label="Message"     value={detail.message} /></div>}
             {detail.statusNote && <div className="pt-1"><Row label="Status Note" value={detail.statusNote} /></div>}
@@ -165,7 +165,7 @@ export default function AdmissionsPage() {
                   {detail.statusHistory.map((h, i) => (
                     <div key={i} className="flex items-center gap-2 text-xs text-muted dark:text-gray-400 bg-gray-50 dark:bg-gray-800 rounded-lg px-3 py-2">
                       <Badge variant={h.status}>{h.status}</Badge>
-                      <span className="flex-1">{h.note || 'ΓÇö'}</span>
+                      <span className="flex-1">{h.note || '-'}</span>
                       <span>{new Date(h.changedAt).toLocaleString()}</span>
                     </div>
                   ))}
@@ -190,7 +190,7 @@ export default function AdmissionsPage() {
         <div className="space-y-3">
           <label className="block text-xs font-medium text-ink dark:text-gray-300">Note (optional)</label>
           <textarea value={statusNote} onChange={e => setSN(e.target.value)} rows={3}
-            placeholder="Add a noteΓÇª"
+            placeholder="Add a note..."
             className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 dark:border-gray-700
               bg-white dark:bg-gray-800 text-ink dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-navy/30 resize-none" />
           <div className="flex gap-2">
@@ -198,7 +198,7 @@ export default function AdmissionsPage() {
               className="flex-1 py-2 rounded-xl border border-gray-200 dark:border-gray-700 text-xs hover:bg-gray-50 dark:hover:bg-gray-800">Cancel</button>
             <button onClick={handleStatusSave} disabled={saving}
               className="flex-1 py-2 rounded-xl bg-navy text-white text-xs font-medium hover:bg-navy-2 disabled:opacity-50">
-              {saving ? 'SavingΓÇª' : 'Confirm'}
+              {saving ? 'Saving...' : 'Confirm'}
             </button>
           </div>
         </div>
@@ -218,7 +218,7 @@ function Row({ label, value, mono, children }) {
   return (
     <div className="flex gap-2">
       <span className="text-muted dark:text-gray-500 w-28 shrink-0 font-medium">{label}</span>
-      <span className={`text-ink dark:text-gray-200 flex-1 min-w-0 ${mono ? 'font-mono' : ''}`}>{children ?? value ?? 'ΓÇö'}</span>
+      <span className={`text-ink dark:text-gray-200 flex-1 min-w-0 ${mono ? 'font-mono' : ''}`}>{children ?? value ?? '-'}</span>
     </div>
   );
 }
@@ -227,7 +227,7 @@ function Pagination({ meta, page, onChange }) {
   return (
     <div className="flex items-center justify-between mt-3">
       <p className="text-xs text-muted dark:text-gray-400">
-        {(page-1)*meta.limit+1}ΓÇô{Math.min(page*meta.limit,meta.total)} of {meta.total}
+        {(page-1)*meta.limit+1}-{Math.min(page*meta.limit,meta.total)} of {meta.total}
       </p>
       <div className="flex gap-1">
         <button onClick={() => onChange(p=>p-1)} disabled={!meta.hasPrev}

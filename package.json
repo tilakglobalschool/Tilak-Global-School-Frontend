@@ -4,18 +4,21 @@
   "private": true,
   "description": "Tilak Global School - Public Website + Admin Panel",
   "scripts": {
-    "dev":            "concurrently -n FRONTEND,ADMIN -c blue,green \"cd frontend && npm run dev\" \"cd admin && npm run dev\"",
-    "dev:frontend":   "cd frontend && npm run dev",
-    "dev:admin":      "cd admin    && npm run dev",
-    "dev:all":        "concurrently -n FRONTEND,ADMIN,BACKEND -c blue,green,yellow \"cd frontend && npm run dev\" \"cd admin && npm run dev\" \"cd backend && npm run dev\"",
-    "build":          "npm run build:frontend && npm run build:admin",
+    "dev": "concurrently -n FRONTEND,ADMIN -c blue,green \"cd frontend && npm run dev\" \"cd admin && npm run dev\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:admin": "cd admin    && npm run dev",
+    "dev:all": "concurrently -n FRONTEND,ADMIN,BACKEND -c blue,green,yellow \"cd frontend && npm run dev\" \"cd admin && npm run dev\" \"cd backend && npm run dev\"",
+    "build": "npm run build:frontend && npm run build:admin",
     "build:frontend": "cd frontend && npm install && npm run build",
-    "build:admin":    "cd admin    && npm install && npm run build",
-    "lint":           "concurrently \"cd frontend && npm run lint\" \"cd admin && npm run lint\"",
+    "build:admin": "cd admin    && npm install && npm run build",
+    "lint": "concurrently \"cd frontend && npm run lint\" \"cd admin && npm run lint\"",
     "start:frontend": "cd frontend && npm start",
-    "start:admin":    "cd admin    && npm start"
+    "start:admin": "cd admin    && npm start"
   },
   "devDependencies": {
     "concurrently": "^9.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.8"
   }
 }

@@ -5,20 +5,20 @@
 
 export const contactPage = {
   heading: "Contact Us",
-  subtext: "[Contact details, enquiry form, map — coming soon]",
+  subtext: "Get in touch with Tilak Global School. Visit us at Bindayaka, Mukandpura Road, Jaipur.",
 };
 
 export const careersPage = {
   heading: "Careers",
-  subtext: "[Career opportunities — coming soon]",
+  subtext: "Interested in joining the Tilak Global School team? Career opportunities will be posted here.",
 };
 
 export const downloadsPage = {
   heading: "Downloads",
-  subtext: "[Downloadable documents — coming soon]",
+  subtext: "Download school documents, forms and notices from this section.",
 };
 
 export const privacyPolicyPage = {
   heading: "Privacy Policy",
-  subtext: "[Privacy policy content — coming soon]",
+  subtext: "This page outlines how Tilak Global School collects, uses and protects your information.",
 };

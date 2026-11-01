@@ -6,6 +6,10 @@
     {
       "source": "/api/(.*)",
       "destination": "https://api.tilakglobalschool.com/api/$1"
+    },
+    {
+      "source": "/uploads/(.*)",
+      "destination": "https://api.tilakglobalschool.com/uploads/$1"
     }
   ],
   "headers": [

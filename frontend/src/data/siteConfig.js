@@ -12,11 +12,11 @@ export const siteConfig = {
 
   address:       "Bindayaka, Mukandpura Road, Jaipur, Rajasthan",
   addressShort:  "Bindayaka, Mukandpura Road, Jaipur", // used in mobile header bar
-  phone:         "[Phone: to be confirmed]",
-  phoneHref:     "tel:[to be confirmed]",
-  email:         "[Email: to be confirmed]",
-  emailHref:     "mailto:[to be confirmed]",
-  whatsapp:      "[WhatsApp: to be confirmed]",
+  phone:         "",
+  phoneHref:     "",
+  email:         "",
+  emailHref:     "",
+  whatsapp:      "",
 
   social: {
     facebook:  "#",

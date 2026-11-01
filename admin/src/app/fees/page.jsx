@@ -61,14 +61,14 @@ export default function FeesPage() {
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-navy text-white
                   text-xs font-medium hover:bg-navy-2 disabled:opacity-50 transition-colors">
                 <Save size={12} />
-                {saving[fee._id] ? 'SavingΓÇª' : saved[fee._id] ? 'Saved!' : 'Save'}
+                {saving[fee._id] ? 'Saving...' : saved[fee._id] ? 'Saved!' : 'Save'}
               </button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {[
-                ['Admission Fee (Γé╣)', 'admissionFee'],
-                ['Tuition Fee/Term (Γé╣)', 'tuitionFeePerTerm'],
-                ['Other Charges (Γé╣)', 'otherCharges'],
+                ['Admission Fee (₹)', 'admissionFee'],
+                ['Tuition Fee/Term (₹)', 'tuitionFeePerTerm'],
+                ['Other Charges (₹)', 'otherCharges'],
               ].map(([label, field]) => (
                 <div key={field}>
                   <label className="block text-xs text-muted dark:text-gray-400 mb-1">{label}</label>

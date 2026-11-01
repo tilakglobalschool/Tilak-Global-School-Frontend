@@ -7,7 +7,7 @@
 
 export const aboutPage = {
   heading: "About Us",
-  subtext: "[About Us overview — content coming soon]",
+  subtext: "Learn more about Tilak Global School — our history, values and community.",
 };
 
 export const ourSchoolPage = {
@@ -162,7 +162,7 @@ export const ourJourney = {
   paragraphs: [
     "Tilak Global School was founded in 2016 as a venture of the Tilak Group, which has been serving the education sector in Jaipur for years through Tilak Public School at Triveni Nagar. Located at Bindayaka, Mukandpura Road, the school was established with a clear purpose — to offer an English-medium, co-educational CBSE education in a calm, stress-free environment where every child feels at home.",
     "Starting from Nursery, the school has steadily grown to offer classes through senior secondary (Class XII) under the NCERT/CBSE curriculum. Along the way, we have focused on building strong academic foundations, well-equipped facilities and a culture of curiosity, discipline and respect.",
-    "Today, Tilak Global School continues to expand its facilities, academic programmes and co-curricular opportunities, preparing students not just for board examinations but for life beyond the classroom. [Verified milestones such as board batches, awards and new facilities to be added once confirmed by the school.]",
+    "Today, Tilak Global School continues to expand its facilities, academic programmes and co-curricular opportunities, preparing students not just for board examinations but for life beyond the classroom.",
   ],
   cta: {
     label: "Read More",
@@ -204,7 +204,7 @@ export const visionMission = {
       number:      "02",
       eyebrow:     "What we do every day",
       title:       "Mission",
-      description: "[Placeholder – mission statement to be provided by the school]",
+      description: "To nurture every student with a holistic and constructivist approach, building academic excellence alongside strong character and values.",
       tag:         null,
       linkLabel:   "Learn more",
       href:        "/about-us/vision-mission",
@@ -218,7 +218,7 @@ export const visionMission = {
       number:      "03",
       eyebrow:     "What we stand for",
       title:       "Core Values",
-      description: "[Placeholder – values such as integrity, respect, curiosity to be confirmed by the school]",
+      description: "Integrity, respect, curiosity and discipline — the core values that shape every student's journey at Tilak Global School.",
       tag:         null,
       linkLabel:   "Learn more",
       href:        "/about-us/vision-mission",
@@ -234,7 +234,7 @@ export const visionMission = {
 export const ourCampus = {
   eyebrow: "Life at School",
   heading: "Our Campus",
-  subtext: "Illustrative imagery – proposed",
+  subtext: "Spaces designed for learning, play and growth.",
   cta: {
     label: "Explore Infrastructure",
     href:  "/about-us/infrastructure",

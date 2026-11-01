@@ -23,7 +23,7 @@ export const feeStructurePage = {
 export const onlineAdmissionFormPage = {
   heading:  "Online Admission Form",
   subtext:  "Fill in the details below. Our team will get back to you shortly.",
-  formNote: "[Admission enquiry / application form — coming soon]",
+  formNote: "Our admissions team will contact you after reviewing your application.",
 };
 
 // ── Hero data ─────────────────────────────────────────────────────────────────

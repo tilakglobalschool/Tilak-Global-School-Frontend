@@ -5,18 +5,7 @@ import { adminApi } from '@/lib/adminApi';
 import PageHeader from '@/app/components/PageHeader';
 import { LoadingPage } from '@/app/components/Spinner';
 import { Save, Upload } from 'lucide-react';
-
-// Build URL for uploaded files — works in both browser and server render
-function fileUrl(path) {
-  if (!path) return '';
-  if (path.startsWith('http')) return path; // already absolute
-  // In browser: Vercel rewrite handles /uploads/* → backend
-  // In SSR: prepend the API origin
-  const base = typeof window !== 'undefined'
-    ? ''
-    : (process.env.API_URL?.replace('/api', '') || 'https://api.tilakglobalschool.com');
-  return `${base}${path}`;
-}
+import { getUploadUrl } from '@/lib/uploadUrl';
 
 function Field({ label, name, value, onChange, type = 'text', placeholder, hint }) {
   return (
@@ -132,7 +121,7 @@ export default function SettingsPage() {
             className="flex items-center gap-2 px-4 py-2 rounded-xl bg-navy text-white
               text-xs font-semibold hover:bg-navy-2 disabled:opacity-50 transition-colors">
             <Save size={14} />
-            {saving ? 'SavingΓÇª' : saved ? 'Saved!' : 'Save Changes'}
+            {saving ? 'Saving...' : saved ? 'Saved!' : 'Save Changes'}
           </button>
         }
       />
@@ -159,13 +148,13 @@ export default function SettingsPage() {
           <Field label="Address" name="address" value={form.address} onChange={handleChange} type="textarea" />
         </div>
         <Field label="PIN Code"        name="pinCode"        value={form.pinCode}        onChange={handleChange} placeholder="302001" />
-        <Field label="Office Timings"  name="officeTimings"  value={form.officeTimings}  onChange={handleChange} placeholder="MonΓÇôSat, 8:00 AM ΓÇô 2:00 PM" />
+        <Field label="Office Timings"  name="officeTimings"  value={form.officeTimings}  onChange={handleChange} placeholder="Mon-Sat, 8:00 AM - 2:00 PM" />
         <Field label="WhatsApp Number" name="whatsappNumber" value={form.whatsappNumber} onChange={handleChange} placeholder="+91XXXXXXXXXX" />
         <div className="md:col-span-2">
           <Field label="WhatsApp Pre-filled Message" name="whatsappMessage" value={form.whatsappMessage} onChange={handleChange} />
         </div>
         <div className="md:col-span-2">
-          <Field label="Google Maps Embed URL" name="mapEmbedUrl" value={form.mapEmbedUrl} onChange={handleChange} placeholder="https://maps.google.com/ΓÇª" />
+          <Field label="Google Maps Embed URL" name="mapEmbedUrl" value={form.mapEmbedUrl} onChange={handleChange} placeholder="https://maps.google.com/..." />
         </div>
       </Section>
 
@@ -193,7 +182,7 @@ export default function SettingsPage() {
         {/* Director photo upload */}
         <div className="flex items-center gap-3">
           {form.directorPhotoUrl && (
-            <img src={fileUrl(form.directorPhotoUrl)}
+            <img src={getUploadUrl(form.directorPhotoUrl)}
               alt="Director" className="w-12 h-12 rounded-full object-cover border border-line" />
           )}
           <button onClick={() => handleUpload('director-photo', 'directorPhotoUrl')}
@@ -208,7 +197,7 @@ export default function SettingsPage() {
       <Section title="Media">
         <div className="flex items-center gap-3">
           {form.logoUrl && (
-            <img src={fileUrl(form.logoUrl)}
+            <img src={getUploadUrl(form.logoUrl)}
               alt="Logo" className="h-10 object-contain border border-line rounded" />
           )}
           <button onClick={() => handleUpload('logo', 'logoUrl')}
@@ -230,9 +219,9 @@ export default function SettingsPage() {
       </Section>
 
       <Section title="Social Media Links">
-        <Field label="Facebook"  value={form.socialLinks?.facebook  ?? ''} onChange={e => handleNestedChange('socialLinks','facebook',  e.target.value)} placeholder="https://facebook.com/ΓÇª" />
-        <Field label="Instagram" value={form.socialLinks?.instagram ?? ''} onChange={e => handleNestedChange('socialLinks','instagram', e.target.value)} placeholder="https://instagram.com/ΓÇª" />
-        <Field label="YouTube"   value={form.socialLinks?.youtube   ?? ''} onChange={e => handleNestedChange('socialLinks','youtube',   e.target.value)} placeholder="https://youtube.com/ΓÇª" />
+        <Field label="Facebook"  value={form.socialLinks?.facebook  ?? ''} onChange={e => handleNestedChange('socialLinks','facebook',  e.target.value)} placeholder="https://facebook.com/..." />
+        <Field label="Instagram" value={form.socialLinks?.instagram ?? ''} onChange={e => handleNestedChange('socialLinks','instagram', e.target.value)} placeholder="https://instagram.com/..." />
+        <Field label="YouTube"   value={form.socialLinks?.youtube   ?? ''} onChange={e => handleNestedChange('socialLinks','youtube',   e.target.value)} placeholder="https://youtube.com/..." />
         <Field label="Other"     value={form.socialLinks?.other     ?? ''} onChange={e => handleNestedChange('socialLinks','other',     e.target.value)} />
       </Section>
     </div>

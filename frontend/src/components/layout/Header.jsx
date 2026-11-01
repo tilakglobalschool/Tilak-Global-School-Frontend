@@ -72,10 +72,12 @@ export default function Header() {
                   {siteConfig.addressShort}
                 </span>
               </span>
-              <a href={siteConfig.phoneHref} className="flex items-center gap-1 text-[10px] font-medium shrink-0 hover:opacity-80 transition">
-                <PhoneCall className="w-3 h-3 shrink-0" />
-                <span>Call</span>
-              </a>
+              {siteConfig.phone && (
+                <a href={siteConfig.phoneHref} className="flex items-center gap-1 text-[10px] font-medium shrink-0 hover:opacity-80 transition">
+                  <PhoneCall className="w-3 h-3 shrink-0" />
+                  <span>Call</span>
+                </a>
+              )}
             </div>
 
             {/* Desktop row */}
@@ -85,14 +87,18 @@ export default function Header() {
                   <MapPin className="w-3.5 h-3.5 shrink-0" />
                   {siteConfig.address}
                 </span>
-                <a href={siteConfig.phoneHref} className="flex items-center gap-1 text-xs hover:opacity-80 transition whitespace-nowrap">
-                  <PhoneCall className="w-3.5 h-3.5 shrink-0" />
-                  {siteConfig.phone}
-                </a>
-                <a href={siteConfig.emailHref} className="flex items-center gap-1 text-xs hover:opacity-80 transition whitespace-nowrap">
-                  <Mail className="w-3.5 h-3.5 shrink-0" />
-                  {siteConfig.email}
-                </a>
+                {siteConfig.phone && (
+                  <a href={siteConfig.phoneHref} className="flex items-center gap-1 text-xs hover:opacity-80 transition whitespace-nowrap">
+                    <PhoneCall className="w-3.5 h-3.5 shrink-0" />
+                    {siteConfig.phone}
+                  </a>
+                )}
+                {siteConfig.email && (
+                  <a href={siteConfig.emailHref} className="flex items-center gap-1 text-xs hover:opacity-80 transition whitespace-nowrap">
+                    <Mail className="w-3.5 h-3.5 shrink-0" />
+                    {siteConfig.email}
+                  </a>
+                )}
               </div>
               <div className="flex items-center gap-3 shrink-0">
                 <a href={siteConfig.social.facebook}  aria-label="Facebook"  className="hover:opacity-75 transition"><FacebookIcon /></a>

@@ -251,13 +251,13 @@ export default function UsersPage() {
                       <IBtn onClick={() => openPerms(u)} title="Edit permissions" color="blue"><Shield size={13}/></IBtn>
                       {/* Reset password */}
                       <IBtn onClick={() => { setEditUser(u); setPwModal(true); setNewPw(''); }} title="Reset password" color="gold"><KeyRound size={13}/></IBtn>
-                      {/* Activate / Deactivate ΓÇö not for yourself */}
+                      {/* Activate / Deactivate - not for yourself */}
                       {u._id !== me?._id && (
                         u.isActive
                           ? <IBtn onClick={() => setDeactId(u._id)} title="Deactivate" color="red"><UserX size={13}/></IBtn>
                           : <IBtn onClick={() => setReactId(u._id)} title="Reactivate" color="green"><UserCheck size={13}/></IBtn>
                       )}
-                      {/* Hard delete ΓÇö not for yourself */}
+                      {/* Hard delete - not for yourself */}
                       {u._id !== me?._id && (
                         <IBtn onClick={() => setDeleteId(u._id)} title="Delete user" color="red"><Trash2 size={13}/></IBtn>
                       )}
@@ -338,7 +338,7 @@ export default function UsersPage() {
             </button>
             <button onClick={handleSave} disabled={saving}
               className="flex-1 py-2 rounded-xl bg-navy text-white text-xs font-medium hover:bg-navy-2 disabled:opacity-50">
-              {saving ? 'SavingΓÇª' : editUser ? 'Update User' : 'Create User'}
+              {saving ? 'Saving...' : editUser ? 'Update User' : 'Create User'}
             </button>
           </div>
         </div>
@@ -346,7 +346,7 @@ export default function UsersPage() {
 
       {/* Permissions Editor Modal */}
       <Modal open={permModal} onClose={() => setPermModal(false)}
-        title={`Permissions ΓÇö ${editUser?.name}`} size="lg">
+        title={`Permissions - ${editUser?.name}`} size="lg">
         <div className="space-y-3">
           <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
             <table className="w-full text-xs">
@@ -385,7 +385,7 @@ export default function UsersPage() {
             </button>
             <button onClick={handleSavePerms} disabled={saving}
               className="flex-1 py-2 rounded-xl bg-navy text-white text-xs font-medium hover:bg-navy-2 disabled:opacity-50">
-              {saving ? 'SavingΓÇª' : 'Save Permissions'}
+              {saving ? 'Saving...' : 'Save Permissions'}
             </button>
           </div>
         </div>
@@ -393,7 +393,7 @@ export default function UsersPage() {
 
       {/* Reset Password Modal */}
       <Modal open={pwModal} onClose={() => setPwModal(false)}
-        title={`Reset Password ΓÇö ${editUser?.name}`} size="sm">
+        title={`Reset Password - ${editUser?.name}`} size="sm">
         <div className="space-y-3">
           <Field label="New Password (min 8 chars)" type="password" value={newPw}
             onChange={e => setNewPw(e.target.value)} />
@@ -404,7 +404,7 @@ export default function UsersPage() {
             </button>
             <button onClick={handleResetPw} disabled={saving || newPw.length < 8}
               className="flex-1 py-2 rounded-xl bg-red-600 text-white text-xs font-medium hover:bg-red-700 disabled:opacity-50">
-              {saving ? 'ResettingΓÇª' : 'Reset Password'}
+              {saving ? 'Resetting...' : 'Reset Password'}
             </button>
           </div>
         </div>

@@ -60,18 +60,24 @@ export default function Footer() {
                 <MapPin size={16} className="text-[#C8102E] shrink-0 mt-0.5" />
                 <span>{siteConfig.address}</span>
               </li>
-              <li className="flex items-center gap-2">
-                <PhoneCall size={16} className="text-[#C8102E] shrink-0" />
-                <a href={siteConfig.phoneHref} className="hover:text-white transition">{siteConfig.phone}</a>
-              </li>
-              <li className="flex items-center gap-2">
-                <Mail size={16} className="text-[#C8102E] shrink-0" />
-                <a href={siteConfig.emailHref} className="hover:text-white transition">{siteConfig.email}</a>
-              </li>
+              {siteConfig.phone && (
+                <li className="flex items-center gap-2">
+                  <PhoneCall size={16} className="text-[#C8102E] shrink-0" />
+                  <a href={siteConfig.phoneHref} className="hover:text-white transition">{siteConfig.phone}</a>
+                </li>
+              )}
+              {siteConfig.email && (
+                <li className="flex items-center gap-2">
+                  <Mail size={16} className="text-[#C8102E] shrink-0" />
+                  <a href={siteConfig.emailHref} className="hover:text-white transition">{siteConfig.email}</a>
+                </li>
+              )}
             </ul>
-            <div className="mt-4 w-full h-28 rounded-lg bg-[#0d2f6e] border border-white/10 flex items-center justify-center">
-              <span className="text-xs text-blue-300">{siteConfig.mapEmbed}</span>
-            </div>
+            {siteConfig.mapEmbed && (
+              <div className="mt-4 w-full h-28 rounded-lg bg-[#0d2f6e] border border-white/10 flex items-center justify-center">
+                <span className="text-xs text-blue-300">{siteConfig.mapEmbed}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -23,7 +23,7 @@ export default function StatCard({ label, value, icon: Icon, color = 'navy' }) {
       <div className="min-w-0">
         <p className="text-xs text-muted dark:text-gray-400 truncate">{label}</p>
         <p className="text-lg font-semibold text-ink dark:text-gray-100 leading-tight">
-          {value ?? 'ΓÇö'}
+          {value ?? '-'}
         </p>
       </div>
     </div>

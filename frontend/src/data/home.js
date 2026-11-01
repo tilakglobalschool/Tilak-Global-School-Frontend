@@ -229,8 +229,8 @@ export const whyChoose = {
     {
       id:          "achievements",
       number:      "04",
-      title:       "[Placeholder]",
-      description: "Board results, achievements and awards – to be added once verified by the school.",
+      title:       "Achievements & Results",
+      description: "Board results, achievements and awards — to be updated once verified by the school.",
       highlight:   true,
       image: {
         src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80&fm=webp",

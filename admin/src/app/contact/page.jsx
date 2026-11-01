@@ -94,7 +94,7 @@ export default function ContactPage() {
                     ${e.status === 'unread' ? 'font-semibold' : ''}`}>
                   <td className="px-3 py-2">{e.name}</td>
                   <td className="px-3 py-2 text-muted dark:text-gray-400">{e.email}</td>
-                  <td className="px-3 py-2 text-muted dark:text-gray-400 max-w-xs truncate">{e.subject || 'ΓÇö'}</td>
+                  <td className="px-3 py-2 text-muted dark:text-gray-400 max-w-xs truncate">{e.subject || '-'}</td>
                   <td className="px-3 py-2"><Badge variant={e.status}>{e.status}</Badge></td>
                   <td className="px-3 py-2 text-muted whitespace-nowrap">{new Date(e.createdAt).toLocaleDateString()}</td>
                   <td className="px-3 py-2">
@@ -118,8 +118,8 @@ export default function ContactPage() {
           <div className="space-y-3 text-xs">
             <Row label="Name"    value={detail.name} />
             <Row label="Email"   value={detail.email} />
-            <Row label="Phone"   value={detail.phone || 'ΓÇö'} />
-            <Row label="Subject" value={detail.subject || 'ΓÇö'} />
+            <Row label="Phone"   value={detail.phone || '-'} />
+            <Row label="Subject" value={detail.subject || '-'} />
             <Row label="Date"    value={new Date(detail.createdAt).toLocaleString()} />
             <div>
               <span className="text-muted dark:text-gray-400">Message</span>

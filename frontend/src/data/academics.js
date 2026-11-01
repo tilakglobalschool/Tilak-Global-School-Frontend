@@ -5,22 +5,22 @@
 
 export const academicsPage = {
   heading: "Academics",
-  subtext: "[Academics overview — content coming soon]",
+  subtext: "Explore our academic programmes, curriculum stages and teaching approach.",
 };
 
 export const curriculumPage = {
   heading: "Curriculum",
-  subtext: "[CBSE Curriculum details — content coming soon]",
+  subtext: "A structured NCERT/CBSE curriculum designed to build strong academic foundations from Nursery to Class XII.",
 };
 
 export const facultyPage = {
   heading: "Faculty",
-  subtext: "[Faculty details — to be confirmed by school]",
+  subtext: "Dedicated educators committed to creating an engaging and supportive learning experience.",
 };
 
 export const academicCalendarPage = {
   heading: "Academic Calendar",
-  subtext: "[Academic Calendar — to be confirmed by school]",
+  subtext: "Stay informed about important academic dates, examinations and school activities throughout the session.",
 };
 
 // ── Page hero data (feed AcademicsHero → PageHero) ───────────────────────────

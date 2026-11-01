@@ -13,6 +13,45 @@ import { Plus, Pencil, Trash2, Star, Eye, EyeOff } from 'lucide-react';
 const CATEGORIES = ['News', 'Event', 'Notice'];
 const EMPTY_FORM = { title:'', category:'News', date:'', summary:'', body:'', status:'draft' };
 
+// ── NewsField is at MODULE SCOPE — stable identity across parent re-renders ──
+// Previously defined as `const F = ...` INSIDE NewsPage → caused remount + focus loss.
+function NewsField({ label, name, form, setForm, type = 'text', opts }) {
+  return (
+    <div>
+      <label className="block text-xs font-medium text-ink dark:text-gray-300 mb-1">{label}</label>
+      {type === 'select' ? (
+        <select
+          value={form[name]}
+          onChange={e => setForm(f => ({ ...f, [name]: e.target.value }))}
+          className="w-full px-3 py-2 text-xs rounded-xl border border-line dark:border-gray-700
+            bg-white dark:bg-gray-800 text-ink dark:text-gray-100
+            focus:outline-none focus:ring-2 focus:ring-navy/30"
+        >
+          {opts.map(o => <option key={o}>{o}</option>)}
+        </select>
+      ) : type === 'textarea' ? (
+        <textarea
+          value={form[name]}
+          rows={3}
+          onChange={e => setForm(f => ({ ...f, [name]: e.target.value }))}
+          className="w-full px-3 py-2 text-xs rounded-xl border border-line dark:border-gray-700
+            bg-white dark:bg-gray-800 text-ink dark:text-gray-100
+            focus:outline-none focus:ring-2 focus:ring-navy/30 resize-none"
+        />
+      ) : (
+        <input
+          type={type}
+          value={form[name]}
+          onChange={e => setForm(f => ({ ...f, [name]: e.target.value }))}
+          className="w-full px-3 py-2 text-xs rounded-xl border border-line dark:border-gray-700
+            bg-white dark:bg-gray-800 text-ink dark:text-gray-100
+            focus:outline-none focus:ring-2 focus:ring-navy/30"
+        />
+      )}
+    </div>
+  );
+}
+
 export default function NewsPage() {
   const [posts,   setPosts]   = useState([]);
   const [meta,    setMeta]    = useState({});
@@ -63,6 +102,7 @@ export default function NewsPage() {
     catch (err) { toast.error(err.message || 'Delete failed'); }
     setDeleteId(null); load();
   };
+
   const handlePublish   = async (id) => {
     try { await adminApi.publishNews(id);   toast.success('Post published');   load(); }
     catch (err) { toast.error(err.message || 'Publish failed'); }
@@ -76,33 +116,17 @@ export default function NewsPage() {
     catch (err) { toast.error(err.message || 'Could not set featured'); }
   };
 
-  const F = ({ label, name, type='text', opts }) => (
-    <div>
-      <label className="block text-xs font-medium text-ink dark:text-gray-300 mb-1">{label}</label>
-      {type === 'select' ? (
-        <select value={form[name]} onChange={e => setForm(f=>({...f,[name]:e.target.value}))}
-          className="w-full px-3 py-2 text-xs rounded-xl border border-line dark:border-gray-700 bg-white dark:bg-gray-800 text-ink dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-navy/30">
-          {opts.map(o => <option key={o}>{o}</option>)}
-        </select>
-      ) : type === 'textarea' ? (
-        <textarea value={form[name]} rows={3} onChange={e => setForm(f=>({...f,[name]:e.target.value}))}
-          className="w-full px-3 py-2 text-xs rounded-xl border border-line dark:border-gray-700 bg-white dark:bg-gray-800 text-ink dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-navy/30 resize-none" />
-      ) : (
-        <input type={type} value={form[name]} onChange={e => setForm(f=>({...f,[name]:e.target.value}))}
-          className="w-full px-3 py-2 text-xs rounded-xl border border-line dark:border-gray-700 bg-white dark:bg-gray-800 text-ink dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-navy/30" />
-      )}
-    </div>
-  );
-
   return (
     <div>
       <PageHeader title="News & Events" subtitle="Manage posts, events and notices"
         actions={
-          <button onClick={openCreate} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-navy text-white text-xs font-semibold hover:bg-navy-2">
+          <button onClick={openCreate}
+            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-navy text-white text-xs font-semibold hover:bg-navy-2">
             <Plus size={14}/> New Post
           </button>
         }
       />
+
       <div className="flex gap-2 mb-4">
         {['all','draft','published'].map(s => (
           <button key={s} onClick={() => setFilter(f=>({...f,status:s,page:1}))}
@@ -138,7 +162,9 @@ export default function NewsPage() {
                   ? <button onClick={() => handlePublish(p._id)} title="Publish" className="p-1 rounded text-muted hover:text-success"><Eye size={13}/></button>
                   : <button onClick={() => handleUnpublish(p._id)} title="Unpublish" className="p-1 rounded text-muted hover:text-warning"><EyeOff size={13}/></button>
                 }
-                {!p.isFeatured && <button onClick={() => handleFeatured(p._id)} title="Set featured" className="p-1 rounded text-muted hover:text-gold"><Star size={13}/></button>}
+                {!p.isFeatured && (
+                  <button onClick={() => handleFeatured(p._id)} title="Set featured" className="p-1 rounded text-muted hover:text-gold"><Star size={13}/></button>
+                )}
                 <button onClick={() => openEdit(p)} className="p-1 rounded text-muted hover:text-navy"><Pencil size={13}/></button>
                 <button onClick={() => setDeleteId(p._id)} className="p-1 rounded text-muted hover:text-danger"><Trash2 size={13}/></button>
               </div>
@@ -149,18 +175,19 @@ export default function NewsPage() {
 
       <Modal open={modal} onClose={() => setModal(false)} title={editing ? 'Edit Post' : 'New Post'} size="lg">
         <div className="space-y-3">
-          <F label="Title"    name="title" />
+          <NewsField label="Title"        name="title"    form={form} setForm={setForm} />
           <div className="grid grid-cols-2 gap-3">
-            <F label="Category" name="category" type="select" opts={CATEGORIES} />
-            <F label="Date"     name="date"     type="date" />
+            <NewsField label="Category" name="category" form={form} setForm={setForm} type="select" opts={CATEGORIES} />
+            <NewsField label="Date"     name="date"     form={form} setForm={setForm} type="date" />
           </div>
-          <F label="Summary" name="summary"  type="textarea" />
-          <F label="Full Content" name="body" type="textarea" />
-          <F label="Status"  name="status"   type="select" opts={['draft','published']} />
+          <NewsField label="Summary"      name="summary"  form={form} setForm={setForm} type="textarea" />
+          <NewsField label="Full Content" name="body"     form={form} setForm={setForm} type="textarea" />
+          <NewsField label="Status"       name="status"   form={form} setForm={setForm} type="select" opts={['draft','published']} />
           <div className="flex gap-2 pt-1">
             <button onClick={() => setModal(false)} className="flex-1 py-2 rounded-xl border border-line text-xs">Cancel</button>
-            <button onClick={handleSave} disabled={saving} className="flex-1 py-2 rounded-xl bg-navy text-white text-xs font-medium hover:bg-navy-2 disabled:opacity-50">
-              {saving ? 'SavingΓÇª' : 'Save Post'}
+            <button onClick={handleSave} disabled={saving}
+              className="flex-1 py-2 rounded-xl bg-navy text-white text-xs font-medium hover:bg-navy-2 disabled:opacity-50">
+              {saving ? 'Saving...' : 'Save Post'}
             </button>
           </div>
         </div>
@@ -171,4 +198,3 @@ export default function NewsPage() {
     </div>
   );
 }
-

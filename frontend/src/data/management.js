@@ -1,7 +1,7 @@
 /**
  * management.js
  * Feeds ManagementSection on the About Us page.
- * Names marked [Name] are placeholders — to be confirmed by the school.
+ * Names will be updated once confirmed by the school.
  */
 
 export const management = {
@@ -23,8 +23,8 @@ export const management = {
     {
       id:          2,
       role:        "Principal",
-      name:        "[Name]",
-      description: "Leads academics and day-to-day school life, ensuring a stress-free learning environment. [To be confirmed]",
+      name:        "To be confirmed",
+      description: "Leads academics and day-to-day school life, ensuring a stress-free learning environment.",
       image: {
         src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80&fm=webp",
         alt: "Principal",
@@ -33,8 +33,8 @@ export const management = {
     {
       id:          3,
       role:        "Vice Principal",
-      name:        "[Name]",
-      description: "Supports curriculum planning, discipline and student welfare across all stages. [To be confirmed]",
+      name:        "To be confirmed",
+      description: "Supports curriculum planning, discipline and student welfare across all stages.",
       image: {
         src: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80&fm=webp",
         alt: "Vice Principal",
@@ -43,8 +43,8 @@ export const management = {
     {
       id:          4,
       role:        "Administrator",
-      name:        "[Name]",
-      description: "Manages admissions, operations and parent communication. [To be confirmed]",
+      name:        "To be confirmed",
+      description: "Manages admissions, operations and parent communication.",
       image: {
         src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80&fm=webp",
         alt: "Administrator",

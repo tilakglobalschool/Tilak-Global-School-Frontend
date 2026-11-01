@@ -10,9 +10,14 @@ import { admissionFaqs as d } from "@/data/admissions";
  *
  * Zero rounded-*. Zero literal text. All from data/admissions.js.
  */
-export default function AdmissionsFaqSection() {
+export default function AdmissionsFaqSection({ apiFaqs }) {
   const [openId, setOpenId] = useState(null);
   const toggle = (id) => setOpenId((prev) => (prev === id ? null : id));
+
+  // Use live API FAQs if available, otherwise fall back to static data
+  const items = apiFaqs && apiFaqs.length > 0
+    ? apiFaqs.map((f, i) => ({ id: f._id || i + 1, question: f.question, answer: f.answer }))
+    : d.items;
 
   return (
     <section className="w-full bg-white border-t border-[#0B3D91]/10 py-12 md:py-20">
@@ -33,7 +38,7 @@ export default function AdmissionsFaqSection() {
 
         {/* Accordion */}
         <div className="max-w-4xl mx-auto space-y-3">
-          {d.items.map((item) => {
+          {items.map((item) => {
             const isOpen = openId === item.id;
             return (
               <div

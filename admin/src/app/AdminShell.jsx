@@ -67,7 +67,7 @@ export default function AdminShell({ children }) {
    *   dark: styles applied. We put class="dark" on the root wrapper
    *   div when dark=true. No need to touch <html>.
    *
-   *   The sidebar (navy) and topbar stay the same ΓÇö they're excluded
+   *   The sidebar (navy) and topbar stay the same - they're excluded
    *   from dark mode styling by design per your requirement.
    *   The main content area (right side) picks up dark: classes because
    *   it's inside the .dark wrapper.
@@ -85,21 +85,21 @@ export default function AdminShell({ children }) {
         }}
       />
 
-      {/* Root wrapper ΓÇö .dark class activates all dark: Tailwind utilities */}
+      {/* Root wrapper - .dark class activates all dark: Tailwind utilities */}
       <div className={`flex h-screen overflow-hidden${dark ? ' dark' : ''}`}>
 
-        {/* Navy sidebar ΓÇö always dark, unaffected by toggle */}
+        {/* Navy sidebar - always dark, unaffected by toggle */}
         <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
 
-        {/* Content area ΓÇö changes with dark mode */}
+        {/* Content area - changes with dark mode */}
         <div className={`flex flex-col flex-1 overflow-hidden transition-all duration-200
           bg-gray-50 dark:bg-gray-950
           ${collapsed ? 'ml-16' : 'ml-60'}`}>
 
-          {/* Top bar ΓÇö white in light, dark gray in dark */}
+          {/* Top bar - white in light, dark gray in dark */}
           <TopBar dark={dark} onToggleDark={toggleDark} />
 
-          {/* Page content ΓÇö scrolls independently */}
+          {/* Page content - scrolls independently */}
           <main className="flex-1 overflow-y-auto p-5 bg-gray-50 dark:bg-gray-950">
             {children}
           </main>

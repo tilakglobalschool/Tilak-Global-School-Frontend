@@ -33,14 +33,7 @@ export const NAV_ITEMS = [
       { label: "Online Admission Form", href: "/admissions/online-admission-form" },
     ],
   },
-  {
-    label: "Gallery",
-    href:  "/gallery",
-    children: [
-      { label: "Photo Gallery", href: "/gallery/photo-gallery" },
-      { label: "Video Gallery", href: "/gallery/video-gallery" },
-    ],
-  },
+  { label: "Gallery",       href: "/gallery" },
   { label: "News & Events", href: "/news-events" },
   { label: "Contact Us",    href: "/contact-us" },
 ];

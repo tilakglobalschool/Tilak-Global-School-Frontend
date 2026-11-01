@@ -9,14 +9,38 @@ import ConfirmDialog from '@/app/components/ConfirmDialog';
 import EmptyState    from '@/app/components/EmptyState';
 import { LoadingPage } from '@/app/components/Spinner';
 import { Upload, Trash2, ExternalLink } from 'lucide-react';
+import { getUploadUrl } from '@/lib/uploadUrl';
 
 const CATEGORIES = ['Disclosure','Notice','Academic','Policy','Certificate','Form','Timetable','Syllabus','Calendar','Results'];
 const PAGES      = ['academics','admissions','news','results','downloads'];
 
-// Build base URL for file links — uses same env-aware logic as API client
-function getFileBase() {
-  if (typeof window !== 'undefined') return ''; // browser: relative (served via Vercel rewrite)
-  return process.env.API_URL?.replace('/api', '') || 'https://api.tilakglobalschool.com';
+// ── DocField is at MODULE SCOPE — React never remounts it on parent re-render ──
+// Previously this was defined as `const F = ...` INSIDE DocumentsPage, which
+// caused React to see a new component type on every keystroke → instant focus loss.
+function DocField({ label, name, form, setForm, type = 'text', opts }) {
+  return (
+    <div>
+      <label className="block text-xs font-medium text-ink dark:text-gray-300 mb-1">{label}</label>
+      {type === 'select' ? (
+        <select
+          value={form[name]}
+          onChange={e => setForm(f => ({ ...f, [name]: e.target.value }))}
+          className="w-full px-3 py-2 text-xs rounded-xl border border-line dark:border-gray-700
+            bg-white dark:bg-gray-800 text-ink dark:text-gray-100"
+        >
+          {opts.map(o => <option key={o}>{o}</option>)}
+        </select>
+      ) : (
+        <input
+          type={type}
+          value={form[name]}
+          onChange={e => setForm(f => ({ ...f, [name]: e.target.value }))}
+          className="w-full px-3 py-2 text-xs rounded-xl border border-line dark:border-gray-700
+            bg-white dark:bg-gray-800 text-ink dark:text-gray-100"
+        />
+      )}
+    </div>
+  );
 }
 
 export default function DocumentsPage() {
@@ -64,31 +88,19 @@ export default function DocumentsPage() {
     setDeleteId(null); load();
   };
 
-  const F = ({ label, name, type='text', opts }) => (
-    <div>
-      <label className="block text-xs font-medium text-ink dark:text-gray-300 mb-1">{label}</label>
-      {type === 'select' ? (
-        <select value={form[name]} onChange={e=>setForm(f=>({...f,[name]:e.target.value}))}
-          className="w-full px-3 py-2 text-xs rounded-xl border border-line dark:border-gray-700 bg-white dark:bg-gray-800 text-ink dark:text-gray-100">
-          {opts.map(o=><option key={o}>{o}</option>)}
-        </select>
-      ) : (
-        <input type={type} value={form[name]} onChange={e=>setForm(f=>({...f,[name]:e.target.value}))}
-          className="w-full px-3 py-2 text-xs rounded-xl border border-line dark:border-gray-700 bg-white dark:bg-gray-800 text-ink dark:text-gray-100" />
-      )}
-    </div>
-  );
-
   return (
     <div>
       <PageHeader title="Documents" subtitle="Manage downloadable files, notices and disclosures"
         actions={
-          <button onClick={() => { setForm({ title:'',category:'Notice',page:'downloads',issueDate:'',status:'published' }); setFile(null); setModal(true); }}
-            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-navy text-white text-xs font-semibold hover:bg-navy-2">
+          <button
+            onClick={() => { setForm({ title:'',category:'Notice',page:'downloads',issueDate:'',status:'published' }); setFile(null); setModal(true); }}
+            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-navy text-white text-xs font-semibold hover:bg-navy-2"
+          >
             <Upload size={14}/> Upload Document
           </button>
         }
       />
+
       <div className="flex gap-2 mb-4 flex-wrap">
         <select value={filter.category} onChange={e=>setFilter(f=>({...f,category:e.target.value,pg:1}))}
           className="px-3 py-1.5 rounded-xl text-xs border border-line dark:border-gray-700 bg-white dark:bg-gray-900 text-ink dark:text-gray-100">
@@ -119,12 +131,12 @@ export default function DocumentsPage() {
                   <td className="px-3 py-2 text-muted">{d.category}</td>
                   <td className="px-3 py-2 text-muted">{d.page}</td>
                   <td className="px-3 py-2"><span className="font-mono bg-sky dark:bg-gray-700 px-1 rounded">{d.fileType}</span></td>
-                  <td className="px-3 py-2 text-muted">{d.fileSizeKb ? `${d.fileSizeKb}KB` : 'ΓÇö'}</td>
-                  <td className="px-3 py-2 text-muted whitespace-nowrap">{d.issueDate ? new Date(d.issueDate).toLocaleDateString() : 'ΓÇö'}</td>
+                  <td className="px-3 py-2 text-muted">{d.fileSizeKb ? `${d.fileSizeKb}KB` : '-'}</td>
+                  <td className="px-3 py-2 text-muted whitespace-nowrap">{d.issueDate ? new Date(d.issueDate).toLocaleDateString() : '-'}</td>
                   <td className="px-3 py-2"><Badge variant={d.status}>{d.status}</Badge></td>
                   <td className="px-3 py-2">
                     <div className="flex gap-1">
-                      <a href={`${getFileBase()}${d.fileUrl}`} target="_blank" rel="noopener noreferrer"
+                      <a href={getUploadUrl(d.fileUrl)} target="_blank" rel="noopener noreferrer"
                         className="p-1 rounded text-muted hover:text-navy"><ExternalLink size={13}/></a>
                       <button onClick={()=>setDeleteId(d._id)} className="p-1 rounded text-muted hover:text-danger"><Trash2 size={13}/></button>
                     </div>
@@ -141,22 +153,25 @@ export default function DocumentsPage() {
           <div>
             <label className="block text-xs font-medium text-ink dark:text-gray-300 mb-1">File</label>
             <input type="file" accept=".pdf,.doc,.docx,.xls,.xlsx" onChange={e=>setFile(e.target.files[0])}
-              className="w-full text-xs text-ink dark:text-gray-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-navy file:text-white hover:file:bg-navy-2" />
+              className="w-full text-xs text-ink dark:text-gray-300 file:mr-3 file:py-1.5 file:px-3
+                file:rounded-lg file:border-0 file:text-xs file:font-medium
+                file:bg-navy file:text-white hover:file:bg-navy-2" />
           </div>
-          <F label="Title"     name="title" />
+          {/* DocField receives form + setForm as props — stable identity, no remounting */}
+          <DocField label="Title"     name="title"     form={form} setForm={setForm} />
           <div className="grid grid-cols-2 gap-3">
-            <F label="Category" name="category" type="select" opts={CATEGORIES} />
-            <F label="Page"     name="page"     type="select" opts={PAGES} />
+            <DocField label="Category" name="category" form={form} setForm={setForm} type="select" opts={CATEGORIES} />
+            <DocField label="Page"     name="page"     form={form} setForm={setForm} type="select" opts={PAGES} />
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <F label="Issue Date" name="issueDate" type="date" />
-            <F label="Status"     name="status"    type="select" opts={['published','draft']} />
+            <DocField label="Issue Date" name="issueDate" form={form} setForm={setForm} type="date" />
+            <DocField label="Status"     name="status"    form={form} setForm={setForm} type="select" opts={['published','draft']} />
           </div>
           <div className="flex gap-2 pt-1">
             <button onClick={()=>setModal(false)} className="flex-1 py-2 rounded-xl border border-line text-xs">Cancel</button>
             <button onClick={handleUpload} disabled={!file||saving}
               className="flex-1 py-2 rounded-xl bg-navy text-white text-xs font-medium hover:bg-navy-2 disabled:opacity-50">
-              {saving ? 'UploadingΓÇª' : 'Upload'}
+              {saving ? 'Uploading...' : 'Upload'}
             </button>
           </div>
         </div>
@@ -167,4 +182,3 @@ export default function DocumentsPage() {
     </div>
   );
 }
-

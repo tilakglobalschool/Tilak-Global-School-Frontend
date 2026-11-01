@@ -79,7 +79,7 @@ export default function LoginPage() {
                 autoComplete="current-password"
                 value={form.password}
                 onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
-                placeholder="ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó"
+                placeholder="********"
                 className="w-full px-3 py-2 pr-10 rounded-xl border border-line dark:border-gray-700
                   bg-white dark:bg-gray-800 text-sm text-ink dark:text-gray-100
                   focus:outline-none focus:ring-2 focus:ring-navy/40 dark:focus:ring-blue-500/40
@@ -113,7 +113,7 @@ export default function LoginPage() {
               text-sm font-semibold transition-colors disabled:opacity-60
               focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-navy"
           >
-            {loading ? 'Signing inΓÇª' : 'Sign In'}
+            {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
       </div>
