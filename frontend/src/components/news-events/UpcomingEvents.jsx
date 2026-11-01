@@ -2,15 +2,20 @@
 
 import MobileSlider from "@/components/ui/MobileSlider";
 import EventCard    from "@/components/news-events/EventCard";
-import { upcomingEvents as d } from "@/data/newsEvents";
+import { upcomingEvents as staticData } from "@/data/newsEvents";
 
 /**
  * UpcomingEvents — client component (MobileSlider needs useState/useRef).
  * Desktop: 3-column grid.
  * Mobile: MobileSlider, one card per swipe, red active dot.
+ *
+ * Props:
+ *   data — optional live data from server; falls back to static
+ *
  * Zero rounded-*. Zero literal text.
  */
-export default function UpcomingEvents() {
+export default function UpcomingEvents({ data }) {
+  const d = data || staticData;
   return (
     <section className="w-full bg-white py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-4 md:px-8">

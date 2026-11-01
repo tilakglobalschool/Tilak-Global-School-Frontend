@@ -1,17 +1,23 @@
 import Link from "next/link";
 import NewsAccordion from "@/components/home/NewsAccordion";
 import GalleryPreview from "@/components/home/GalleryPreview";
-import { newsEvents } from "@/data/newsEvents";
-import { galleryPreview } from "@/data/gallery";
+import { newsEvents as staticNews } from "@/data/newsEvents";
+import { galleryPreview as staticGallery } from "@/data/gallery";
 
 /**
  * NewsGallerySection — server component.
  * Tinted background, serif headings, eyebrow labels, dot pattern texture.
  * No rounded-* anywhere in this component.
  *
+ * Props:
+ *   newsItems    — live news items from API (optional; falls back to static)
+ *   galleryItems — live gallery items from API (optional; falls back to static)
+ *
  * Zero literal text — all strings from data/newsEvents.js and data/gallery.js.
  */
-export default function NewsGallerySection() {
+export default function NewsGallerySection({ newsItems, galleryItems }) {
+  const newsEvents    = { ...staticNews,    items: newsItems    || staticNews.items    };
+  const galleryPreview = { ...staticGallery, items: galleryItems || staticGallery.items };
   return (
     <section
       className="relative overflow-hidden w-full bg-[#EEF3FB] py-16 md:py-24"
@@ -114,7 +120,7 @@ export default function NewsGallerySection() {
             className="w-12 h-[2px] md:h-1 bg-red-600 mt-3 mb-6"
           />
 
-          <GalleryPreview />
+          <GalleryPreview items={galleryPreview.items} />
 
           {/* View full gallery — square outline button */}
           <div className="mt-8">

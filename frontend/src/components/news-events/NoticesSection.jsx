@@ -1,13 +1,12 @@
-import { notices as d } from "@/data/newsEvents";
+import { notices as staticData } from "@/data/newsEvents";
 
 /**
  * NoticesSection — server component.
- * Clean rectangular document rows — no fake download links.
- * Compact: py-3 md:py-4, consistent with News rows.
- * Empty state when no notices.
- * Zero rounded-*. Zero literal text.
+ * Props:
+ *   data — optional live data from server; falls back to static
  */
-export default function NoticesSection() {
+export default function NoticesSection({ data }) {
+  const d = data || staticData;
   return (
     <div>
       {/* Header */}

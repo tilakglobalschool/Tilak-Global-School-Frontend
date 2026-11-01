@@ -1,16 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { newsAnnouncements as d } from "@/data/newsEvents";
+import { newsAnnouncements as staticData } from "@/data/newsEvents";
 
 /**
  * NewsAnnouncements — client component (accordion state).
- * Single-open accordion. Left red edge grows on hover/open.
- * Square date block turns red-600 when item is open.
- * Compact rows: p-3 md:p-4, date blocks w-12 h-12 md:w-14 md:h-14.
- * Zero rounded-*. Zero literal text.
+ * Props:
+ *   data — optional live data from server; falls back to static
  */
-export default function NewsAnnouncements() {
+export default function NewsAnnouncements({ data }) {
+  const d = data || staticData;
   const [openId, setOpenId] = useState(null);
   const toggle = (id) => setOpenId((prev) => (prev === id ? null : id));
 

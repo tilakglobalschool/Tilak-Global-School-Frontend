@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { PhoneCall, Mail, MapPin } from "lucide-react";
-import { siteConfig } from "@/data/siteConfig";
+import { siteConfig as staticConfig } from "@/data/siteConfig";
 import { QUICK_LINKS, IMPORTANT_LINKS } from "@/data/navigation";
 
-export default function Footer() {
+export default function Footer({ siteConfig: liveSiteConfig }) {
+  const config = liveSiteConfig || staticConfig;
   return (
     <footer className="w-full">
       {/* ── Main Dark Blue Section ── */}
@@ -14,14 +15,14 @@ export default function Footer() {
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shrink-0">
-                <span className="text-[#0B3D91] font-bold text-lg">{siteConfig.logoInitials}</span>
+                <span className="text-[#0B3D91] font-bold text-lg">{config.logoInitials}</span>
               </div>
               <div className="leading-tight">
-                <p className="font-bold text-base">{siteConfig.name}</p>
-                <p className="text-xs text-blue-200">{siteConfig.tagline}</p>
+                <p className="font-bold text-base">{config.name}</p>
+                <p className="text-xs text-blue-200">{config.tagline}</p>
               </div>
             </div>
-            <p className="text-sm text-blue-200 leading-relaxed">{siteConfig.description}</p>
+            <p className="text-sm text-blue-200 leading-relaxed">{config.description}</p>
           </div>
 
           {/* Column 2 — Quick Links */}
@@ -58,24 +59,24 @@ export default function Footer() {
             <ul className="flex flex-col gap-3 text-sm text-blue-200">
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="text-[#C8102E] shrink-0 mt-0.5" />
-                <span>{siteConfig.address}</span>
+                <span>{config.address}</span>
               </li>
-              {siteConfig.phone && (
+              {config.phone && (
                 <li className="flex items-center gap-2">
                   <PhoneCall size={16} className="text-[#C8102E] shrink-0" />
-                  <a href={siteConfig.phoneHref} className="hover:text-white transition">{siteConfig.phone}</a>
+                  <a href={config.phoneHref} className="hover:text-white transition">{config.phone}</a>
                 </li>
               )}
-              {siteConfig.email && (
+              {config.email && (
                 <li className="flex items-center gap-2">
                   <Mail size={16} className="text-[#C8102E] shrink-0" />
-                  <a href={siteConfig.emailHref} className="hover:text-white transition">{siteConfig.email}</a>
+                  <a href={config.emailHref} className="hover:text-white transition">{config.email}</a>
                 </li>
               )}
             </ul>
-            {siteConfig.mapEmbed && (
+            {config.mapEmbed && (
               <div className="mt-4 w-full h-28 rounded-lg bg-[#0d2f6e] border border-white/10 flex items-center justify-center">
-                <span className="text-xs text-blue-300">{siteConfig.mapEmbed}</span>
+                <span className="text-xs text-blue-300">{config.mapEmbed}</span>
               </div>
             )}
           </div>
@@ -85,8 +86,8 @@ export default function Footer() {
       {/* ── Bottom Red Copyright Bar ── */}
       <div className="bg-[#C8102E] text-white text-center py-3 px-4">
         <p className="text-xs sm:text-sm">
-          {siteConfig.copyright} &nbsp;|&nbsp; Designed &amp; Developed by{" "}
-          <span className="font-semibold">{siteConfig.developer}</span>
+          {config.copyright} &nbsp;|&nbsp; Designed &amp; Developed by{" "}
+          <span className="font-semibold">{config.developer}</span>
         </p>
       </div>
     </footer>

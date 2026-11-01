@@ -1,9 +1,12 @@
 import Image from "next/image";
-import { featuredEvent as d } from "@/data/newsEvents";
+import { featuredEvent as defaultData } from "@/data/newsEvents";
 
 /**
  * FeaturedEvent — server component.
  * Full-width cinematic banner for the featured event.
+ *
+ * Props:
+ *   data — live event data from API (optional; falls back to static)
  *
  * Design:
  *   • Image covers the entire banner (fill, object-cover, object-center)
@@ -16,7 +19,8 @@ import { featuredEvent as d } from "@/data/newsEvents";
  *
  * Zero rounded-*. Zero literal text. All from data/newsEvents.js.
  */
-export default function FeaturedEvent() {
+export default function FeaturedEvent({ data }) {
+  const d = data || defaultData;
   if (!d) return null;
 
   return (

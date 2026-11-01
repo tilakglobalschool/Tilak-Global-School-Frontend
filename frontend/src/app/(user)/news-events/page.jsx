@@ -1,8 +1,8 @@
 import PageHero          from "@/components/shared/PageHero";
-import FeaturedEvent      from "@/components/news-events/FeaturedEvent";
-import UpcomingEvents     from "@/components/news-events/UpcomingEvents";
-import NewsNoticesLayout  from "@/components/news-events/NewsNoticesLayout";
-import PreviousEvents     from "@/components/news-events/PreviousEvents";
+import FeaturedEventServer  from "@/components/news-events/FeaturedEventServer";
+import UpcomingEventsServer from "@/components/news-events/UpcomingEventsServer";
+import NewsNoticesLayoutServer from "@/components/news-events/NewsNoticesLayoutServer";
+import PreviousEventsServer from "@/components/news-events/PreviousEventsServer";
 import CtaBanner          from "@/components/shared/CtaBanner";
 import { newsEventsHero, newsEventsPage, newsEventsCta } from "@/data/newsEvents";
 
@@ -13,21 +13,16 @@ export const metadata = {
 
 /**
  * NewsEventsPage — server component.
- * Section order:
- *   PageHero → FeaturedEvent → UpcomingEvents →
- *   NewsNoticesLayout (News + Notices side-by-side) →
- *   PreviousEvents → CtaBanner
- *
- * All strings from data/newsEvents.js — zero literals in JSX.
+ * All sections now fetch live data from backend with static fallbacks.
  */
 export default function NewsEventsPage() {
   return (
     <>
       <PageHero data={newsEventsHero} />
-      <FeaturedEvent />
-      <UpcomingEvents />
-      <NewsNoticesLayout />
-      <PreviousEvents />
+      <FeaturedEventServer />
+      <UpcomingEventsServer />
+      <NewsNoticesLayoutServer />
+      <PreviousEventsServer />
       <CtaBanner data={newsEventsCta} />
     </>
   );

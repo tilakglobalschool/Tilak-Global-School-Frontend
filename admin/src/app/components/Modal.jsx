@@ -3,11 +3,14 @@ import { useEffect } from 'react';
 import { X } from 'lucide-react';
 
 /**
- * Centered modal overlay.
- * Props: open, onClose, title, children, size ('sm'|'md'|'lg')
+ * Centered modal overlay — with scrollable body so content never hides behind viewport edge.
+ * Props: open, onClose, title, children, footer, size ('sm'|'md'|'lg')
+ *
+ * `footer` — optional sticky footer node (e.g. Cancel/Save buttons).
+ *   When provided, buttons stay fixed at the bottom regardless of scroll position.
+ *   When omitted, children render as normal (backwards compatible).
  */
-export default function Modal({ open, onClose, title, children, size = 'md' }) {
-  // Close on Escape key
+export default function Modal({ open, onClose, title, children, footer, size = 'md' }) {
   useEffect(() => {
     if (!open) return;
     const handler = (e) => { if (e.key === 'Escape') onClose(); };
@@ -29,9 +32,11 @@ export default function Modal({ open, onClose, title, children, size = 'md' }) {
       />
       {/* Panel */}
       <div className={`relative w-full ${widths[size]} bg-white dark:bg-gray-900
-        rounded-2xl shadow-2xl border border-line dark:border-gray-800 z-10`}>
-        {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4
+        rounded-2xl shadow-2xl border border-line dark:border-gray-800 z-10
+        flex flex-col max-h-[90vh]`}>
+
+        {/* Sticky Header */}
+        <div className="flex items-center justify-between px-6 py-4 shrink-0
           border-b border-line dark:border-gray-800">
           <h2 className="text-base font-semibold text-ink dark:text-gray-100">{title}</h2>
           <button
@@ -43,8 +48,16 @@ export default function Modal({ open, onClose, title, children, size = 'md' }) {
             <X size={16} />
           </button>
         </div>
-        {/* Body */}
-        <div className="px-6 py-4">{children}</div>
+
+        {/* Scrollable Body */}
+        <div className="px-6 py-4 overflow-y-auto flex-1 min-h-0">{children}</div>
+
+        {/* Sticky Footer (optional) */}
+        {footer && (
+          <div className="px-6 py-4 shrink-0 border-t border-line dark:border-gray-800">
+            {footer}
+          </div>
+        )}
       </div>
     </div>
   );

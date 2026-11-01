@@ -13,7 +13,8 @@ const InstagramIcon = () => (<svg width="14" height="14" viewBox="0 0 24 24" fil
 const YoutubeIcon   = () => (<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>);
 const TwitterIcon   = () => (<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>);
 
-export default function Header() {
+export default function Header({ siteConfig: liveSiteConfig }) {
+  const config = liveSiteConfig || siteConfig;
   const pathname = usePathname();
   const headerRef = useRef(null);
   const [scrolled, setScrolled]                       = useState(false);
@@ -69,11 +70,11 @@ export default function Header() {
               <span className="flex items-center gap-1 text-[10px] font-medium shrink min-w-0 overflow-hidden">
                 <MapPin className="w-3 h-3 shrink-0" />
                 <span style={{ display: "block", whiteSpace: "nowrap", textOverflow: "clip", overflow: "hidden" }}>
-                  {siteConfig.addressShort}
+                  {config.addressShort}
                 </span>
               </span>
-              {siteConfig.phone && (
-                <a href={siteConfig.phoneHref} className="flex items-center gap-1 text-[10px] font-medium shrink-0 hover:opacity-80 transition">
+              {config.phone && (
+                <a href={config.phoneHref} className="flex items-center gap-1 text-[10px] font-medium shrink-0 hover:opacity-80 transition">
                   <PhoneCall className="w-3 h-3 shrink-0" />
                   <span>Call</span>
                 </a>
@@ -85,26 +86,26 @@ export default function Header() {
               <div className="flex items-center gap-4">
                 <span className="flex items-center gap-1 text-xs opacity-90 whitespace-nowrap">
                   <MapPin className="w-3.5 h-3.5 shrink-0" />
-                  {siteConfig.address}
+                  {config.address}
                 </span>
-                {siteConfig.phone && (
-                  <a href={siteConfig.phoneHref} className="flex items-center gap-1 text-xs hover:opacity-80 transition whitespace-nowrap">
+                {config.phone && (
+                  <a href={config.phoneHref} className="flex items-center gap-1 text-xs hover:opacity-80 transition whitespace-nowrap">
                     <PhoneCall className="w-3.5 h-3.5 shrink-0" />
-                    {siteConfig.phone}
+                    {config.phone}
                   </a>
                 )}
-                {siteConfig.email && (
-                  <a href={siteConfig.emailHref} className="flex items-center gap-1 text-xs hover:opacity-80 transition whitespace-nowrap">
+                {config.email && (
+                  <a href={config.emailHref} className="flex items-center gap-1 text-xs hover:opacity-80 transition whitespace-nowrap">
                     <Mail className="w-3.5 h-3.5 shrink-0" />
-                    {siteConfig.email}
+                    {config.email}
                   </a>
                 )}
               </div>
               <div className="flex items-center gap-3 shrink-0">
-                <a href={siteConfig.social.facebook}  aria-label="Facebook"  className="hover:opacity-75 transition"><FacebookIcon /></a>
-                <a href={siteConfig.social.instagram} aria-label="Instagram" className="hover:opacity-75 transition"><InstagramIcon /></a>
-                <a href={siteConfig.social.youtube}   aria-label="YouTube"   className="hover:opacity-75 transition"><YoutubeIcon /></a>
-                <a href={siteConfig.social.twitter}   aria-label="Twitter"   className="hover:opacity-75 transition"><TwitterIcon /></a>
+                <a href={config.social.facebook}  aria-label="Facebook"  className="hover:opacity-75 transition"><FacebookIcon /></a>
+                <a href={config.social.instagram} aria-label="Instagram" className="hover:opacity-75 transition"><InstagramIcon /></a>
+                <a href={config.social.youtube}   aria-label="YouTube"   className="hover:opacity-75 transition"><YoutubeIcon /></a>
+                <a href={config.social.twitter}   aria-label="Twitter"   className="hover:opacity-75 transition"><TwitterIcon /></a>
               </div>
             </div>
           </div>
@@ -116,11 +117,11 @@ export default function Header() {
 
             <Link href="/" className="flex items-center gap-2 md:gap-3 shrink-0 min-w-0">
               <div className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-white flex items-center justify-center shrink-0">
-                <span className="text-[#0B3D91] font-bold text-sm md:text-lg leading-none">{siteConfig.logoInitials}</span>
+                <span className="text-[#0B3D91] font-bold text-sm md:text-lg leading-none">{config.logoInitials}</span>
               </div>
               <div className="leading-tight min-w-0">
-                <p className="font-bold text-sm md:text-lg tracking-wide">{siteConfig.name}</p>
-                <p className="text-[10px] md:text-xs text-blue-200 tracking-wider">{siteConfig.tagline}</p>
+                <p className="font-bold text-sm md:text-lg tracking-wide">{config.name}</p>
+                <p className="text-[10px] md:text-xs text-blue-200 tracking-wider">{config.tagline}</p>
               </div>
             </Link>
 

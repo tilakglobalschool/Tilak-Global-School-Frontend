@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { galleryPreview as d } from "@/data/gallery";
+import { galleryPreview as staticData } from "@/data/gallery";
 
 /**
  * GalleryPreview — server component.
@@ -8,10 +8,15 @@ import { galleryPreview as d } from "@/data/gallery";
  * Layered backing plate (navy, bottom-right) + outline frame (red, top-left)
  * sit behind the whole grid inside a relative wrapper.
  *
+ * Props:
+ *   items — optional live items array from parent; falls back to static data
+ *
  * Zero rounded-* anywhere. Zero literal text.
  * All strings from data/gallery.js → galleryPreview.
  */
-export default function GalleryPreview() {
+export default function GalleryPreview({ items }) {
+  const d = staticData;
+  const displayItems = (items && items.length > 0 ? items : d.items).slice(0, 4);
   return (
     /*
       Outer wrapper:
@@ -38,9 +43,9 @@ export default function GalleryPreview() {
 
       {/* ── 2×2 grid — z-10 above both decorative layers ── */}
       <div className="relative z-10 grid grid-cols-2 gap-3 md:gap-4">
-        {d.items.map((item, i) => (
+        {displayItems.map((item, i) => (
           <GalleryTile
-            key={item.id}
+            key={item.id || item._id || i}
             item={item}
             href={d.viewAll.href}
             index={i}

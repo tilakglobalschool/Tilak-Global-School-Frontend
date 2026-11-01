@@ -68,7 +68,7 @@ export default function AdmissionEnquiryForm() {
         )}
         <p className="text-sm text-green-700 leading-relaxed">
           Thank you! We will contact you shortly to discuss admission for{" "}
-          <strong>{values.studentName}</strong> in Class{" "}
+          <strong>{values.studentName}</strong> in{" "}
           <strong>{values.classApplying}</strong>.
         </p>
         <button

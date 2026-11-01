@@ -109,10 +109,11 @@ export default function UsersPage() {
     setModal(true);
   };
 
-  // Open edit modal
+  // Open edit modal — load existing permissions too
   const openEdit = (u) => {
     setEditUser(u);
     setForm({ name: u.name, email: u.email, password:'', role: u.role });
+    setPerms(JSON.parse(JSON.stringify(u.permissions || DEFAULT_PERMS[u.role] || {})));
     setModal(true);
   };
 
@@ -130,10 +131,24 @@ export default function UsersPage() {
   };
 
   const handleSave = async () => {
+    if (!form.name.trim()) { toast.error('Name is required'); return; }
+    if (!editUser && !form.email.trim()) { toast.error('Email is required'); return; }
+    if (!editUser && form.password.length < 8) { toast.error('Password must be at least 8 chars'); return; }
     setSaving(true);
     try {
       if (editUser) {
-        await adminApi.updateUser(editUser._id, { name: form.name, role: form.role });
+        const isSuperAdmin = editUser.role === 'super_admin';
+        // Build update payload — always update name and role
+        const payload = { name: form.name, role: form.role };
+        // Allow email update for non-super-admin only
+        if (!isSuperAdmin && form.email.trim() && form.email !== editUser.email) {
+          payload.email = form.email.trim();
+        }
+        await adminApi.updateUser(editUser._id, payload);
+        // Save permissions for non-super-admin
+        if (!isSuperAdmin) {
+          await adminApi.updatePerms(editUser._id, { permissions: perms });
+        }
         toast.success('User updated');
       } else {
         await adminApi.createUser({ ...form, permissions: perms });
@@ -271,67 +286,13 @@ export default function UsersPage() {
       )}
 
       {/* Create / Edit User Modal */}
-      <Modal open={modal} onClose={() => setModal(false)} title={editUser ? 'Edit User' : 'New User'} size="md">
-        <div className="space-y-3">
-          <Field label="Full Name" value={form.name}
-            onChange={e => setForm(f => ({...f, name: e.target.value}))} />
-          <Field label="Email" type="email" value={form.email}
-            onChange={e => setForm(f => ({...f, email: e.target.value}))}
-            disabled={!!editUser} />
-          {!editUser && (
-            <Field label="Password (min 8 chars)" type="password" value={form.password}
-              onChange={e => setForm(f => ({...f, password: e.target.value}))} />
-          )}
-          <div>
-            <label className="block text-xs font-medium text-ink dark:text-gray-300 mb-1">Role</label>
-            <select value={form.role}
-              onChange={e => editUser ? setForm(f=>({...f,role:e.target.value})) : handleRoleChange(e.target.value)}
-              className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 dark:border-gray-700
-                bg-white dark:bg-gray-800 text-ink dark:text-gray-100">
-              {ROLES.map(r => <option key={r} value={r}>{ROLE_LABELS[r]}</option>)}
-            </select>
-          </div>
-
-          {/* Show permissions grid only when creating */}
-          {!editUser && (
-            <div>
-              <p className="text-xs font-semibold text-ink dark:text-gray-200 mb-2 mt-1">
-                Permissions for this user
-              </p>
-              <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
-                <table className="w-full text-xs">
-                  <thead>
-                    <tr className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-                      <th className="text-left px-3 py-2 text-muted dark:text-gray-400 font-medium">Module</th>
-                      <th className="text-left px-3 py-2 text-muted dark:text-gray-400 font-medium">Permissions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {PERM_DISPLAY.map(({ mod, actions, label }) => (
-                      <tr key={mod} className="border-b border-gray-100 dark:border-gray-800/50 last:border-0">
-                        <td className="px-3 py-2 font-medium text-ink dark:text-gray-200 whitespace-nowrap">{label}</td>
-                        <td className="px-3 py-2">
-                          <div className="flex flex-wrap gap-2">
-                            {actions.map(action => (
-                              <label key={action} className="flex items-center gap-1 cursor-pointer">
-                                <input type="checkbox"
-                                  checked={!!perms[mod]?.[action]}
-                                  onChange={() => togglePerm(mod, action)}
-                                  className="w-3.5 h-3.5 accent-navy" />
-                                <span className="text-xs text-muted dark:text-gray-400 capitalize">{action}</span>
-                              </label>
-                            ))}
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
-
-          <div className="flex gap-2 pt-1">
+      <Modal
+        open={modal}
+        onClose={() => setModal(false)}
+        title={editUser ? 'Edit User' : 'New User'}
+        size="md"
+        footer={
+          <div className="flex gap-2">
             <button onClick={() => setModal(false)}
               className="flex-1 py-2 rounded-xl border border-gray-200 dark:border-gray-700 text-xs hover:bg-gray-50 dark:hover:bg-gray-800">
               Cancel
@@ -341,44 +302,57 @@ export default function UsersPage() {
               {saving ? 'Saving...' : editUser ? 'Update User' : 'Create User'}
             </button>
           </div>
+        }
+      >
+        <div className="space-y-3">
+          <Field label="Full Name" value={form.name}
+            onChange={e => setForm(f => ({...f, name: e.target.value}))} />
+
+          {/* Email — editable for non-super-admin in edit mode, always editable on create */}
+          <Field
+            label="Email"
+            type="email"
+            value={form.email}
+            onChange={e => setForm(f => ({...f, email: e.target.value}))}
+            disabled={editUser?.role === 'super_admin'}
+          />
+
+          {!editUser && (
+            <Field label="Password (min 8 chars)" type="password" value={form.password}
+              onChange={e => setForm(f => ({...f, password: e.target.value}))} />
+          )}
+
+          <div>
+            <label className="block text-xs font-medium text-ink dark:text-gray-300 mb-1">Role</label>
+            <select value={form.role}
+              onChange={e => editUser ? setForm(f=>({...f,role:e.target.value})) : handleRoleChange(e.target.value)}
+              disabled={editUser?.role === 'super_admin'}
+              className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 dark:border-gray-700
+                bg-white dark:bg-gray-800 text-ink dark:text-gray-100 disabled:opacity-50">
+              {ROLES.map(r => <option key={r} value={r}>{ROLE_LABELS[r]}</option>)}
+            </select>
+          </div>
+
+          {/* Permissions grid — create mode OR editing a non-super-admin */}
+          {(!editUser || editUser.role !== 'super_admin') && (
+            <div>
+              <p className="text-xs font-semibold text-ink dark:text-gray-200 mb-2 mt-1">
+                Permissions for this user
+              </p>
+              <PermissionsTable perms={perms} onToggle={togglePerm} />
+            </div>
+          )}
         </div>
       </Modal>
 
       {/* Permissions Editor Modal */}
-      <Modal open={permModal} onClose={() => setPermModal(false)}
-        title={`Permissions - ${editUser?.name}`} size="lg">
-        <div className="space-y-3">
-          <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
-            <table className="w-full text-xs">
-              <thead>
-                <tr className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-                  <th className="text-left px-3 py-2 text-muted dark:text-gray-400 font-medium">Module</th>
-                  <th className="text-left px-3 py-2 text-muted dark:text-gray-400 font-medium">Permissions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {PERM_DISPLAY.map(({ mod, actions, label }) => (
-                  <tr key={mod} className="border-b border-gray-100 dark:border-gray-800/50 last:border-0">
-                    <td className="px-3 py-2.5 font-medium text-ink dark:text-gray-200 whitespace-nowrap">{label}</td>
-                    <td className="px-3 py-2.5">
-                      <div className="flex flex-wrap gap-3">
-                        {actions.map(action => (
-                          <label key={action} className="flex items-center gap-1.5 cursor-pointer">
-                            <input type="checkbox"
-                              checked={!!perms[mod]?.[action]}
-                              onChange={() => togglePerm(mod, action)}
-                              className="w-3.5 h-3.5 accent-navy" />
-                            <span className="text-xs text-muted dark:text-gray-400 capitalize">{action}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="flex gap-2 pt-1">
+      <Modal
+        open={permModal}
+        onClose={() => setPermModal(false)}
+        title={`Permissions — ${editUser?.name}`}
+        size="lg"
+        footer={
+          <div className="flex gap-2">
             <button onClick={() => setPermModal(false)}
               className="flex-1 py-2 rounded-xl border border-gray-200 dark:border-gray-700 text-xs hover:bg-gray-50 dark:hover:bg-gray-800">
               Cancel
@@ -388,15 +362,18 @@ export default function UsersPage() {
               {saving ? 'Saving...' : 'Save Permissions'}
             </button>
           </div>
-        </div>
+        }
+      >
+        <PermissionsTable perms={perms} onToggle={togglePerm} />
       </Modal>
 
       {/* Reset Password Modal */}
-      <Modal open={pwModal} onClose={() => setPwModal(false)}
-        title={`Reset Password - ${editUser?.name}`} size="sm">
-        <div className="space-y-3">
-          <Field label="New Password (min 8 chars)" type="password" value={newPw}
-            onChange={e => setNewPw(e.target.value)} />
+      <Modal
+        open={pwModal}
+        onClose={() => setPwModal(false)}
+        title={`Reset Password — ${editUser?.name}`}
+        size="sm"
+        footer={
           <div className="flex gap-2">
             <button onClick={() => setPwModal(false)}
               className="flex-1 py-2 rounded-xl border border-gray-200 dark:border-gray-700 text-xs hover:bg-gray-50 dark:hover:bg-gray-800">
@@ -407,7 +384,10 @@ export default function UsersPage() {
               {saving ? 'Resetting...' : 'Reset Password'}
             </button>
           </div>
-        </div>
+        }
+      >
+        <Field label="New Password (min 8 chars)" type="password" value={newPw}
+          onChange={e => setNewPw(e.target.value)} />
       </Modal>
 
       {/* Deactivate confirm */}
@@ -444,6 +424,43 @@ function Field({ label, value, onChange, type = 'text', disabled }) {
         className="w-full px-3 py-2 text-xs rounded-xl border border-gray-200 dark:border-gray-700
           bg-white dark:bg-gray-800 text-ink dark:text-gray-100 disabled:opacity-50
           focus:outline-none focus:ring-2 focus:ring-navy/30" />
+    </div>
+  );
+}
+
+function PermissionsTable({ perms, onToggle }) {
+  return (
+    <div className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+      <table className="w-full text-xs">
+        <thead>
+          <tr className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+            <th className="text-left px-3 py-2 text-muted dark:text-gray-400 font-medium w-32">Module</th>
+            <th className="text-left px-3 py-2 text-muted dark:text-gray-400 font-medium">Permissions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {PERM_DISPLAY.map(({ mod, actions, label }) => (
+            <tr key={mod} className="border-b border-gray-100 dark:border-gray-800/50 last:border-0">
+              <td className="px-3 py-2 font-medium text-ink dark:text-gray-200 whitespace-nowrap">{label}</td>
+              <td className="px-3 py-2">
+                <div className="flex flex-wrap gap-3">
+                  {actions.map(action => (
+                    <label key={action} className="flex items-center gap-1 cursor-pointer select-none">
+                      <input
+                        type="checkbox"
+                        checked={!!perms[mod]?.[action]}
+                        onChange={() => onToggle(mod, action)}
+                        className="w-3.5 h-3.5 accent-navy"
+                      />
+                      <span className="text-xs text-muted dark:text-gray-400 capitalize">{action}</span>
+                    </label>
+                  ))}
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

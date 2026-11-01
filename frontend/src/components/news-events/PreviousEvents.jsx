@@ -2,15 +2,15 @@
 
 import MobileSlider from "@/components/ui/MobileSlider";
 import EventCard    from "@/components/news-events/EventCard";
-import { previousEvents as d } from "@/data/newsEvents";
+import { previousEvents as staticData } from "@/data/newsEvents";
 
 /**
  * PreviousEvents — client component (MobileSlider needs useState/useRef).
- * Desktop: 3-column grid. Mobile: MobileSlider, one per swipe.
- * Reuses EventCard with showDetails=false so title lives on the image.
- * Zero rounded-*. Zero literal text.
+ * Props:
+ *   data — optional live data from server; falls back to static
  */
-export default function PreviousEvents() {
+export default function PreviousEvents({ data }) {
+  const d = data || staticData;
   return (
     <section className="w-full bg-white py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
