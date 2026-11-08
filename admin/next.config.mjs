@@ -1,9 +1,15 @@
 /** @type {import('next').NextConfig} */
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const isDev = process.env.NODE_ENV !== 'production';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const isDev     = process.env.NODE_ENV !== 'production';
 
 const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
+
+  // Silence "workspace root" warning — tells Next.js this app lives inside a monorepo
+  outputFileTracingRoot: path.join(__dirname, '..'),
 
   // Dev-only rewrites — production uses vercel.json rewrites
   ...(isDev && {
