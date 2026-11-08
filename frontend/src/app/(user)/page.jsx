@@ -1,3 +1,5 @@
+import DiwaliHero from "@/components/home/DiwaliHero";
+import DiwaliWishes from "@/components/home/DiwaliWishes";
 import HeroSection from "@/components/home/HeroSection";
 import StatsBar from "@/components/home/StatsBar";
 import WelcomeSection from "@/components/home/WelcomeSection";
@@ -19,9 +21,13 @@ export const metadata = {
 export default function HomePage() {
   return (
     <>
+      {/* ── Diwali Special (seasonal — remove after festival) ── */}
+      <DiwaliHero />
+      <DiwaliWishes />
+
+      {/* ── Permanent homepage sections ── */}
       <HeroSection />
       <StatsBar />
-
       <WelcomeSection />
       <AcademicStages />
       <DirectorMessage data={directorMessage} />
