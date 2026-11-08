@@ -125,7 +125,7 @@ export default function DiwaliWishes() {
             className="text-[10px] sm:text-[11px] font-semibold tracking-[0.25em] uppercase mb-6"
             style={{ color: "#a06b1a" }}
           >
-            A Special Message from Tilak Global School
+            Diwali Thought &bull; From Tilak Global School
           </p>
 
           {/* Diya illustration row */}
@@ -167,42 +167,55 @@ export default function DiwaliWishes() {
               color: "#7c4a08",
             }}
           >
-            Lighting Up Lives,&nbsp;Spreading Happiness!
+            Every Diya Holds a&nbsp;Story of&nbsp;Hope.
           </h2>
 
           {/* Greeting card message */}
           <div
-            className="rounded-none border mx-auto mb-8 px-6 sm:px-10 py-8 text-left sm:text-left"
+            className="rounded-none border mx-auto mb-8 px-6 sm:px-10 py-8 text-center"
             style={{
               borderColor: "#c9952a40",
               background: "rgba(255,250,235,0.8)",
               boxShadow: "0 4px 32px rgba(180,120,10,0.10), inset 0 1px 0 rgba(200,150,40,0.15)",
             }}
           >
-            {/* Salutation */}
+            {/* Opening quote ornament */}
             <p
-              className="font-semibold text-sm sm:text-base mb-4"
-              style={{ color: "#7c4a08", fontFamily: "Lora, Georgia, serif" }}
+              className="text-4xl sm:text-5xl leading-none mb-4 select-none"
+              style={{ color: "#c9952a", opacity: 0.45, fontFamily: "Georgia, serif" }}
+              aria-hidden="true"
             >
-              Dear Students, Parents, Teachers &amp; Well-Wishers,
+              &#8220;
             </p>
 
-            {/* Body paragraphs */}
-            <p className="text-sm sm:text-base leading-relaxed mb-4" style={{ color: "#5a3c10" }}>
-              As we celebrate the beautiful festival of Diwali,{" "}
-              <strong style={{ color: "#7c4a08" }}>{siteConfig.name}</strong> wishes every
-              member of our school family a life filled with happiness, peace,
-              prosperity and endless opportunities.
+            {/* Motivational thought — universal, no target audience */}
+            <p
+              className="font-serif text-base sm:text-lg leading-relaxed mb-5"
+              style={{ color: "#5a3c10", fontStyle: "italic" }}
+            >
+              Darkness cannot stay where even a small flame burns with courage.
+              This Diwali, light your inner diya — the one that never goes out,
+              the one that turns challenges into lessons and moments into
+              memories. You are brighter than any darkness you face.
             </p>
-            <p className="text-sm sm:text-base leading-relaxed mb-4" style={{ color: "#5a3c10" }}>
-              May the light of knowledge guide our students towards success, may
-              the spirit of kindness bring us closer, and may every new beginning
-              inspire us to learn, grow and shine brighter.
+
+            {/* Closing quote ornament */}
+            <p
+              className="text-4xl sm:text-5xl leading-none mb-6 select-none"
+              style={{ color: "#c9952a", opacity: 0.45, fontFamily: "Georgia, serif" }}
+              aria-hidden="true"
+            >
+              &#8221;
             </p>
-            <p className="text-sm sm:text-base leading-relaxed mb-5" style={{ color: "#5a3c10" }}>
-              Let us celebrate this festival with love, positivity and
-              responsibility.
-            </p>
+
+            {/* Divider */}
+            <div className="flex items-center justify-center gap-3 mb-5" aria-hidden="true">
+              <span className="flex-1 h-px max-w-[60px]" style={{ background: "linear-gradient(90deg, transparent, #c9952a80)" }} />
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#f6c94e" }} />
+              <span className="w-2 h-2 rounded-full" style={{ background: "#c9952a" }} />
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#f6c94e" }} />
+              <span className="flex-1 h-px max-w-[60px]" style={{ background: "linear-gradient(90deg, #c9952a80, transparent)" }} />
+            </div>
 
             {/* Highlighted wish line */}
             <p
@@ -214,7 +227,7 @@ export default function DiwaliWishes() {
                 fontFamily: "Lora, Georgia, serif",
               }}
             >
-              🪔 &nbsp;Wishing You and Your Family a Very Happy &amp; Prosperous Diwali!&nbsp; 🪔
+              🪔 &nbsp;May this Diwali light up your world in ways you never imagined.&nbsp; 🪔
             </p>
           </div>
 
@@ -228,7 +241,7 @@ export default function DiwaliWishes() {
             </div>
 
             <p className="text-sm font-medium" style={{ color: "#a06b1a" }}>
-              With Warm Wishes,
+              Shared with love this Diwali,
             </p>
             {/* School name badge */}
             <div
