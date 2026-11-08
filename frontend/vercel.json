@@ -5,20 +5,20 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://api.tilakglobalschool.com/api/$1"
+      "destination": "https://tilak-global-school-api.onrender.com/api/$1"
     },
     {
       "source": "/uploads/(.*)",
-      "destination": "https://api.tilakglobalschool.com/uploads/$1"
+      "destination": "https://tilak-global-school-api.onrender.com/uploads/$1"
     }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Frame-Options",        "value": "DENY" },
-        { "key": "X-Content-Type-Options",  "value": "nosniff" },
-        { "key": "Referrer-Policy",         "value": "strict-origin-when-cross-origin" }
+        { "key": "X-Frame-Options",       "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy",        "value": "strict-origin-when-cross-origin" }
       ]
     }
   ]
