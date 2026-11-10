@@ -1,18 +1,37 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { newsAnnouncements as d } from "@/data/newsEvents";
 
 /**
  * NewsAnnouncements — client component (accordion state).
- * Single-open accordion. Left red edge grows on hover/open.
- * Square date block turns red-600 when item is open.
- * Compact rows: p-3 md:p-4, date blocks w-12 h-12 md:w-14 md:h-14.
- * Zero rounded-*. Zero literal text.
+ *
+ * Props:
+ *   apiPosts — array of NewsPost docs with category=News from the API
+ *
+ * Falls back to static data/newsEvents.js when apiPosts is empty.
  */
-export default function NewsAnnouncements() {
+export default function NewsAnnouncements({ apiPosts = [] }) {
   const [openId, setOpenId] = useState(null);
   const toggle = (id) => setOpenId((prev) => (prev === id ? null : id));
+
+  // Map API posts to the shape this component needs, or use static items
+  const items = apiPosts.length > 0
+    ? apiPosts.map(p => {
+        const dt = new Date(p.date);
+        return {
+          id:       p._id,
+          day:      dt.toLocaleDateString("en-IN", { day: "2-digit" }),
+          month:    dt.toLocaleDateString("en-IN", { month: "short" }),
+          title:    p.title,
+          summary:  p.summary || "",
+          content:  p.body    || p.summary || "",
+          category: p.category,
+          slug:     p.slug,
+        };
+      })
+    : d.items;
 
   return (
     <div>
@@ -21,14 +40,19 @@ export default function NewsAnnouncements() {
         <span aria-hidden="true" className="w-8 h-[2px] bg-red-600 shrink-0" />
         {d.eyebrow}
       </span>
-      <h2 className="mt-3 text-2xl md:text-3xl font-serif font-bold text-[#0B3D91]">
-        {d.heading}
-      </h2>
+      <h2 className="mt-3 text-2xl md:text-3xl font-serif font-bold text-[#0B3D91]">{d.heading}</h2>
       <div aria-hidden="true" className="w-12 h-[2px] md:h-1 bg-red-600 mt-3 mb-5" />
+
+      {/* Empty state */}
+      {items.length === 0 && (
+        <div className="text-center py-10 border border-[#0B3D91]/15 bg-white">
+          <p className="text-sm text-gray-500">No news has been published yet.</p>
+        </div>
+      )}
 
       {/* Accordion list */}
       <div className="space-y-2.5">
-        {d.items.map((item) => {
+        {items.map((item) => {
           const isOpen = openId === item.id;
           return (
             <div
@@ -53,7 +77,7 @@ export default function NewsAnnouncements() {
                 onClick={() => toggle(item.id)}
                 className="w-full flex items-center gap-3 pl-4 pr-3 py-3 md:p-4 text-left"
               >
-                {/* Date block — compact */}
+                {/* Date block */}
                 <div
                   className={`shrink-0 w-12 h-12 md:w-14 md:h-14 flex flex-col items-center justify-center
                               leading-none transition-colors duration-300
@@ -74,18 +98,15 @@ export default function NewsAnnouncements() {
                 </div>
 
                 {/* Plus / × icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
+                <svg xmlns="http://www.w3.org/2000/svg"
                   className={`shrink-0 w-5 h-5 transition-all duration-300
                               ${isOpen ? "rotate-45 text-red-600" : "text-[#0B3D91]"}`}
-                  fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor" strokeWidth={2} aria-hidden="true"
-                >
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12h14" />
                 </svg>
               </button>
 
-              {/* Expanded content — grid-rows animation */}
+              {/* Expanded content */}
               <div
                 id={`news-panel-${item.id}`}
                 role="region"
@@ -98,9 +119,13 @@ export default function NewsAnnouncements() {
                     <span className="inline-block mb-1.5 text-[10px] uppercase tracking-wider text-red-700 border-l-2 border-red-600 pl-2 capitalize">
                       {item.category}
                     </span>
-                    <p className="text-xs md:text-sm text-gray-700 leading-relaxed">
-                      {item.content}
-                    </p>
+                    <p className="text-xs md:text-sm text-gray-700 leading-relaxed">{item.content}</p>
+                    {item.slug && (
+                      <Link href={`/news-events/${item.slug}`}
+                        className="inline-block mt-3 text-xs font-semibold text-[#0B3D91] hover:text-red-600 underline underline-offset-2 transition-colors">
+                        Read full article →
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
@@ -109,8 +134,7 @@ export default function NewsAnnouncements() {
         })}
       </div>
 
-      {/* Note */}
-      {d.note && (
+      {!apiPosts.length && d.note && (
         <p className="mt-4 text-[10px] uppercase tracking-wider text-red-700 border-l-2 border-red-600 pl-2">
           {d.note}
         </p>

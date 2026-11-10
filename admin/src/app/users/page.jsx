@@ -170,13 +170,11 @@ export default function UsersPage() {
     setReactId(null); load();
   };
 
-  // Hard delete
+  // Hard delete — calls the actual DELETE endpoint (soft deactivate on backend)
   const handleHardDelete = async () => {
     try {
-      // Use updateUser to set isActive false first, then we can delete via admin API
-      // Backend only has soft-delete (deactivate); for hard delete we deactivate
-      await adminApi.updateUser(deleteId, { isActive: false });
-      toast.success('User removed');
+      await adminApi.deleteUser(deleteId);
+      toast.success('User deactivated');
     } catch (err) { toast.error(err.message || 'Delete failed'); }
     setDeleteId(null); load();
   };

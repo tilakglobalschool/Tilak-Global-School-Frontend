@@ -1,16 +1,41 @@
 "use client";
 
-import MobileSlider from "@/components/ui/MobileSlider";
-import EventCard    from "@/components/news-events/EventCard";
+import MobileSlider  from "@/components/ui/MobileSlider";
+import EventCard      from "@/components/news-events/EventCard";
+import { getUploadUrl } from "@/lib/uploadUrl";
 import { upcomingEvents as d } from "@/data/newsEvents";
 
 /**
  * UpcomingEvents — client component (MobileSlider needs useState/useRef).
- * Desktop: 3-column grid.
- * Mobile: MobileSlider, one card per swipe, red active dot.
- * Zero rounded-*. Zero literal text.
+ *
+ * Props:
+ *   apiItems — array of NewsPost docs from the API (category=Event, date>=today)
+ *
+ * When apiItems is non-empty, they replace the static placeholder items.
+ * Falls back to static data/newsEvents.js when API returns empty.
  */
-export default function UpcomingEvents() {
+export default function UpcomingEvents({ apiItems = [] }) {
+
+  // Map API posts to the shape EventCard expects
+  const apiCards = apiItems.map(p => ({
+    id:            p._id,
+    title:         p.title,
+    description:   p.summary || "",
+    category:      p.category,
+    date:          new Date(p.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }),
+    dateConfirmed: true,
+    slug:          p.slug,
+    image: {
+      src: p.imageUrl ? getUploadUrl(p.imageUrl) : "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=80&fm=webp",
+      alt: p.title,
+    },
+  }));
+
+  const items = apiCards.length > 0 ? apiCards : d.items;
+
+  // Don't render the section at all if there are no upcoming events and no static items
+  if (!items || items.length === 0) return null;
+
   return (
     <section className="w-full bg-white py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -35,7 +60,7 @@ export default function UpcomingEvents() {
 
         {/* Mobile slider */}
         <MobileSlider
-          items={d.items}
+          items={items}
           breakpoint="md"
           slideWidth="w-[calc(100vw-2.5rem)]"
           activeDotClass="w-6 h-2 bg-red-600"
@@ -45,7 +70,7 @@ export default function UpcomingEvents() {
 
         {/* Desktop grid */}
         <div className="hidden md:grid md:grid-cols-3 gap-6 lg:gap-8">
-          {d.items.map((item) => (
+          {items.map((item) => (
             <EventCard key={item.id} item={item} showDetails={true} />
           ))}
         </div>

@@ -127,7 +127,6 @@ export const adminApi = {
   uploadDocument:      (fd)        => http('POST',   '/admin/documents',       fd),
   updateDocument:      (id, body)  => http('PUT',    `/admin/documents/${id}`, body),
   deleteDocument:      (id)        => http('DELETE', `/admin/documents/${id}`),
-
   // ── Fee Structure ────────────────────────────────────────────────────────────
   fees:                ()          => http('GET',    '/admin/fees'),
   createFee:           (body)      => http('POST',   '/admin/fees',            body),

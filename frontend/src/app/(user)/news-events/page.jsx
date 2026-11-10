@@ -4,6 +4,7 @@ import UpcomingEvents     from "@/components/news-events/UpcomingEvents";
 import NewsNoticesLayout  from "@/components/news-events/NewsNoticesLayout";
 import PreviousEvents     from "@/components/news-events/PreviousEvents";
 import CtaBanner          from "@/components/shared/CtaBanner";
+import { getNews }        from "@/lib/api";
 import { newsEventsHero, newsEventsPage, newsEventsCta } from "@/data/newsEvents";
 
 export const metadata = {
@@ -13,21 +14,38 @@ export const metadata = {
 
 /**
  * NewsEventsPage — server component.
- * Section order:
- *   PageHero → FeaturedEvent → UpcomingEvents →
- *   NewsNoticesLayout (News + Notices side-by-side) →
- *   PreviousEvents → CtaBanner
+ * Fetches all published posts from the API and distributes them to sections.
  *
- * All strings from data/newsEvents.js — zero literals in JSX.
+ * API post shape: { _id, title, slug, category, date, summary, body, imageUrl, isFeatured }
+ *
+ * Distribution:
+ *   featured  → isFeatured === true (or first published post)
+ *   upcoming  → category === 'Event', date >= today
+ *   news      → category === 'News'
+ *   notices   → category === 'Notice'
+ *   previous  → category === 'Event', date < today
+ *
+ * Falls back to static data/newsEvents.js when API returns empty.
  */
-export default function NewsEventsPage() {
+export default async function NewsEventsPage() {
+  const { data } = await getNews("?limit=100&status=published");
+  const allPosts = data?.posts || [];
+
+  const now = new Date();
+
+  const featured = allPosts.find(p => p.isFeatured) || allPosts[0] || null;
+  const upcoming = allPosts.filter(p => p.category === "Event" && new Date(p.date) >= now);
+  const news     = allPosts.filter(p => p.category === "News");
+  const notices  = allPosts.filter(p => p.category === "Notice");
+  const previous = allPosts.filter(p => p.category === "Event" && new Date(p.date) < now);
+
   return (
     <>
       <PageHero data={newsEventsHero} />
-      <FeaturedEvent />
-      <UpcomingEvents />
-      <NewsNoticesLayout />
-      <PreviousEvents />
+      <FeaturedEvent     apiPost={featured} />
+      <UpcomingEvents    apiItems={upcoming} />
+      <NewsNoticesLayout apiNews={news} apiNotices={notices} />
+      <PreviousEvents    apiItems={previous} />
       <CtaBanner data={newsEventsCta} />
     </>
   );
