@@ -14,14 +14,14 @@ import { faqs } from "@/data/home";
  */
 
 /* ── FAQ Page JSON-LD schema for SEO ── */
-function FaqSchema() {
+function FaqSchema({ items }) {
   const schema = {
     "@context": "https://schema.org",
     "@type":    "FAQPage",
-    mainEntity: faqs.items.map((item) => ({
-      "@type":         "Question",
-      name:            item.question,
-      acceptedAnswer:  { "@type": "Answer", text: item.answer },
+    mainEntity: items.map((item) => ({
+      "@type":        "Question",
+      name:           item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
     })),
   };
   return (
@@ -32,13 +32,18 @@ function FaqSchema() {
   );
 }
 
-export default function FaqSection() {
+export default function FaqSection({ apiFaqs }) {
   const [openId, setOpenId] = useState(null);
   const toggle = (id) => setOpenId((prev) => (prev === id ? null : id));
 
+  // Use API FAQs if available, otherwise fall back to static
+  const items = apiFaqs && apiFaqs.length > 0
+    ? apiFaqs.map((f, i) => ({ id: f._id || i + 1, question: f.question, answer: f.answer }))
+    : faqs.items;
+
   return (
     <section className="w-full bg-white pt-6 md:pt-10 pb-16 md:pb-24">
-      <FaqSchema />
+      <FaqSchema items={items} />
 
       <div className="max-w-4xl mx-auto px-4 md:px-8">
 
@@ -76,7 +81,7 @@ export default function FaqSection() {
 
         {/* ── FAQ list ── */}
         <ul className="space-y-3">
-          {faqs.items.map((item, idx) => {
+          {items.map((item, idx) => {
             const isOpen = openId === item.id;
 
             return (

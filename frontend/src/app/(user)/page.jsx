@@ -5,12 +5,14 @@ import StatsBar from "@/components/home/StatsBar";
 import WelcomeSection from "@/components/home/WelcomeSection";
 import AcademicStages from "@/components/home/AcademicStages";
 import DirectorMessage from "@/components/shared/DirectorMessage";
-import { directorMessage } from "@/data/home";
 import FacilitiesSection from "@/components/home/FacilitiesSection";
 import WhyChooseSection from "@/components/home/WhyChooseSection";
 import NewsGallerySection from "@/components/home/NewsGallerySection";
 import FaqSection from "@/components/home/FaqSection";
 import CtaBanner from "@/components/home/CtaBanner";
+
+import { getSettings, getContent, getNews, getGallery, getFaqs } from "@/lib/api";
+import { directorMessage as staticDirectorMsg } from "@/data/home";
 
 export const metadata = {
   title: "Home — Tilak Global School | CBSE School Jaipur",
@@ -18,7 +20,38 @@ export const metadata = {
     "Tilak Global School is an English-medium co-educational CBSE school in Jaipur offering classes from Nursery to Class XII.",
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch all dynamic data in parallel — graceful fallback on error
+  const [settingsRes, contentRes, newsRes, galleryRes, faqsRes] = await Promise.all([
+    getSettings(),
+    getContent("home"),
+    getNews("?limit=4&status=published"),
+    getGallery("?limit=4&status=published"),
+    getFaqs(),
+  ]);
+
+  const settings = settingsRes.data?.settings || null;
+  const content  = contentRes.data?.content   || {};
+  const news     = newsRes.data?.posts         || [];
+  const gallery  = galleryRes.data?.images     || [];
+  const faqs     = faqsRes.data?.faqs          || [];
+
+  // Build director data: prefer DB settings, fall back to static
+  const directorData = settings ? {
+    ...staticDirectorMsg,
+    name:        settings.directorName        || staticDirectorMsg.name,
+    designation: settings.directorDesignation || staticDirectorMsg.designation,
+    quote:       settings.directorMessage     || staticDirectorMsg.quote,
+    image: {
+      ...staticDirectorMsg.image,
+      src: settings.directorPhotoUrl
+        ? (settings.directorPhotoUrl.startsWith("http")
+            ? settings.directorPhotoUrl
+            : `${process.env.API_URL?.replace("/api", "") || "https://tilak-global-school-backend-0xwt.onrender.com"}${settings.directorPhotoUrl}`)
+        : staticDirectorMsg.image.src,
+    },
+  } : staticDirectorMsg;
+
   return (
     <>
       {/* ── Diwali Special (seasonal — remove after festival) ── */}
@@ -26,16 +59,16 @@ export default function HomePage() {
       <DiwaliWishes />
 
       {/* ── Permanent homepage sections ── */}
-      <HeroSection />
+      <HeroSection settings={settings} content={content} />
       <StatsBar />
-      <WelcomeSection />
+      <WelcomeSection content={content} />
       <AcademicStages />
-      <DirectorMessage data={directorMessage} />
+      <DirectorMessage data={directorData} />
       <FacilitiesSection />
       <WhyChooseSection />
-      <NewsGallerySection />
-      <FaqSection />
-      <CtaBanner />
+      <NewsGallerySection news={news} gallery={gallery} />
+      <FaqSection apiFaqs={faqs} />
+      <CtaBanner settings={settings} />
     </>
   );
 }

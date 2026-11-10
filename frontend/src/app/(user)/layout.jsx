@@ -1,5 +1,5 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import HeaderServer from "@/components/layout/HeaderServer";
+import FooterServer from "@/components/layout/FooterServer";
 import ToasterProvider from "@/components/ToasterProvider";
 
 export const metadata = {
@@ -11,9 +11,9 @@ export default function UserLayout({ children }) {
   return (
     <>
       <ToasterProvider />
-      <Header />
+      <HeaderServer />
       <main className="min-h-screen">{children}</main>
-      <Footer />
+      <FooterServer />
     </>
   );
 }

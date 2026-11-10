@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -7,13 +7,33 @@ import { PhoneCall, MapPin, Mail, Menu, X, ChevronDown } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
 import { NAV_ITEMS, admissionCta } from "@/data/navigation";
 
-/* ── Social SVG icons ── */
+/* â”€â”€ Social SVG icons â”€â”€ */
 const FacebookIcon  = () => (<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>);
 const InstagramIcon = () => (<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>);
 const YoutubeIcon   = () => (<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>);
 const TwitterIcon   = () => (<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>);
 
-export default function Header() {
+export default function Header({ settings }) {
+  // Merge API settings with static siteConfig â€” API wins when available
+  const sc = {
+    ...siteConfig,
+    ...(settings && {
+      name:         settings.schoolName      || sc.name,
+      tagline:      settings.schoolSubtitle  || settings.topBarTagline || sc.tagline,
+      address:      settings.address         || sc.address,
+      addressShort: settings.address         || sc.addressShort,
+      phone:        settings.phone           || sc.phone,
+      phoneHref:    settings.phone           ? `tel:${settings.phone.replace(/\s/g,"")}` : sc.phoneHref,
+      email:        settings.email           || sc.email,
+      emailHref:    settings.email           ? `mailto:${settings.email}` : sc.emailHref,
+      social: {
+        facebook:  settings.socialLinks?.facebook  || sc.social.facebook,
+        instagram: settings.socialLinks?.instagram || sc.social.instagram,
+        youtube:   settings.socialLinks?.youtube   || sc.social.youtube,
+        twitter:   settings.socialLinks?.other     || sc.social.twitter,
+      },
+    }),
+  };
   const pathname = usePathname();
   const headerRef = useRef(null);
   const [scrolled, setScrolled]                       = useState(false);
@@ -58,7 +78,7 @@ export default function Header() {
         ref={headerRef}
         className={`fixed top-0 left-0 right-0 z-50 transition-shadow duration-300 ${scrolled ? "shadow-lg" : ""}`}
       >
-        {/* ── Top Red Utility Bar ── */}
+        {/* â”€â”€ Top Red Utility Bar â”€â”€ */}
         <div className={`bg-[#C8102E] text-white overflow-hidden transition-all duration-300 ease-in-out ${
           scrolled ? "max-h-0 opacity-0 py-0" : "max-h-[48px] opacity-100 py-1 md:py-2"
         }`}>
@@ -69,11 +89,11 @@ export default function Header() {
               <span className="flex items-center gap-1 text-[10px] font-medium shrink min-w-0 overflow-hidden">
                 <MapPin className="w-3 h-3 shrink-0" />
                 <span style={{ display: "block", whiteSpace: "nowrap", textOverflow: "clip", overflow: "hidden" }}>
-                  {siteConfig.addressShort}
+                  {sc.addressShort}
                 </span>
               </span>
-              {siteConfig.phone && (
-                <a href={siteConfig.phoneHref} className="flex items-center gap-1 text-[10px] font-medium shrink-0 hover:opacity-80 transition">
+              {sc.phone && (
+                <a href={sc.phoneHref} className="flex items-center gap-1 text-[10px] font-medium shrink-0 hover:opacity-80 transition">
                   <PhoneCall className="w-3 h-3 shrink-0" />
                   <span>Call</span>
                 </a>
@@ -85,42 +105,42 @@ export default function Header() {
               <div className="flex items-center gap-4">
                 <span className="flex items-center gap-1 text-xs opacity-90 whitespace-nowrap">
                   <MapPin className="w-3.5 h-3.5 shrink-0" />
-                  {siteConfig.address}
+                  {sc.address}
                 </span>
-                {siteConfig.phone && (
-                  <a href={siteConfig.phoneHref} className="flex items-center gap-1 text-xs hover:opacity-80 transition whitespace-nowrap">
+                {sc.phone && (
+                  <a href={sc.phoneHref} className="flex items-center gap-1 text-xs hover:opacity-80 transition whitespace-nowrap">
                     <PhoneCall className="w-3.5 h-3.5 shrink-0" />
-                    {siteConfig.phone}
+                    {sc.phone}
                   </a>
                 )}
-                {siteConfig.email && (
-                  <a href={siteConfig.emailHref} className="flex items-center gap-1 text-xs hover:opacity-80 transition whitespace-nowrap">
+                {sc.email && (
+                  <a href={sc.emailHref} className="flex items-center gap-1 text-xs hover:opacity-80 transition whitespace-nowrap">
                     <Mail className="w-3.5 h-3.5 shrink-0" />
-                    {siteConfig.email}
+                    {sc.email}
                   </a>
                 )}
               </div>
               <div className="flex items-center gap-3 shrink-0">
-                <a href={siteConfig.social.facebook}  aria-label="Facebook"  className="hover:opacity-75 transition"><FacebookIcon /></a>
-                <a href={siteConfig.social.instagram} aria-label="Instagram" className="hover:opacity-75 transition"><InstagramIcon /></a>
-                <a href={siteConfig.social.youtube}   aria-label="YouTube"   className="hover:opacity-75 transition"><YoutubeIcon /></a>
-                <a href={siteConfig.social.twitter}   aria-label="Twitter"   className="hover:opacity-75 transition"><TwitterIcon /></a>
+                <a href={sc.social.facebook}  aria-label="Facebook"  className="hover:opacity-75 transition"><FacebookIcon /></a>
+                <a href={sc.social.instagram} aria-label="Instagram" className="hover:opacity-75 transition"><InstagramIcon /></a>
+                <a href={sc.social.youtube}   aria-label="YouTube"   className="hover:opacity-75 transition"><YoutubeIcon /></a>
+                <a href={sc.social.twitter}   aria-label="Twitter"   className="hover:opacity-75 transition"><TwitterIcon /></a>
               </div>
             </div>
           </div>
         </div>
 
-        {/* ── Main Navy Navigation Bar ── */}
+        {/* â”€â”€ Main Navy Navigation Bar â”€â”€ */}
         <nav className="bg-[#0B3D91] text-white">
           <div className="max-w-7xl mx-auto px-3 md:px-6 py-2 md:py-3 flex items-center justify-between gap-3">
 
             <Link href="/" className="flex items-center gap-2 md:gap-3 shrink-0 min-w-0">
               <div className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-white flex items-center justify-center shrink-0">
-                <span className="text-[#0B3D91] font-bold text-sm md:text-lg leading-none">{siteConfig.logoInitials}</span>
+                <span className="text-[#0B3D91] font-bold text-sm md:text-lg leading-none">{sc.logoInitials}</span>
               </div>
               <div className="leading-tight min-w-0">
-                <p className="font-bold text-sm md:text-lg tracking-wide">{siteConfig.name}</p>
-                <p className="text-[10px] md:text-xs text-blue-200 tracking-wider">{siteConfig.tagline}</p>
+                <p className="font-bold text-sm md:text-lg tracking-wide">{sc.name}</p>
+                <p className="text-[10px] md:text-xs text-blue-200 tracking-wider">{sc.tagline}</p>
               </div>
             </Link>
 
@@ -201,3 +221,4 @@ export default function Header() {
     </>
   );
 }
+
