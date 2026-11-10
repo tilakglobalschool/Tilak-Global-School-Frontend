@@ -26,7 +26,7 @@ export const siteConfig = {
   address:       "Bindayaka (Bhutawali), Mukundpura Road, Jaipur - 302041",
   addressShort:  "Bindayaka, Mukundpura Road, Jaipur",
   phone:         "9119112335",
-  phoneHref:     "tel:9119112335",
+  phoneHref:     "tel:+919119112335",
   landline:      "0141-2945793",
   landlineHref:  "tel:01412945793",
   email:         "schooltilak@gmail.com",
@@ -47,7 +47,6 @@ export const siteConfig = {
   },
 
   copyright:  "© 2026 Tilak Global School. All Rights Reserved.",
-  developer:  "Code Craft IT Solution",
 
   logoInitials: "TGS",
   mapEmbed:     "", // CF-11 — Google Maps URL not yet provided by client
