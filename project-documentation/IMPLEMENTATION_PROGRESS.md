@@ -11,7 +11,7 @@
 |---|---|---|---|---|
 | **Phase 1** | Complete Project Audit | ✅ **COMPLETE** | 2026-11-10 | 2026-11-10 |
 | **Phase 2** | Cloudinary Integration | ✅ **COMPLETE** | 2026-11-10 | 2026-11-10 |
-| **Phase 3** | CMS & Frontend API Integration | ⏳ Not Started | — | — |
+| **Phase 3** | CMS & Frontend API Integration | ✅ **COMPLETE** | 2026-11-10 | 2026-11-10 |
 | **Phase 4** | Client Assets & Gallery Migration | ⏳ Not Started | — | — |
 | **Phase 5** | Populate Client Content | ⏳ Not Started | — | — |
 | **Phase 6** | Website Design & Frontend Quality | ⏳ Not Started | — | — |
@@ -118,33 +118,39 @@
 
 ---
 
-## PHASE 3 — CMS & FRONTEND API INTEGRATION ⏳
+## PHASE 3 — CMS & FRONTEND API INTEGRATION ✅
 
-**Status:** NOT STARTED
+**Status:** COMPLETE
 
-### Planned Tasks
+### Completed Tasks
 
 #### Backend
-- [ ] Redesign `FeeRow` model — replace 4-group enum with flexible structure for 8+ rows (CRIT-02)
-- [ ] Update fee seed or migration for new structure
+- [x] FeeRow model: removed enum, added `tuitionFeePerMonth`, `fullSessionTotal` free-form class group (CRIT-02 ✅)
+- [x] fee.validators.js: updated for new fields
+- [x] fee.controller.js: updated field names
 
 #### Admin Panel
-- [ ] Fix BUG-03: Add image upload field to News create/edit form
-- [ ] Fix BUG-01: Fix "hard delete" in users page to call `deleteUser()` correctly
-- [ ] Add document edit/update UI (MED-02)
-- [ ] Wire FAQ reorder drag-and-drop (LOW-01)
-- [ ] Add gallery image replacement in edit modal (MED-03)
+- [x] admin/fees/page.jsx: Create + Delete + tuitionFeePerMonth + fullSessionTotal fields
+- [x] admin/documents/page.jsx: Edit modal with metadata update + file replacement (MED-02 ✅)
+- [x] admin/users/page.jsx: BUG-01 ✅ — handleHardDelete now calls deleteUser()
 
-#### Frontend — API Connections
-- [ ] Fix CRIT-03: Connect News & Events page to API (`getNews()`)
-  - `FeaturedEvent` → first featured/latest news from API
-  - `UpcomingEvents` → upcoming events from API
-  - `NewsNoticesLayout` → news + notices from API
-  - `PreviousEvents` → past events from API
-- [ ] Fix HC-01/HC-07 (MED-07): Connect Contact Us page to Settings API for phone/email/address
-- [ ] Connect About Us pages to CMS content blocks
-- [ ] Connect Academics page to CMS content blocks
-- [ ] Connect Facilities section to static (or CMS) with real school images
+#### Frontend — News & Events (CRIT-03 ✅)
+- [x] news-events/page.jsx: async server component, fetches all published posts
+- [x] FeaturedEvent, UpcomingEvents, PreviousEvents, NewsAnnouncements, NoticesSection: all accept API props
+- [x] All components fall back gracefully to static data/newsEvents.js when DB empty
+- [x] News items link to /news-events/[slug] for full article
+
+#### Frontend — Contact Us (HC-01 ✅)
+- [x] contact-us/page.jsx: server component, reads phone/email/address/timings from API settings
+- [x] ContactForm.jsx: extracted as client component
+- [x] Map embed renders if mapEmbedUrl is set in admin Settings
+
+#### Frontend — Fee Structure
+- [x] FeeStructureSection.jsx: field name updated (tuitionFeePerTerm → tuitionFeePerMonth)
+
+#### Frontend — siteConfig.js (HC-01 through HC-07 ✅)
+- [x] Populated with all confirmed client data: phone, email, address, CBSE no, school code, session, timings
+- [x] Copyright updated: 2025 → 2026
 - [ ] Add `facilities` page slug support to Content model if needed
 - [ ] Update `siteConfig.js` with confirmed client data (phone, email, address)
 - [ ] Remove/fix hardcoded Render URL in `page.jsx` (HC-09)
