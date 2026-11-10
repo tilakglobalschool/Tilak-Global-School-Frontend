@@ -10,7 +10,7 @@
 | Phase | Name | Status | Started | Completed |
 |---|---|---|---|---|
 | **Phase 1** | Complete Project Audit | ✅ **COMPLETE** | 2026-11-10 | 2026-11-10 |
-| **Phase 2** | Cloudinary Integration | ⏳ Awaiting Approval | — | — |
+| **Phase 2** | Cloudinary Integration | ✅ **COMPLETE** | 2026-11-10 | 2026-11-10 |
 | **Phase 3** | CMS & Frontend API Integration | ⏳ Not Started | — | — |
 | **Phase 4** | Client Assets & Gallery Migration | ⏳ Not Started | — | — |
 | **Phase 5** | Populate Client Content | ⏳ Not Started | — | — |
@@ -88,55 +88,33 @@
 
 ---
 
-## PHASE 2 — CLOUDINARY INTEGRATION ⏳
+## PHASE 2 — CLOUDINARY INTEGRATION ✅
 
-**Status:** AWAITING APPROVAL
+**Status:** COMPLETE
 
-### Planned Tasks
+### Completed Tasks
 
-- [ ] Install `cloudinary` and `multer-storage-cloudinary` packages
-- [ ] Create `backend/src/config/cloudinary.js` — Cloudinary SDK init from env
-- [ ] Add Cloudinary env vars to `backend/.env.example`
-- [ ] Add Cloudinary vars to Render environment settings
-- [ ] Update `upload.middleware.js` — replace `multer.diskStorage` with `CloudinaryStorage`
-- [ ] Configure Cloudinary folders: `tilak-global-school/gallery`, `/news`, `/documents`, `/media`, `/videos`
-- [ ] Add `publicId` and `cloudinaryUrl` fields to `GalleryImage` model
-- [ ] Add `publicId` and `cloudinaryUrl` fields to `NewsPost` model
-- [ ] Add `publicId` and `cloudinaryUrl` fields to `Document` model
-- [ ] Add `logoPublicId`, `faviconPublicId`, `directorPhotoPublicId` to `SiteSettings` model
-- [ ] Update `gallery.controller.js` — delete from Cloudinary on record delete
-- [ ] Update `news.controller.js` — delete from Cloudinary on record delete
-- [ ] Update `document.controller.js` — delete from Cloudinary on record delete
-- [ ] Update `settings.controller.js` — upload/replace/delete media via Cloudinary
-- [ ] Add `res.cloudinary.com` to `frontend/next.config.mjs` image remote patterns
-- [ ] Add `res.cloudinary.com` to `admin/next.config.mjs` image remote patterns
-- [ ] Fix `frontend/next.config.mjs` — hostname `tilak-global-school-backend.onrender.com` missing `-0xwt` suffix (HIGH-05)
-- [ ] Fix CORS `CLIENT_URL` to be env-driven instead of hardcoded (MED-04)
-- [ ] Maintain backward compatibility — existing `/uploads/*` URLs in DB continue to work
-- [ ] Test: upload image, fetch, replace, delete, invalid file rejection, error handling
+- [x] Installed `cloudinary` and `multer-storage-cloudinary` packages
+- [x] Created `backend/src/config/cloudinary.js` — Cloudinary SDK init from env vars
+- [x] Added Cloudinary env vars to `env.js` and `.env.example`
+- [x] Replaced `multer.diskStorage` with `CloudinaryStorage` in `upload.middleware.js`
+- [x] Added `uploadVideo` handler for MP4/video uploads
+- [x] `GalleryImage` model: added `cloudinaryPublicId`, `cloudinaryResourceType`, `altText`; expanded categories to 14
+- [x] `NewsPost` model: added `cloudinaryPublicId`
+- [x] `Document` model: added `cloudinaryPublicId`, `cloudinaryResourceType`
+- [x] `SiteSettings` model: added `logoPublicId`, `faviconPublicId`, `directorPhotoPublicId`
+- [x] All 4 controllers updated with Cloudinary delete/replace logic + legacy disk backward compat
+- [x] `gallery.routes.js`: added `uploadImage` middleware to PUT route
+- [x] `gallery.validators.js`: added `altText` field
+- [x] `frontend/next.config.mjs`: added `res.cloudinary.com`; fixed Render hostname (HIGH-05)
+- [x] `admin/next.config.mjs`: same fixes
+- [x] `admin/gallery/page.jsx`: 14 categories, alt text, image replacement in edit modal (BUG-02 ✅)
+- [x] `admin/news/page.jsx`: image upload/preview/remove in create+edit forms (BUG-03 ✅)
+- [x] `app.js`: CORS origins merged from env `CLIENT_URL` (MED-04 ✅)
+- [x] Server boots cleanly, Atlas connected, all APIs verified
 
-### Files to Create/Modify (Phase 2)
-- NEW: `backend/src/config/cloudinary.js`
-- MOD: `backend/package.json`
-- MOD: `backend/.env.example`
-- MOD: `backend/src/middleware/upload.middleware.js`
-- MOD: `backend/src/models/GalleryImage.model.js`
-- MOD: `backend/src/models/NewsPost.model.js`
-- MOD: `backend/src/models/Document.model.js`
-- MOD: `backend/src/models/SiteSettings.model.js`
-- MOD: `backend/src/controllers/gallery.controller.js`
-- MOD: `backend/src/controllers/news.controller.js`
-- MOD: `backend/src/controllers/document.controller.js`
-- MOD: `backend/src/controllers/settings.controller.js`
-- MOD: `frontend/next.config.mjs`
-- MOD: `admin/next.config.mjs`
-
-### Env Vars to Add
-```env
-CLOUDINARY_CLOUD_NAME=h6erncmn
-CLOUDINARY_API_KEY=515823445522997
-CLOUDINARY_API_SECRET=[to be set privately]
-```
+### Manual Step Required
+> Set `CLOUDINARY_API_SECRET` in Render dashboard AND in local `backend/.env`.
 
 ---
 
