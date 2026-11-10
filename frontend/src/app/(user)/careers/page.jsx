@@ -1,4 +1,6 @@
 import { careersPage } from "@/data/contact";
+
+export const dynamic = "force-dynamic";
 export const metadata = { title: `${careersPage.heading} — Tilak Global School` };
 export default function CareersPage() {
   return (

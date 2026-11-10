@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import AdmissionsHero from "@/components/admissions/AdmissionsHero";
 import FeeStructureSection from "@/components/admissions/FeeStructureSection";
 import { feeStructurePage, feeStructureHero } from "@/data/admissions";
@@ -15,3 +16,4 @@ export default function FeeStructurePage() {
     </>
   );
 }
+

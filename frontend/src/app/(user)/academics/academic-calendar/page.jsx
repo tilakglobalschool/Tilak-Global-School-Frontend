@@ -2,6 +2,7 @@ import AcademicsHero from "@/components/academics/AcademicsHero";
 import AcademicEventCard from "@/components/academics/AcademicEventCard";
 import { academicCalendarPage, academicCalendarHero, academicCalendar } from "@/data/academics";
 
+export const dynamic = "force-dynamic";
 export const metadata = {
   title: `${academicCalendarPage.heading} — Tilak Global School`,
   description: academicCalendar.description,

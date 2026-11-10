@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import PageHero from "@/components/shared/PageHero";
 import { principalsMessagePage, principalsMessageHero } from "@/data/about";
 
@@ -13,3 +14,4 @@ export default function PrincipalsMessagePage() {
     </>
   );
 }
+

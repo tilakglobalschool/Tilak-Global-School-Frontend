@@ -1,6 +1,4 @@
-import DiwaliHero from "@/components/home/DiwaliHero";
-import DiwaliWishes from "@/components/home/DiwaliWishes";
-import HeroSection from "@/components/home/HeroSection";
+﻿import HeroSection from "@/components/home/HeroSection";
 import StatsBar from "@/components/home/StatsBar";
 import WelcomeSection from "@/components/home/WelcomeSection";
 import AcademicStages from "@/components/home/AcademicStages";
@@ -14,10 +12,12 @@ import CtaBanner from "@/components/home/CtaBanner";
 import { getSettings, getContent, getNews, getGallery, getFaqs } from "@/lib/api";
 import { directorMessage as staticDirectorMsg } from "@/data/home";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
-  title: "Home — Tilak Global School | CBSE School Jaipur",
+  title: "Tilak Global School | CBSE School Jaipur — Nursery to Class XII",
   description:
-    "Tilak Global School is an English-medium co-educational CBSE school in Jaipur offering classes from Nursery to Class XII.",
+    "Tilak Global School is an English-medium, co-educational CBSE-affiliated school in Jaipur offering classes from Play Group to Class XII. Admissions open for 2026-27.",
 };
 
 export default async function HomePage() {
@@ -47,18 +47,14 @@ export default async function HomePage() {
       src: settings.directorPhotoUrl
         ? (settings.directorPhotoUrl.startsWith("http")
             ? settings.directorPhotoUrl
-            : `${process.env.API_URL?.replace("/api", "") || "https://tilak-global-school-backend-0xwt.onrender.com"}${settings.directorPhotoUrl}`)
+            : `${process.env.API_URL?.replace("/api", "") || ""}${settings.directorPhotoUrl}`)
         : staticDirectorMsg.image.src,
     },
   } : staticDirectorMsg;
 
   return (
     <>
-      {/* ── Diwali Special (seasonal — remove after festival) ── */}
-      <DiwaliHero />
-      <DiwaliWishes />
-
-      {/* ── Permanent homepage sections ── */}
+      {/* ── Homepage sections ── */}
       <HeroSection settings={settings} content={content} />
       <StatsBar />
       <WelcomeSection content={content} />

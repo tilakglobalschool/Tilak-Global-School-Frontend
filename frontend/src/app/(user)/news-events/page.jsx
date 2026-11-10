@@ -1,4 +1,4 @@
-import PageHero          from "@/components/shared/PageHero";
+﻿import PageHero          from "@/components/shared/PageHero";
 import FeaturedEvent      from "@/components/news-events/FeaturedEvent";
 import UpcomingEvents     from "@/components/news-events/UpcomingEvents";
 import NewsNoticesLayout  from "@/components/news-events/NewsNoticesLayout";
@@ -6,6 +6,8 @@ import PreviousEvents     from "@/components/news-events/PreviousEvents";
 import CtaBanner          from "@/components/shared/CtaBanner";
 import { getNews }        from "@/lib/api";
 import { newsEventsHero, newsEventsPage, newsEventsCta } from "@/data/newsEvents";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: `${newsEventsPage.heading} — Tilak Global School`,
@@ -15,17 +17,6 @@ export const metadata = {
 /**
  * NewsEventsPage — server component.
  * Fetches all published posts from the API and distributes them to sections.
- *
- * API post shape: { _id, title, slug, category, date, summary, body, imageUrl, isFeatured }
- *
- * Distribution:
- *   featured  → isFeatured === true (or first published post)
- *   upcoming  → category === 'Event', date >= today
- *   news      → category === 'News'
- *   notices   → category === 'Notice'
- *   previous  → category === 'Event', date < today
- *
- * Falls back to static data/newsEvents.js when API returns empty.
  */
 export default async function NewsEventsPage() {
   const { data } = await getNews("?limit=100&status=published");

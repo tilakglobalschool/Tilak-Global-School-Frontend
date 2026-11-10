@@ -6,13 +6,24 @@ import { visionMission as d } from "@/data/about";
 
 /**
  * VisionMission — client component (MobileSlider needs useRef/useState).
- * Tinted bg-[#EEF3FB] with dot pattern, blurred glows.
- * Two-column editorial header on lg+: heading left, subtext right.
- * Three equal cards on md+, one-per-swipe MobileSlider below md.
- *
- * Zero rounded-* anywhere. Zero literal text.
+ * Props:
+ *   content — CMS blocks from /api/content/about (optional)
  */
-export default function VisionMission() {
+export default function VisionMission({ content = {} }) {
+  // CMS overrides
+  const cmsVision  = content?.["about.vision.text"]?.value  || null;
+  const cmsMission = content?.["about.mission.text"]?.value || null;
+  const cmsValues  = content?.["about.values.list"]?.value  || null;
+
+  // Build cards — override with CMS where available
+  const cards = d.cards.map(card => {
+    if (card.id === "vision"  && cmsVision)  return { ...card, body: cmsVision };
+    if (card.id === "mission" && cmsMission && !cmsMission.includes("["))
+      return { ...card, body: cmsMission };
+    if (card.id === "values"  && Array.isArray(cmsValues))
+      return { ...card, list: cmsValues };
+    return card;
+  });
   return (
     <section
       className="relative overflow-hidden bg-[#EEF3FB] py-16 md:py-24"
@@ -80,7 +91,7 @@ export default function VisionMission() {
 
         {/* ── Mobile / tablet slider — hidden md+ ── */}
         <MobileSlider
-          items={d.cards}
+          items={cards}
           breakpoint="md"
           slideWidth="w-[calc(100vw-2.5rem)]"
           activeDotClass="w-6 h-2 bg-red-600"
@@ -92,7 +103,7 @@ export default function VisionMission() {
           className="hidden md:grid md:grid-cols-3
                      gap-6 md:gap-8 lg:gap-10 items-stretch"
         >
-          {d.cards.map((card) => (
+          {cards.map((card) => (
             <VisionMissionCard key={card.id} card={card} />
           ))}
         </div>

@@ -4,9 +4,10 @@ import CtaBanner      from "@/components/shared/CtaBanner";
 import { getGallery } from "@/lib/api";
 import { galleryHero, galleryPage, dummyGalleryItems, galleryCta } from "@/data/gallery";
 
+export const dynamic = "force-dynamic";
 export const metadata = {
-  title: `${galleryPage.heading} — Tilak Global School`,
-  description: galleryPage.description,
+  title: "Gallery — Tilak Global School | School Photos Jaipur",
+  description: "Browse photos of Tilak Global School Jaipur — Annual Day, sports, science exhibitions, Janmashtami, Independence Day, school facilities and more.",
 };
 
 /**

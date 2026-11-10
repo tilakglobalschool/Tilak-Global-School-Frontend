@@ -7,10 +7,11 @@ import AdmissionsFaqWrapper from "@/components/admissions/AdmissionsFaqWrapper";
 import CtaBanner from "@/components/shared/CtaBanner";
 import { admissionsPage, admissionsHero, admissionsCta } from "@/data/admissions";
 
+export const dynamic = "force-dynamic";
 export const metadata = {
-  title: `${admissionsPage.heading} — Tilak Global School`,
+  title: "Admissions 2026-27 — Tilak Global School | CBSE School Jaipur",
   description:
-    "Start your child's educational journey with Tilak Global School. Explore our admission process, eligibility and available classes.",
+    "Apply for admission at Tilak Global School, Jaipur for session 2026-27. CBSE-affiliated school offering Play Group to Class XII. Easy 4-step process.",
 };
 
 export default function AdmissionsPage() {

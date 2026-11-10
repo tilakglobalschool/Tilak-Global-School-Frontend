@@ -6,7 +6,7 @@
 // ── Hero Section ─────────────────────────────────────────────────────────────
 export const hero = {
   eyebrow:      "Tilak Global School · Jaipur",
-  badge:        "Admissions Open · Session 2025-26",
+  badge:        "Admissions Open · Session 2026-27",
   headingLine1: "A stress-free place where",
   headingLine2: "every child grows with character.",
   // Keep full heading for SEO / non-visual use

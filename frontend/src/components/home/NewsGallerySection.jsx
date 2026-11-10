@@ -36,8 +36,8 @@ export default function NewsGallerySection({ news = [], gallery = [] }) {
         image: {
           src: img.imageUrl?.startsWith("http")
             ? img.imageUrl
-            : `${process.env.API_URL?.replace("/api", "") || "https://tilak-global-school-backend-0xwt.onrender.com"}${img.imageUrl}`,
-          alt: img.caption || img.category || "Gallery photo",
+            : `${process.env.API_URL?.replace("/api", "") || ""}${img.imageUrl}`,
+          alt: img.altText || img.caption || img.category || "Gallery photo",
         },
       }))
     : staticGallery.items;

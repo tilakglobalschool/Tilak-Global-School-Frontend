@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import AcademicsHero from "@/components/academics/AcademicsHero";
 import { facultyPage, facultyHero } from "@/data/academics";
 
@@ -20,3 +21,4 @@ export default function FacultyPage() {
     </>
   );
 }
+
