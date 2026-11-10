@@ -14,23 +14,23 @@ const YoutubeIcon   = () => (<svg width="14" height="14" viewBox="0 0 24 24" fil
 const TwitterIcon   = () => (<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>);
 
 export default function Header({ settings }) {
-  // Merge API settings with static siteConfig â€” API wins when available
+  // Merge API settings with static siteConfig — API wins when available
   const sc = {
     ...siteConfig,
     ...(settings && {
-      name:         settings.schoolName      || sc.name,
-      tagline:      settings.schoolSubtitle  || settings.topBarTagline || sc.tagline,
-      address:      settings.address         || sc.address,
-      addressShort: settings.address         || sc.addressShort,
-      phone:        settings.phone           || sc.phone,
-      phoneHref:    settings.phone           ? `tel:${settings.phone.replace(/\s/g,"")}` : sc.phoneHref,
-      email:        settings.email           || sc.email,
-      emailHref:    settings.email           ? `mailto:${settings.email}` : sc.emailHref,
+      name:         settings.schoolName      || siteConfig.name,
+      tagline:      settings.schoolSubtitle  || settings.topBarTagline || siteConfig.tagline,
+      address:      settings.address         || siteConfig.address,
+      addressShort: settings.address         || siteConfig.addressShort,
+      phone:        settings.phone           || siteConfig.phone,
+      phoneHref:    settings.phone           ? `tel:${settings.phone.replace(/\s/g,"")}` : siteConfig.phoneHref,
+      email:        settings.email           || siteConfig.email,
+      emailHref:    settings.email           ? `mailto:${settings.email}` : siteConfig.emailHref,
       social: {
-        facebook:  settings.socialLinks?.facebook  || sc.social.facebook,
-        instagram: settings.socialLinks?.instagram || sc.social.instagram,
-        youtube:   settings.socialLinks?.youtube   || sc.social.youtube,
-        twitter:   settings.socialLinks?.other     || sc.social.twitter,
+        facebook:  settings.socialLinks?.facebook  || siteConfig.social.facebook,
+        instagram: settings.socialLinks?.instagram || siteConfig.social.instagram,
+        youtube:   settings.socialLinks?.youtube   || siteConfig.social.youtube,
+        twitter:   settings.socialLinks?.other     || siteConfig.social.twitter,
       },
     }),
   };

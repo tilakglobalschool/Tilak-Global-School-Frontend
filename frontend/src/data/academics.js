@@ -141,7 +141,7 @@ export const academicStages = {
       stats:       "15+ activities · 20+ classrooms",
       href:        "/academics/curriculum",
       image: {
-        src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80&fm=webp",
+        src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80&fm=webp",
         alt: "Senior school students studying",
       },
     },

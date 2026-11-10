@@ -42,7 +42,7 @@ export const aboutHero = {
     { label: "About Us", href: "/about-us" },
   ],
   image: {
-    src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1800&q=80&fm=webp",
+    src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1800&q=80&fm=webp",
     alt: "Tilak Global School students",
   },
 };

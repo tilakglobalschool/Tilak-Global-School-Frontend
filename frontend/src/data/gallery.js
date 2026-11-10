@@ -15,7 +15,7 @@ export const galleryHero = {
     { label: "Gallery", href: "/gallery" },
   ],
   image: {
-    src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1800&q=80&fm=webp",
+    src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1800&q=80&fm=webp",
     alt: "Students at Tilak Global School events and activities",
   },
 };
@@ -131,9 +131,9 @@ export const dummyGalleryItems = [
     caption:     "A celebration of talent",
     category:    "Events",
     description: "Students showcase their talent through dance, music and drama at the Annual Day.",
-    imageUrl:    "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80&fm=webp",
+    imageUrl:    "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80&fm=webp",
     image: {
-      src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80&fm=webp",
+      src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80&fm=webp",
       alt: "Annual Day celebrations at Tilak Global School",
     },
     status: "published",
@@ -204,7 +204,7 @@ export const galleryPreview = {
       id:    "annual-day",
       title: "Annual Day",
       image: {
-        src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1000&q=80&fm=webp",
+        src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=80&fm=webp",
         alt: "Annual Day celebrations at Tilak Global School",
       },
     },
