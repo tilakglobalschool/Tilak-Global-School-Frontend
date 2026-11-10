@@ -111,7 +111,6 @@ export const adminApi = {
   uploadGallery:       (fd)        => http('POST',   '/admin/gallery',         fd),
   updateGallery:       (id, body)  => http('PUT',    `/admin/gallery/${id}`,   body),
   deleteGallery:       (id)        => http('DELETE', `/admin/gallery/${id}`),
-
   // ── News & Events ────────────────────────────────────────────────────────────
   news:                (q = '')    => http('GET',    `/admin/news${q}`),
   newsItem:            (id)        => http('GET',    `/admin/news/${id}`),

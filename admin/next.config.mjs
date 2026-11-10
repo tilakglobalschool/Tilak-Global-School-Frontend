@@ -29,14 +29,20 @@ const nextConfig = {
 
   images: {
     remotePatterns: [
+      // Cloudinary — permanent image CDN
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
       {
         protocol: 'https',
         hostname: 'api.tilakglobalschool.com',
         pathname: '/uploads/**',
       },
+      // Fixed: correct Render hostname with -0xwt suffix
       {
         protocol: 'https',
-        hostname: 'tilak-global-school-backend.onrender.com',
+        hostname: 'tilak-global-school-backend-0xwt.onrender.com',
         pathname: '/uploads/**',
       },
       {
