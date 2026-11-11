@@ -49,5 +49,13 @@ export const siteConfig = {
   copyright:  "© 2026 Tilak Global School. All Rights Reserved.",
 
   logoInitials: "TGS",
-  mapEmbed:     "", // CF-11 — Google Maps URL not yet provided by client
+  /**
+   * logoUrl — Cloudinary URL of the school logo.
+   * Set via Admin Panel → Settings → Upload Logo.
+   * The API returns this in settings.logoUrl (SiteSettings.logoUrl in MongoDB).
+   * Leave empty here — Footer & Header fall back to logoInitials ("TGS") when null.
+   * Once uploaded via admin, this is served from: settings.logoUrl passed as prop.
+   */
+  logoUrl:  "",
+  mapEmbed: "", // CF-11 — Google Maps URL not yet provided by client
 };

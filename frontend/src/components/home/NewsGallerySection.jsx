@@ -112,37 +112,53 @@ export default function NewsGallerySection({ news = [], gallery = [] }) {
 /* ── Gallery tile grid (server) ── */
 function DynamicGalleryGrid({ items, viewAllHref }) {
   return (
-    <div className="relative mt-4 mb-6 pt-3 pl-3 pb-3 md:pt-4 md:pl-4 md:pb-4 pr-3 md:pr-4">
-      {/* Backing plate */}
-      <div aria-hidden="true" className="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 w-full h-full bg-[#0B3D91] z-0" />
-      {/* Outline frame */}
-      <div aria-hidden="true" className="absolute -top-3 -left-3 md:-top-4 md:-left-4 w-full h-full border-2 border-red-600 z-0" />
-
-      <div className="relative z-10 grid grid-cols-2 gap-3 md:gap-4">
-        {items.slice(0, 4).map((item, i) => (
-          <Link key={item.id || i} href={viewAllHref}
-            className="group relative block aspect-square overflow-hidden shadow-lg border border-[#0B3D91]/10"
-            aria-label={item.title}>
+    <div className="grid grid-cols-2 gap-3 md:gap-4">
+      {items.slice(0, 4).map((item, i) => (
+        <Link
+          key={item.id || i}
+          href={viewAllHref}
+          aria-label={item.title}
+          className="group flex flex-col border border-[#0B3D91]/15
+                     shadow-sm hover:shadow-md hover:border-red-600/40
+                     transition-all duration-300 overflow-hidden bg-white"
+        >
+          {/* ── Image area — fixed aspect ratio, full brightness, object-contain ── */}
+          <div className="relative w-full bg-[#F4F7FC]" style={{ aspectRatio: "4 / 3" }}>
             <Image
               src={item.image.src}
               alt={item.image.alt}
               fill
-              sizes="(max-width: 1024px) 45vw, 22vw"
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              sizes="(max-width: 768px) 45vw, (max-width: 1024px) 40vw, 20vw"
+              className="object-contain"
+              quality={85}
             />
-            <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#0B3D91]/85 via-[#0B3D91]/20 to-transparent pointer-events-none" />
-            <div aria-hidden="true" className="absolute inset-0 bg-red-600 opacity-0 md:group-hover:opacity-20 transition-opacity duration-500 mix-blend-multiply pointer-events-none" />
-            <div aria-hidden="true" className="absolute top-0 left-0 w-10 h-1 bg-red-600" />
-            <div aria-hidden="true" className="absolute top-0 left-0 w-1 h-10 bg-red-600" />
-            <span aria-hidden="true" className="absolute top-3 right-4 text-3xl md:text-4xl font-serif font-bold text-white/15 leading-none select-none pointer-events-none">
+
+            {/* Red top-left corner accent */}
+            <div aria-hidden="true" className="absolute top-0 left-0 w-8 h-[3px] bg-red-600 z-10" />
+            <div aria-hidden="true" className="absolute top-0 left-0 w-[3px] h-8 bg-red-600 z-10" />
+
+            {/* Serial number — faint, top-right */}
+            <span
+              aria-hidden="true"
+              className="absolute top-2 right-3 z-10
+                         text-2xl font-serif font-bold text-[#0B3D91]/20
+                         leading-none select-none pointer-events-none"
+            >
               {String(i + 1).padStart(2, "0")}
             </span>
-            <p className="absolute bottom-3 left-3 text-white text-[10px] md:text-xs uppercase tracking-wider border-l-2 border-red-500 pl-2">
+          </div>
+
+          {/* ── Caption strip — below image, never overlaid ── */}
+          <div className="flex items-center gap-2 px-3 py-2 bg-white
+                          border-t border-[#0B3D91]/10">
+            <span aria-hidden="true" className="w-[3px] h-4 bg-red-600 shrink-0" />
+            <p className="text-[10px] md:text-[11px] uppercase tracking-wider
+                          font-semibold text-[#0B3D91] truncate">
               {item.title}
             </p>
-          </Link>
-        ))}
-      </div>
+          </div>
+        </Link>
+      ))}
     </div>
   );
 }

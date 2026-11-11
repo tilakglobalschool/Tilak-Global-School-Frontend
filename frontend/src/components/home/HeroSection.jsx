@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { hero, stats } from "@/data/home";
+import { hero } from "@/data/home";
 
 /**
  * HeroSection — server component.
@@ -30,7 +30,7 @@ export default function HeroSection({ settings, content }) {
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[70%_center]"
+        className="object-cover object-center"
         style={{ zIndex: 0 }}
       />
 
@@ -67,17 +67,6 @@ export default function HeroSection({ settings, content }) {
         className="absolute inset-x-0 bottom-0 h-28 md:h-40 pointer-events-none"
         style={{ zIndex: 2, background: "linear-gradient(to top, rgba(11,61,145,0.65) 0%, transparent 100%)" }}
       />
-
-      {/* ══ Layer 2: Faint serif year watermark ══ */}
-      <span
-        aria-hidden="true"
-        className="hidden md:block absolute right-6 bottom-28
-                   text-[6rem] md:text-[9rem] font-serif font-bold
-                   text-white/5 leading-none select-none pointer-events-none"
-        style={{ zIndex: 3 }}
-      >
-        {stats[2].label}
-      </span>
 
       {/* ══ Layer 3: Content ══ */}
       <div

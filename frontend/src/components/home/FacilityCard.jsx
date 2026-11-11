@@ -3,113 +3,99 @@ import Link from "next/link";
 
 /**
  * FacilityCard — server component.
- * Sharp-cornered image card consistent with AcademicStages and ManagementCard.
+ * Sharp-cornered card: image on top, caption strip below.
+ *
+ * Layout (mobile + desktop both):
+ *   ┌─────────────────┐
+ *   │  image (4:3)    │  ← object-cover, objectPosition from data
+ *   ├─────────────────┤
+ *   │ title + desc    │  ← always visible, never hidden behind overlay
+ *   └─────────────────┘
+ *
+ * Desktop hover: image zooms gently, red border on card.
+ * No text is ever hidden or clipped by dark overlays.
  *
  * Props:
- *   facility — { id, title, description, image: { src, alt }, href }
- *   index    — zero-based position used for the faint serif watermark number
- *
- * Design rules:
- *   • Zero rounded-* anywhere.
- *   • Hover: zoom, red tint, white inner frame, red rule widens.
- *   • Mobile (below md): description always visible.
- *   • Desktop (md+): description hidden by default, slides up on hover
- *     via the grid-rows trick (same pattern as ManagementCard).
+ *   facility — { id, title, description, image: { src, alt, objectPosition? }, href }
+ *   index    — zero-based, used for serif watermark
  */
 export default function FacilityCard({ facility, index = 0 }) {
-  const ordinal = String(index + 1).padStart(2, "0");
+  const ordinal  = String(index + 1).padStart(2, "0");
+  const objPos   = facility.image.objectPosition || "center";
 
   return (
     <Link
       href={facility.href}
-      className="group relative block w-full aspect-[4/3] md:aspect-[3/2]
-                 overflow-hidden shadow-lg border border-[#0B3D91]/10"
+      className="group flex flex-col h-full overflow-hidden
+                 border border-[#0B3D91]/15 bg-white
+                 shadow-sm hover:shadow-lg hover:border-red-600/40
+                 transition-all duration-300"
       aria-label={facility.title}
     >
-      {/* Background image — zooms on hover */}
-      <Image
-        src={facility.image.src}
-        alt={facility.image.alt}
-        fill
-        sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 22vw"
-        className="object-cover transition-transform duration-700 ease-out
-                   group-hover:scale-105"
-      />
+      {/* ── Image area ── */}
+      <div className="relative w-full overflow-hidden shrink-0" style={{ aspectRatio: "4 / 3" }}>
+        <Image
+          src={facility.image.src}
+          alt={facility.image.alt}
+          fill
+          sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 22vw"
+          className="object-cover transition-transform duration-700 ease-out
+                     group-hover:scale-105"
+          style={{ objectPosition: objPos }}
+          quality={85}
+        />
 
-      {/* Permanent bottom gradient */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0
-                   bg-gradient-to-t from-[#0B3D91]/95 via-[#0B3D91]/40 to-[#0B3D91]/5
-                   pointer-events-none"
-      />
+        {/* Subtle bottom gradient — purely for depth, not hiding content */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0
+                     bg-gradient-to-t from-[#0B3D91]/30 via-transparent to-transparent
+                     pointer-events-none"
+        />
 
-      {/* Red hover tint — desktop only */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-red-600 opacity-0
-                   md:group-hover:opacity-20
-                   transition-opacity duration-500
-                   mix-blend-multiply pointer-events-none"
-      />
+        {/* Red top-left corner accent */}
+        <div aria-hidden="true" className="absolute top-0 left-0 w-8 h-[3px] bg-red-600 z-10" />
+        <div aria-hidden="true" className="absolute top-0 left-0 w-[3px] h-8 bg-red-600 z-10" />
 
-      {/* Hover inner white frame */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-3 border border-white/0
-                   md:group-hover:border-white/30
-                   transition-colors duration-500 pointer-events-none"
-      />
+        {/* Faint serif index — top-right */}
+        <span
+          aria-hidden="true"
+          className="absolute top-3 right-4 z-10
+                     text-3xl md:text-4xl font-serif font-bold text-white/25
+                     leading-none select-none pointer-events-none"
+        >
+          {ordinal}
+        </span>
 
-      {/* Red top-left corner accent — horizontal */}
-      <div aria-hidden="true" className="absolute top-0 left-0 w-10 h-1 bg-red-600" />
-      {/* Red top-left corner accent — vertical */}
-      <div aria-hidden="true" className="absolute top-0 left-0 w-1 h-10 bg-red-600" />
+        {/* Hover red tint — desktop only, very light */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-red-600 opacity-0
+                     md:group-hover:opacity-10
+                     transition-opacity duration-500
+                     pointer-events-none"
+        />
+      </div>
 
-      {/* Faint serif index number — top-right */}
-      <span
-        aria-hidden="true"
-        className="absolute top-4 right-5
-                   text-4xl md:text-5xl font-serif font-bold text-white/15
-                   leading-none select-none pointer-events-none"
-      >
-        {ordinal}
-      </span>
-
-      {/* Bottom content block */}
-      <div className="absolute inset-x-0 bottom-0 p-4 md:p-5 text-white">
-
+      {/* ── Caption strip — always visible, below image ── */}
+      <div className="flex flex-col flex-1 p-4 md:p-5 bg-white">
         {/* Animated red rule */}
         <div
           aria-hidden="true"
-          className="w-8 h-[2px] bg-red-500 mb-3
-                     transition-all duration-500 md:group-hover:w-16"
+          className="w-8 h-[2px] bg-red-600 mb-2.5
+                     transition-all duration-500 group-hover:w-14"
         />
 
         {/* Title */}
-        <p className="text-base md:text-xl font-serif font-bold text-white leading-tight">
+        <h3 className="text-sm md:text-base font-serif font-bold text-[#0B3D91]
+                       leading-snug mb-2 group-hover:text-red-600 transition-colors duration-300">
           {facility.title}
+        </h3>
+
+        {/* Description — always visible, clamped to 3 lines on desktop to keep grid uniform */}
+        <p className="text-xs text-gray-600 leading-relaxed line-clamp-3 md:line-clamp-4">
+          {facility.description}
         </p>
-
-        {/*
-          Description reveal block — same grid-rows pattern as ManagementCard.
-          Mobile  (below md): always visible → grid-rows-[1fr] opacity-100
-          Desktop (md+):      hidden by default, slides up on hover
-        */}
-        <div
-          className="grid grid-rows-[1fr] opacity-100 translate-y-0
-                     md:grid-rows-[0fr] md:opacity-0 md:translate-y-3
-                     md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100
-                     md:group-hover:translate-y-0
-                     transition-all duration-500 ease-out"
-        >
-          <div className="overflow-hidden">
-            <p className="mt-2 text-xs md:text-sm text-blue-100/90 leading-relaxed">
-              {facility.description}
-            </p>
-          </div>
-        </div>
-
       </div>
     </Link>
   );

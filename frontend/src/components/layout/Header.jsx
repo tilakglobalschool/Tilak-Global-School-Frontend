@@ -149,18 +149,18 @@ export default function Header({ settings }) {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 md:gap-3 shrink-0 min-w-0">
               {sc.logoUrl ? (
-                <div className="w-9 h-9 md:w-12 md:h-12 rounded-full overflow-hidden bg-white shrink-0 flex items-center justify-center">
+                <div className="w-11 h-11 md:w-16 md:h-16 rounded-full overflow-hidden bg-white shrink-0 flex items-center justify-center">
                   <Image
                     src={sc.logoUrl}
                     alt={`${sc.name} logo`}
-                    width={48}
-                    height={48}
+                    width={64}
+                    height={64}
                     className="w-full h-full object-contain"
                     priority
                   />
                 </div>
               ) : (
-                <div className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-white flex items-center justify-center shrink-0">
+                <div className="w-11 h-11 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center shrink-0">
                   <span className="text-[#0B3D91] font-bold text-sm md:text-lg leading-none">{sc.logoInitials}</span>
                 </div>
               )}

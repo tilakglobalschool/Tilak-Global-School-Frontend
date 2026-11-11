@@ -16,6 +16,18 @@ export const curriculumPage = {
 export const facultyPage = {
   heading: "Faculty",
   subtext: "Dedicated educators committed to creating an engaging and supportive learning experience.",
+  introHeading: "Our Educators",
+  introLead:    "At Tilak Global School, our teachers are the foundation of everything we do.",
+  introParagraphs: [
+    "Our faculty are dedicated professionals who bring knowledge, patience and genuine care to every classroom. They create an environment where students feel safe to ask questions, make mistakes and grow — academically and as individuals.",
+    "Following a constructivist and holistic teaching approach, our educators focus on building conceptual understanding rather than rote memorisation. They design lessons that connect classroom learning to real-world situations, encouraging curiosity, critical thinking and independent study habits.",
+    "Beyond academics, our teachers support students in developing self-confidence, discipline and a positive attitude toward learning — skills that serve them well throughout their lives.",
+  ],
+  introNote: "Faculty profiles and individual qualifications will be published once confirmed by the school.",
+  introImage: {
+    src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80&fm=webp",
+    alt: "Teachers and students in a classroom at Tilak Global School",
+  },
 };
 
 export const academicCalendarPage = {
@@ -51,8 +63,8 @@ export const curriculumHero = {
     { label: "Curriculum", href: "/academics/curriculum" },
   ],
   image: {
-    src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1800&q=80&fm=webp",
-    alt: "Students engaged in classroom learning",
+    src: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1800&q=80&fm=webp",
+    alt: "Students studying books and curriculum materials",
   },
 };
 
@@ -102,8 +114,8 @@ export const academicStages = {
       stats:       "20+ activities · 10+ classrooms",
       href:        "/academics/curriculum",
       image: {
-        src: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=900&q=80&fm=webp",
-        alt: "Young children in a Kindergarten classroom",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794408329/tilak-global-school/academic-stages/kindergarten.jpg",
+        alt: "Young children in a Kindergarten classroom at Tilak Global School",
       },
     },
     {
@@ -115,8 +127,8 @@ export const academicStages = {
       stats:       "15+ activities · 20+ classrooms",
       href:        "/academics/curriculum",
       image: {
-        src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=80&fm=webp",
-        alt: "Primary school students in class",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794408331/tilak-global-school/academic-stages/primary_school.jpg",
+        alt: "Primary school students in class at Tilak Global School",
       },
     },
     {
@@ -128,8 +140,8 @@ export const academicStages = {
       stats:       "15+ activities · 20+ classrooms",
       href:        "/academics/curriculum",
       image: {
-        src: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=900&q=80&fm=webp",
-        alt: "Middle school students in a science lab",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794408332/tilak-global-school/academic-stages/middle_school.jpg",
+        alt: "Middle school students in a classroom at Tilak Global School",
       },
     },
     {
@@ -141,8 +153,8 @@ export const academicStages = {
       stats:       "15+ activities · 20+ classrooms",
       href:        "/academics/curriculum",
       image: {
-        src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80&fm=webp",
-        alt: "Senior school students studying",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794408334/tilak-global-school/academic-stages/senior_school.jpg",
+        alt: "Senior school students studying at Tilak Global School",
       },
     },
   ],

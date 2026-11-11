@@ -42,49 +42,69 @@ export const aboutHero = {
     { label: "About Us", href: "/about-us" },
   ],
   image: {
-    src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1800&q=80&fm=webp",
-    alt: "Tilak Global School students",
+    src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794421761/tilak-global-school/hero/homepage-hero.jpg",
+    alt: "Tilak Global School campus, Bindayaka, Jaipur",
   },
 };
 
 export const ourSchoolHero = {
+  badge:   "Est. 2016 · Jaipur",
   heading: "Our School",
-  subtext: "Learn about our history, values and the people who make Tilak Global School special.",
+  subtext: "An English-medium, co-educational CBSE school at Bindayaka, Jaipur — part of the trusted Tilak Group.",
   breadcrumb: [
     { label: "Home",       href: "/" },
     { label: "About Us",   href: "/about-us" },
     { label: "Our School", href: "/about-us/our-school" },
   ],
+  image: {
+    src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794421761/tilak-global-school/hero/homepage-hero.jpg",
+    alt: "Tilak Global School campus, Bindayaka, Jaipur",
+  },
 };
 
 export const visionMissionHero = {
-  heading: "Vision & Mission",
-  subtext: "The principles and ideals that guide every decision we make.",
+  badge:   "Our Purpose",
+  heading: "Our Vision & Mission",
+  subtext: "The principles and ideals that guide every decision we make and every child we nurture.",
   breadcrumb: [
-    { label: "Home",              href: "/" },
-    { label: "About Us",          href: "/about-us" },
-    { label: "Vision & Mission",  href: "/about-us/vision-mission" },
+    { label: "Home",             href: "/" },
+    { label: "About Us",         href: "/about-us" },
+    { label: "Vision & Mission", href: "/about-us/vision-mission" },
   ],
+  image: {
+    src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794421761/tilak-global-school/hero/homepage-hero.jpg",
+    alt: "Students engaged in learning at Tilak Global School",
+  },
 };
 
 export const principalsMessageHero = {
+  badge:   "Leadership",
   heading: "Principal's Message",
-  subtext: "A personal message from the head of Tilak Global School.",
+  subtext: "A message from the leadership of Tilak Global School.",
   breadcrumb: [
-    { label: "Home",                 href: "/" },
-    { label: "About Us",             href: "/about-us" },
-    { label: "Principal's Message",  href: "/about-us/principals-message" },
+    { label: "Home",                href: "/" },
+    { label: "About Us",            href: "/about-us" },
+    { label: "Principal's Message", href: "/about-us/principals-message" },
   ],
+  image: {
+    src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794421761/tilak-global-school/hero/homepage-hero.jpg",
+    alt: "School leadership at Tilak Global School",
+  },
 };
 
 export const infrastructureHero = {
-  heading: "Infrastructure",
-  subtext: "Modern facilities and thoughtfully designed spaces for learning and growth.",
+  badge:   "Campus & Facilities",
+  heading: "School Infrastructure",
+  subtext: "Modern facilities and thoughtfully designed spaces for learning, sports, creativity and growth.",
   breadcrumb: [
     { label: "Home",           href: "/" },
     { label: "About Us",       href: "/about-us" },
     { label: "Infrastructure", href: "/about-us/infrastructure" },
   ],
+  image: {
+    src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794421761/tilak-global-school/hero/homepage-hero.jpg",
+    alt: "Tilak Global School campus and facilities",
+  },
 };
 
 // ── Who We Are section (About Us page) ────────────────────────────────────────
@@ -302,5 +322,77 @@ export const aboutCta = {
   image: {
     src: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80&fm=webp",
     alt: "Tilak Global School building",
+  },
+};
+
+// ── Educational Philosophy — feeds Vision & Mission subpage ──────────────────
+export const educationalPhilosophy = {
+  eyebrow:  "Our Approach",
+  heading:  "Educational Philosophy",
+  intro:
+    "At Tilak Global School, we believe that every child has the potential to learn, grow and contribute meaningfully to society. Our educational approach is built on three interconnected ideas.",
+  points: [
+    {
+      number: "01",
+      title:  "Holistic & Constructivist Learning",
+      body:
+        "We follow a constructivist approach where students learn by doing, questioning and applying ideas. Lessons are designed to build genuine understanding rather than rote memorisation, connecting classroom knowledge to real-world contexts.",
+    },
+    {
+      number: "02",
+      title:  "Creativity, Innovation and Positive Values",
+      body:
+        "In line with the Director's message, the school emphasises creativity, innovation and the development of indigenous knowledge. Students are encouraged to think independently, express themselves and develop strong moral character alongside academic skills.",
+    },
+    {
+      number: "03",
+      title:  "Stress-Free, Supportive Environment",
+      body:
+        "A calm, family-like atmosphere allows every child to progress at a natural pace. Equal educational and developmental opportunities ensure that no child is left behind, and every student feels seen, supported and motivated.",
+    },
+  ],
+  note: "Educational philosophy summarised from the school website — final wording subject to school confirmation.",
+};
+
+// ── Principal's Message — placeholder (details not yet confirmed) ─────────────
+export const principalMessage = {
+  heading:     "Principal's Message",
+  placeholder: true,   // set to false once verified details are available
+  placeholderNote:
+    "The Principal's message will be published here once details are confirmed by the school. Please check back soon or contact us for more information.",
+  // When placeholder is false, populate these fields:
+  name:        "",
+  designation: "Principal, Tilak Global School",
+  quote:       "",
+  note:        "",
+  image: {
+    src:     "",
+    alt:     "Principal, Tilak Global School",
+    caption: "Principal",
+  },
+};
+
+// ── Subpage CTA objects ───────────────────────────────────────────────────────
+export const subpageCta = {
+  eyebrow:     "Admissions 2026-27",
+  heading:     "Give your child the Tilak Global advantage",
+  subtext:     "Admissions open · Nursery to Class XII · Session 2026-27",
+  sessionYear: "2026",
+  points: [
+    "Nursery to Class XII",
+    "CBSE · English medium",
+    "Limited seats per class",
+  ],
+  primary: {
+    label: "Apply for Admission",
+    href:  "/admissions/online-admission-form",
+  },
+  secondary: {
+    label: "Contact Us",
+    href:  "/contact-us",
+  },
+  image: {
+    src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794421761/tilak-global-school/hero/homepage-hero.jpg",
+    alt: "Tilak Global School campus",
   },
 };

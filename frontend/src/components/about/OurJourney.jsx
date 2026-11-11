@@ -16,7 +16,7 @@ import { ourJourney as d } from "@/data/about";
  *  • Faint large serif year watermark floats behind the image column.
  *  • Hover: subtle zoom (scale-105) + red tint on the photo.
  */
-export default function OurJourney() {
+export default function OurJourney({ showCta = true }) {
   return (
     <section className="relative bg-white pt-16 md:pt-24 pb-8 md:pb-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8
@@ -59,7 +59,8 @@ export default function OurJourney() {
             ))}
           </div>
 
-          {/* CTA */}
+          {/* CTA — hidden when showCta is false (e.g. on the Our School page itself) */}
+          {showCta && (
           <div className="mt-8 md:mt-10">
             <Link
               href={d.cta.href}
@@ -84,6 +85,7 @@ export default function OurJourney() {
               </svg>
             </Link>
           </div>
+          )}
 
         </div>
 

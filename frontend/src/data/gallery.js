@@ -204,7 +204,8 @@ export const galleryPreview = {
       id:    "annual-day",
       title: "Annual Day",
       image: {
-        src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=80&fm=webp",
+        // fit=clip → Unsplash delivers the FULL image without server-side cropping
+        src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=clip&w=1000&q=80&fm=webp",
         alt: "Annual Day celebrations at Tilak Global School",
       },
     },
@@ -212,7 +213,7 @@ export const galleryPreview = {
       id:    "classroom",
       title: "Classrooms",
       image: {
-        src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1000&q=80&fm=webp",
+        src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=clip&w=1000&q=80&fm=webp",
         alt: "Modern classrooms at Tilak Global School",
       },
     },
@@ -220,7 +221,7 @@ export const galleryPreview = {
       id:    "sports",
       title: "Sports",
       image: {
-        src: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1000&q=80&fm=webp",
+        src: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=clip&w=1000&q=80&fm=webp",
         alt: "Sports activities at Tilak Global School",
       },
     },
@@ -228,7 +229,7 @@ export const galleryPreview = {
       id:    "science-lab",
       title: "Science Lab",
       image: {
-        src: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1000&q=80&fm=webp",
+        src: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=clip&w=1000&q=80&fm=webp",
         alt: "Science laboratory at Tilak Global School",
       },
     },
