@@ -93,7 +93,7 @@ export const welcome = {
     href:  "/about-us/our-school",
   },
   image: {
-    src:     "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80&fm=webp",
+    src:     "https://res.cloudinary.com/h6erncmn/image/upload/v1794425393/tilak-global-school/hero/welcome-section.jpg",
     alt:     "Tilak Global School classroom",
     caption: "Tilak Global School · Jaipur",
   },
