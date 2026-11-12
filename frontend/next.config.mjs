@@ -21,16 +21,21 @@ const nextConfig = {
 
   images: {
     remotePatterns: [
+      // Cloudinary — permanent image CDN
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
       // Production backend (Render + custom domain)
       {
         protocol: 'https',
         hostname: 'api.tilakglobalschool.com',
         pathname: '/uploads/**',
       },
-      // Render auto-domain (before custom domain is set)
+      // Render auto-domain (before custom domain is set) — fixed hostname with -0xwt suffix
       {
         protocol: 'https',
-        hostname: 'tilak-global-school-backend.onrender.com',
+        hostname: 'tilak-global-school-backend-0xwt.onrender.com',
         pathname: '/uploads/**',
       },
       // Development
@@ -40,7 +45,7 @@ const nextConfig = {
         port:     '5000',
         pathname: '/uploads/**',
       },
-      // Unsplash placeholder images
+      // Unsplash placeholder images (remove once real school photos replace them)
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',

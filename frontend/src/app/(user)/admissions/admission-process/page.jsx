@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import AdmissionsHero from "@/components/admissions/AdmissionsHero";
 import AdmissionProcess from "@/components/admissions/AdmissionProcess";
 import EligibilityDocumentsSection from "@/components/admissions/EligibilityDocumentsSection";
@@ -17,3 +18,4 @@ export default function AdmissionProcessPage() {
     </>
   );
 }
+

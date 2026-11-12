@@ -13,9 +13,9 @@ export default async function FeeStructureSection() {
   const rows = apiFees.length > 0
     ? apiFees.map((fee) => ({
         classLabel:   fee.classGroup,
-        admissionFee: fee.admissionFee     != null ? `₹ ${fee.admissionFee.toLocaleString("en-IN")}` : "To be announced",
-        tuitionFee:   fee.tuitionFeePerTerm != null ? `₹ ${fee.tuitionFeePerTerm.toLocaleString("en-IN")} / term` : "To be announced",
-        otherCharges: fee.otherCharges     != null ? `₹ ${fee.otherCharges.toLocaleString("en-IN")}` : "To be announced",
+        admissionFee: fee.admissionFee      != null ? `₹ ${fee.admissionFee.toLocaleString("en-IN")}` : "To be announced",
+        tuitionFee:   fee.tuitionFeePerMonth != null ? `₹ ${fee.tuitionFeePerMonth.toLocaleString("en-IN")} / month` : "To be announced",
+        otherCharges: fee.otherCharges      != null ? `₹ ${fee.otherCharges.toLocaleString("en-IN")}` : "To be announced",
         notes:        fee.notes || "",
       }))
     : d.rows; // static fallback

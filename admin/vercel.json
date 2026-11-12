@@ -5,11 +5,11 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://api.tilakglobalschool.com/api/$1"
+      "destination": "https://tilak-global-school-backend-0xwt.onrender.com/api/$1"
     },
     {
       "source": "/uploads/(.*)",
-      "destination": "https://api.tilakglobalschool.com/uploads/$1"
+      "destination": "https://tilak-global-school-backend-0xwt.onrender.com/uploads/$1"
     }
   ],
   "headers": [

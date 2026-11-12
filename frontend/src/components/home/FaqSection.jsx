@@ -2,16 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { faqs as staticFaqs } from "@/data/home";
+import { faqs } from "@/data/home";
 
 /**
  * FaqSection — client component.
  * bg-white, serif heading, eyebrow label, square FAQ rows, no rounded-*.
  * Single-open-at-a-time via openId state.
  * Left red edge grows via real div (h-0 → h-full), same pattern as NewsAccordion.
- *
- * Props:
- *   faqItems — optional live FAQ items from server; falls back to staticFaqs.items
  *
  * Zero literal text — all strings from data/home.js → faqs.
  */
@@ -22,9 +19,9 @@ function FaqSchema({ items }) {
     "@context": "https://schema.org",
     "@type":    "FAQPage",
     mainEntity: items.map((item) => ({
-      "@type":         "Question",
-      name:            item.question,
-      acceptedAnswer:  { "@type": "Answer", text: item.answer },
+      "@type":        "Question",
+      name:           item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
     })),
   };
   return (
@@ -35,11 +32,14 @@ function FaqSchema({ items }) {
   );
 }
 
-export default function FaqSection({ faqItems }) {
-  const faqs = staticFaqs;
-  const items = faqItems || faqs.items;
+export default function FaqSection({ apiFaqs }) {
   const [openId, setOpenId] = useState(null);
   const toggle = (id) => setOpenId((prev) => (prev === id ? null : id));
+
+  // Use API FAQs if available, otherwise fall back to static
+  const items = apiFaqs && apiFaqs.length > 0
+    ? apiFaqs.map((f, i) => ({ id: f._id || i + 1, question: f.question, answer: f.answer }))
+    : faqs.items;
 
   return (
     <section className="w-full bg-white pt-6 md:pt-10 pb-16 md:pb-24">

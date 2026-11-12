@@ -1,12 +1,29 @@
-import { notices as staticData } from "@/data/newsEvents";
+import Link from "next/link";
+import { notices as d } from "@/data/newsEvents";
 
 /**
  * NoticesSection — server component.
+ *
  * Props:
- *   data — optional live data from server; falls back to static
+ *   apiPosts — array of NewsPost docs with category=Notice from the API
+ *
+ * Falls back to static data/newsEvents.js when apiPosts is empty.
  */
-export default function NoticesSection({ data }) {
-  const d = data || staticData;
+export default function NoticesSection({ apiPosts = [] }) {
+
+  // Map API notices or use static
+  const items = apiPosts.length > 0
+    ? apiPosts.map(p => ({
+        id:          p._id,
+        title:       p.title,
+        description: p.summary || "",
+        date:        new Date(p.date).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }),
+        category:    "Notice",
+        documentUrl: null,   // notices don't have documents from this module
+        slug:        p.slug,
+      }))
+    : d.items;
+
   return (
     <div>
       {/* Header */}
@@ -14,27 +31,24 @@ export default function NoticesSection({ data }) {
         <span aria-hidden="true" className="w-8 h-[2px] bg-red-600 shrink-0" />
         {d.eyebrow}
       </span>
-      <h2 className="mt-3 text-2xl md:text-3xl font-serif font-bold text-[#0B3D91]">
-        {d.heading}
-      </h2>
+      <h2 className="mt-3 text-2xl md:text-3xl font-serif font-bold text-[#0B3D91]">{d.heading}</h2>
       <div aria-hidden="true" className="w-12 h-[2px] md:h-1 bg-red-600 mt-3 mb-5" />
 
       {/* Empty state */}
-      {(!d.items || d.items.length === 0) && (
+      {(!items || items.length === 0) && (
         <div className="text-center py-10 border border-[#0B3D91]/15 bg-white">
           <p className="text-sm text-gray-500">No notices have been published yet.</p>
         </div>
       )}
 
       {/* Notice rows */}
-      {d.items && d.items.length > 0 && (
+      {items && items.length > 0 && (
         <div className="divide-y divide-[#0B3D91]/10 border-y border-[#0B3D91]/10">
-          {d.items.map((notice) => (
+          {items.map((notice) => (
             <div
               key={notice.id}
               className="group flex flex-col sm:flex-row sm:items-start gap-3
-                         py-3 md:py-4 px-3 hover:bg-white transition-colors duration-200
-                         relative"
+                         py-3 md:py-4 px-3 hover:bg-white transition-colors duration-200 relative"
             >
               {/* Left red accent on hover */}
               <div
@@ -61,25 +75,25 @@ export default function NoticesSection({ data }) {
                 </p>
               </div>
 
-              {/* Action button */}
+              {/* Action */}
               <div className="shrink-0 mt-2 sm:mt-1">
-                {notice.documentUrl ? (
-                  <a
-                    href={notice.documentUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                {notice.slug ? (
+                  <Link href={`/news-events/${notice.slug}`}
                     className="inline-flex items-center border-2 border-[#0B3D91] text-[#0B3D91]
                                hover:bg-[#0B3D91] hover:text-white font-semibold
-                               text-[10px] md:text-xs px-3 py-1.5 transition-all duration-300"
-                  >
+                               text-[10px] md:text-xs px-3 py-1.5 transition-all duration-300">
+                    {d.viewNotice}
+                  </Link>
+                ) : notice.documentUrl ? (
+                  <a href={notice.documentUrl} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center border-2 border-[#0B3D91] text-[#0B3D91]
+                               hover:bg-[#0B3D91] hover:text-white font-semibold
+                               text-[10px] md:text-xs px-3 py-1.5 transition-all duration-300">
                     {d.viewNotice}
                   </a>
                 ) : (
-                  <span
-                    className="inline-block border border-gray-300 text-gray-400
-                               text-[10px] md:text-xs px-3 py-1.5 select-none"
-                    aria-label={notice.documentStatus}
-                  >
+                  <span className="inline-block border border-gray-300 text-gray-400
+                                   text-[10px] md:text-xs px-3 py-1.5 select-none">
                     {notice.documentStatus || d.documentSoon}
                   </span>
                 )}

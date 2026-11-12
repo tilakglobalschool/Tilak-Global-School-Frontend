@@ -53,6 +53,18 @@ h1, h2, h3, h4 {
   font-family: "Lora", Georgia, serif;
 }
 
+/* ── WhatsApp floating button pulse ring ──────────────────────────────────
+ * Used by WhatsAppButton.jsx via animate-[wa-pulse_3s_ease-out_infinite].
+ * Ring starts at scale(1) opacity(0.7), expands to scale(1.55) opacity(0)
+ * creating a soft ripple effect every 3 seconds.
+ * motion-reduce:animate-none is applied in the component for a11y.
+ * ------------------------------------------------------------------------- */
+@keyframes wa-pulse {
+  0%   { transform: scale(1);    opacity: 0.7; }
+  70%  { transform: scale(1.55); opacity: 0;   }
+  100% { transform: scale(1.55); opacity: 0;   }
+}
+
 /* ── Scrollbar utilities ─────────────────────────────────────────────────── */
 .scrollbar-none,
 .scrollbar-hide {

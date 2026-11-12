@@ -1,9 +1,8 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import ToasterProvider from "@/components/ToasterProvider";
-import { getSettings } from "@/lib/api";
-import { getUploadUrl } from "@/lib/uploadUrl";
-import { siteConfig as staticConfig } from "@/data/siteConfig";
+import HeaderServer     from "@/components/layout/HeaderServer";
+import FooterServer     from "@/components/layout/FooterServer";
+import ToasterProvider  from "@/components/ToasterProvider";
+import WhatsAppButton   from "@/components/ui/WhatsAppButton";
+import { getSettings }  from "@/lib/api";
 
 export const metadata = {
   title: "Tilak Global School",
@@ -11,44 +10,18 @@ export const metadata = {
 };
 
 export default async function UserLayout({ children }) {
-  // Fetch live settings for Header/Footer — fail gracefully
+  // Fetch settings once here so the WhatsApp button gets the correct number
   const { data } = await getSettings();
-  const s = data?.settings || null;
-
-  // Merge live settings over static fallback
-  const siteConfig = s
-    ? {
-        ...staticConfig,
-        name:         s.schoolName        || staticConfig.name,
-        tagline:      s.schoolSubtitle    || staticConfig.tagline,
-        description:  s.footerDescription || staticConfig.description,
-        address:      s.address           || staticConfig.address,
-        addressShort: s.address
-          ? s.address.split(",").slice(0, 2).join(",")
-          : staticConfig.addressShort,
-        phone:        s.phone             || staticConfig.phone,
-        phoneHref:    s.phone             ? `tel:${s.phone.replace(/\s/g, "")}` : staticConfig.phoneHref,
-        email:        s.email             || staticConfig.email,
-        emailHref:    s.email             ? `mailto:${s.email}` : staticConfig.emailHref,
-        whatsapp:     s.whatsappNumber    || staticConfig.whatsapp,
-        logoUrl:      s.logoUrl           ? getUploadUrl(s.logoUrl) : null,
-        mapEmbedUrl:  s.mapEmbedUrl       || null,
-        social: {
-          facebook:  s.socialLinks?.facebook  || staticConfig.social.facebook,
-          instagram: s.socialLinks?.instagram || staticConfig.social.instagram,
-          youtube:   s.socialLinks?.youtube   || staticConfig.social.youtube,
-          // backend stores twitter as "other" — fall back gracefully
-          twitter:   s.socialLinks?.twitter   || s.socialLinks?.other || staticConfig.social.twitter,
-        },
-      }
-    : staticConfig;
+  const phone   = data?.settings?.whatsappNumber || data?.settings?.phone || "9119112335";
+  const message = data?.settings?.whatsappMessage || "Hello, I would like to enquire about admission to Tilak Global School.";
 
   return (
     <>
       <ToasterProvider />
-      <Header siteConfig={siteConfig} />
+      <HeaderServer />
       <main className="min-h-screen">{children}</main>
-      <Footer siteConfig={siteConfig} />
+      <FooterServer />
+      <WhatsAppButton phone={phone} message={message} />
     </>
   );
 }

@@ -4,15 +4,13 @@ import { welcome as d } from "@/data/home";
 
 /**
  * WelcomeSection — server component.
- * Two-column editorial layout: text left, layered image composition right.
- * Matches the About-page style (OurJourney / DirectorMessage):
- *   • Red outline frame offset bottom-right behind the photo
- *   • Soft decorative circles and dot-pattern behind the image column
- *   • Sharp corners on photo, frame and button — NO rounded-* on these
- *   • Circles are the only rounded shapes (decorative background only)
- * Zero literal text — all strings from data/home.js → welcome.
+ * Props: content — from /api/content/home (optional, falls back to static)
  */
-export default function WelcomeSection() {
+export default function WelcomeSection({ content }) {
+  // Dynamic overrides from CMS
+  const label   = content?.["home.welcome.title"]?.value || d.label;
+  const heading = content?.["home.welcome.title"]?.value || d.heading;
+  const body    = content?.["home.welcome.body"]?.value  || null;
   return (
     <section className="relative overflow-hidden bg-white pt-16 md:pt-24 pb-10 md:pb-14">
       <div
@@ -26,40 +24,25 @@ export default function WelcomeSection() {
         <div className="lg:col-span-6 flex flex-col">
 
           {/* Eyebrow label */}
-          <span
-            className="inline-flex items-center gap-2
-                       text-[11px] md:text-xs font-semibold uppercase
-                       tracking-[0.2em] text-red-600"
-          >
+          <span className="inline-flex items-center gap-2 text-[11px] md:text-xs font-semibold uppercase tracking-[0.2em] text-red-600">
             <span aria-hidden="true" className="w-8 h-[2px] bg-red-600 shrink-0" />
-            {d.label}
+            {label}
           </span>
 
           {/* Heading */}
-          <h2
-            className="mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem]
-                       font-serif font-bold text-[#0B3D91] leading-tight"
-          >
-            {d.heading}
+          <h2 className="mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-serif font-bold text-[#0B3D91] leading-tight">
+            {heading}
           </h2>
 
-          {/* Paragraphs — left rule, first as lead text */}
-          <div
-            className="mt-6 border-l-4 border-[#0B3D91]/80 pl-5 md:pl-6
-                       space-y-4 text-sm md:text-base text-gray-700 leading-relaxed"
-          >
-            {d.paragraphs.map((para, i) => (
-              <p
-                key={i}
-                className={
-                  i === 0
-                    ? "text-base md:text-lg text-gray-800 leading-relaxed"
-                    : ""
-                }
-              >
-                {para}
-              </p>
-            ))}
+          {/* Paragraphs — dynamic body OR static paragraphs */}
+          <div className="mt-6 border-l-4 border-[#0B3D91]/80 pl-5 md:pl-6 space-y-4 text-sm md:text-base text-gray-700 leading-relaxed">
+            {body ? (
+              <p className="text-base md:text-lg text-gray-800 leading-relaxed">{body}</p>
+            ) : (
+              d.paragraphs.map((para, i) => (
+                <p key={i} className={i === 0 ? "text-base md:text-lg text-gray-800 leading-relaxed" : ""}>{para}</p>
+              ))
+            )}
           </div>
 
           {/* Highlights row */}

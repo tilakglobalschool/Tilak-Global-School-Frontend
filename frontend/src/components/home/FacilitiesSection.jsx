@@ -24,8 +24,7 @@ export default function FacilitiesSection() {
             className="w-12 h-[2px] md:h-1 bg-red-600 mx-auto mt-3 mb-3"
           />
           <p className="text-xs md:text-base text-gray-600 max-w-2xl mx-auto mb-10 md:mb-14">
-            {facilities.subtext}{" "}
-            <span className="italic">{facilities.note}</span>
+            {facilities.subtext}
           </p>
         </div>
 

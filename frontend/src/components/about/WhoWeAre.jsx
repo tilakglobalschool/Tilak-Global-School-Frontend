@@ -4,17 +4,17 @@ import { whoWeAre as d } from "@/data/about";
 
 /**
  * WhoWeAre — server component.
- * Two-block layout on a clean white background.
- *
- * Block A (intro):  two-column text — heading+lead left, paragraphs+quote+CTA right.
- * Block B (visual): wide photo left, numbered pillars + facts strip right.
- *
- * Design rules:
- *   • Zero rounded-* anywhere.
- *   • Zero literal text — every string from data/about.js → whoWeAre.
- *   • No offset plates, no frames — clean editorial layout.
+ * Props:
+ *   content — CMS content blocks from /api/content/about (optional)
  */
-export default function WhoWeAre() {
+export default function WhoWeAre({ content = {} }) {
+  // CMS overrides for key text blocks
+  const cmsBody    = content?.["about.intro.body"]?.value || null;
+
+  // Split CMS body into paragraphs (separated by double newline or \n)
+  const cmsParagraphs = cmsBody
+    ? cmsBody.split(/\n+/).map(p => p.trim()).filter(Boolean)
+    : null;
   return (
     <section
       className="relative overflow-hidden bg-white pt-10 md:pt-16 pb-16 md:pb-24"
@@ -92,7 +92,7 @@ export default function WhoWeAre() {
                        text-sm md:text-base text-gray-700 leading-relaxed
                        space-y-4 [&>p]:break-inside-avoid"
           >
-            {d.paragraphs.map((para, i) => (
+            {(cmsParagraphs || d.paragraphs).map((para, i) => (
               <p key={i}>{para}</p>
             ))}
           </div>

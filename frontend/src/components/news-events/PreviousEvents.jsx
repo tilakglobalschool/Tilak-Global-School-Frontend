@@ -1,16 +1,38 @@
 "use client";
 
-import MobileSlider from "@/components/ui/MobileSlider";
-import EventCard    from "@/components/news-events/EventCard";
-import { previousEvents as staticData } from "@/data/newsEvents";
+import MobileSlider  from "@/components/ui/MobileSlider";
+import EventCard      from "@/components/news-events/EventCard";
+import { getUploadUrl } from "@/lib/uploadUrl";
+import { previousEvents as d } from "@/data/newsEvents";
 
 /**
- * PreviousEvents — client component (MobileSlider needs useState/useRef).
+ * PreviousEvents — client component.
+ *
  * Props:
- *   data — optional live data from server; falls back to static
+ *   apiItems — array of NewsPost docs (category=Event, date<today) from the API
+ *
+ * Falls back to static data/newsEvents.js when apiItems is empty.
  */
-export default function PreviousEvents({ data }) {
-  const d = data || staticData;
+export default function PreviousEvents({ apiItems = [] }) {
+
+  const apiCards = apiItems.map(p => ({
+    id:          p._id,
+    title:       p.title,
+    description: p.summary || "",
+    category:    p.category,
+    date:        new Date(p.date).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }),
+    dateConfirmed: true,
+    slug:        p.slug,
+    image: {
+      src: p.imageUrl ? getUploadUrl(p.imageUrl) : "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80&fm=webp",
+      alt: p.title,
+    },
+  }));
+
+  const items = apiCards.length > 0 ? apiCards : d.items;
+
+  if (!items || items.length === 0) return null;
+
   return (
     <section className="w-full bg-white py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -22,20 +44,16 @@ export default function PreviousEvents({ data }) {
             {d.eyebrow}
             <span aria-hidden="true" className="w-8 h-[2px] bg-red-600 shrink-0" />
           </span>
-          <h2 className="mt-4 text-2xl md:text-4xl font-serif font-bold text-[#0B3D91]">
-            {d.heading}
-          </h2>
+          <h2 className="mt-4 text-2xl md:text-4xl font-serif font-bold text-[#0B3D91]">{d.heading}</h2>
           <div aria-hidden="true" className="w-12 h-[2px] md:h-1 bg-red-600 mx-auto mt-4" />
           {d.description && (
-            <p className="mt-4 text-xs md:text-base text-gray-600 max-w-xl mx-auto">
-              {d.description}
-            </p>
+            <p className="mt-4 text-xs md:text-base text-gray-600 max-w-xl mx-auto">{d.description}</p>
           )}
         </div>
 
         {/* Mobile slider */}
         <MobileSlider
-          items={d.items}
+          items={items}
           breakpoint="md"
           slideWidth="w-[calc(100vw-2.5rem)]"
           activeDotClass="w-6 h-2 bg-red-600"
@@ -45,7 +63,7 @@ export default function PreviousEvents({ data }) {
 
         {/* Desktop grid */}
         <div className="hidden md:grid md:grid-cols-3 gap-6 lg:gap-8">
-          {d.items.map((item) => (
+          {items.map((item) => (
             <EventCard key={item.id} item={item} showDetails={false} />
           ))}
         </div>

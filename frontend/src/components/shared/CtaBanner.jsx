@@ -20,8 +20,20 @@ import { ctaBanner as defaultData } from "@/data/home";
  *   • Layered red outline frame (top-left) + navy backing plate (bottom-right).
  *   • Right-half background image at opacity-20, lg+ only.
  */
-export default function CtaBanner({ data = defaultData }) {
-  const d = data;
+export default function CtaBanner({ data = defaultData, settings }) {
+  // Override session year from settings if available
+  const d = settings?.admissionSession
+    ? {
+        ...defaultData,
+        ...data,
+        eyebrow: settings.admissionBannerText
+          ? `Admissions ${settings.admissionSession}`
+          : data.eyebrow || defaultData.eyebrow,
+        subtext: settings.admissionBannerText
+          ? `${settings.admissionBannerText} · Session ${settings.admissionSession}`
+          : data.subtext || defaultData.subtext,
+      }
+    : (data || defaultData);
 
   return (
     <section className="relative overflow-hidden bg-white

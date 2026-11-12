@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Permanent redirect: /gallery/video-gallery → /gallery
- * Preserves any external links or bookmarks.
  */
 export default function VideoGalleryRedirect() {
   redirect("/gallery");

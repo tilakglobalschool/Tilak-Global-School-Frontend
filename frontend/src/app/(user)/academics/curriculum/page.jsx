@@ -1,22 +1,34 @@
-import AcademicsHero from "@/components/academics/AcademicsHero";
-import { curriculumPage, curriculumHero } from "@/data/academics";
+import AcademicsHero              from "@/components/academics/AcademicsHero";
+import AcademicStages             from "@/components/home/AcademicStages";
+import CurriculumMethodologySection from "@/components/academics/CurriculumMethodologySection";
+import CtaBanner                  from "@/components/shared/CtaBanner";
+import { getContent }             from "@/lib/api";
+import { curriculumPage, curriculumHero, academicsCta } from "@/data/academics";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: `${curriculumPage.heading} — Tilak Global School`,
+  title:       `${curriculumPage.heading} — Tilak Global School`,
   description: curriculumPage.subtext,
 };
 
-export default function CurriculumPage() {
+export default async function CurriculumPage() {
+  const { data } = await getContent("academics");
+  const content  = data?.content || {};
+
   return (
     <>
+      {/* Hero */}
       <AcademicsHero data={curriculumHero} />
 
-      {/* Placeholder content — to be replaced with full Curriculum section */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-20">
-        <p className="text-[#5B6785] text-sm md:text-base leading-relaxed">
-          {curriculumPage.subtext}
-        </p>
-      </div>
+      {/* Academic Stages — four image cards on white bg */}
+      <AcademicStages content={content} />
+
+      {/* CBSE Curriculum (left) + Teaching Methodology (right) */}
+      <CurriculumMethodologySection />
+
+      {/* Admission CTA */}
+      <CtaBanner data={academicsCta} />
     </>
   );
 }

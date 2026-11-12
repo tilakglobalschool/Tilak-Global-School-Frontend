@@ -1,9 +1,15 @@
 /** @type {import('next').NextConfig} */
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const isDev = process.env.NODE_ENV !== 'production';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const isDev     = process.env.NODE_ENV !== 'production';
 
 const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
+
+  // Silence "workspace root" warning — tells Next.js this app lives inside a monorepo
+  outputFileTracingRoot: path.join(__dirname, '..'),
 
   // Dev-only rewrites — production uses vercel.json rewrites
   ...(isDev && {
@@ -23,14 +29,20 @@ const nextConfig = {
 
   images: {
     remotePatterns: [
+      // Cloudinary — permanent image CDN
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
       {
         protocol: 'https',
         hostname: 'api.tilakglobalschool.com',
         pathname: '/uploads/**',
       },
+      // Fixed: correct Render hostname with -0xwt suffix
       {
         protocol: 'https',
-        hostname: 'tilak-global-school-backend.onrender.com',
+        hostname: 'tilak-global-school-backend-0xwt.onrender.com',
         pathname: '/uploads/**',
       },
       {

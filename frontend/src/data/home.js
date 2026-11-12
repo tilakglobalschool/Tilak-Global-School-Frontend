@@ -6,15 +6,15 @@
 // ── Hero Section ─────────────────────────────────────────────────────────────
 export const hero = {
   eyebrow:      "Tilak Global School · Jaipur",
-  badge:        "Admissions Open · Session 2025-26",
+  badge:        "Admissions Open · Session 2026-27",
   headingLine1: "A stress-free place where",
   headingLine2: "every child grows with character.",
   // Keep full heading for SEO / non-visual use
   heading:      "A stress-free place where every child grows with character.",
   subtext:
     "Tilak Global School is an English-medium, co-educational CBSE school offering classes from Nursery to XII — part of the trusted Tilak Group, Jaipur. We nurture curiosity, discipline, and lifelong learning.",
-  imageSrc: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=1600&q=80&fm=webp",
-  imageAlt: "Students studying at Tilak Global School",
+  imageSrc: "https://res.cloudinary.com/h6erncmn/image/upload/v1794421761/tilak-global-school/hero/homepage-hero.jpg",
+  imageAlt: "Tilak Global School campus — Bindayaka, Jaipur",
   cta: [
     {
       label:   "Enquire for Admission",
@@ -93,7 +93,7 @@ export const welcome = {
     href:  "/about-us/our-school",
   },
   image: {
-    src:     "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80&fm=webp",
+    src:     "https://res.cloudinary.com/h6erncmn/image/upload/v1794425393/tilak-global-school/hero/welcome-section.jpg",
     alt:     "Tilak Global School classroom",
     caption: "Tilak Global School · Jaipur",
   },
@@ -102,86 +102,98 @@ export const welcome = {
 // ── School Facilities ─────────────────────────────────────────────────────────
 export const facilities = {
   heading: "School Facilities",
-  subtext: "Spaces designed for learning, play and creativity.",
-  note:    "Facilities shown are proposed – subject to school confirmation.",
+  subtext: "Spaces designed for learning, growth and creativity.",
+  note:    "",
   items: [
+    // ── Cloudinary images (actual school photographs) ───────────────────────
+    {
+      id:          "laboratory",
+      title:       "Laboratory",
+      description: "To enhance learning ability, develop practical skills and provide hands-on exposure to theoretical concepts, the school has modern laboratories for Physics, Chemistry, Biology, Mathematics, Geography and Computer Science.",
+      image: {
+        src:            "https://res.cloudinary.com/h6erncmn/image/upload/v1794421174/tilak-global-school/facilities/laboratory.jpg",
+        alt:            "Modern school laboratory at Tilak Global School",
+        objectPosition: "center",
+      },
+      href: "/about-us/infrastructure",
+    },
     {
       id:          "smart-classrooms",
       title:       "Smart Classrooms",
-      description: "Interactive digital boards for engaging lessons.",
+      description: "Computer-aided teaching through smart classrooms helps make the teaching and learning process more interactive, engaging and effective for students.",
       image: {
-        src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80&fm=webp",
-        alt: "Smart classroom with digital board",
-      },
-      href: "/about-us/infrastructure",
-    },
-    {
-      id:          "science-labs",
-      title:       "Science Laboratories",
-      description: "Fully equipped labs for hands-on scientific exploration.",
-      image: {
-        src: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80&fm=webp",
-        alt: "Science laboratory with equipment",
-      },
-      href: "/about-us/infrastructure",
-    },
-    {
-      id:          "computer-lab",
-      title:       "Computer Lab",
-      description: "Modern computers with high-speed internet for digital learning.",
-      image: {
-        src: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80&fm=webp",
-        alt: "Computer lab with modern systems",
+        src:            "https://res.cloudinary.com/h6erncmn/image/upload/v1794421180/tilak-global-school/facilities/smart-classrooms.jpg",
+        alt:            "Smart classroom with digital board at Tilak Global School",
+        objectPosition: "center",
       },
       href: "/about-us/infrastructure",
     },
     {
       id:          "library",
       title:       "Library",
-      description: "A rich collection of books, journals and digital resources.",
+      description: "The school library offers a wide range of resources to support students' academic needs, including books, journals, periodicals, newspapers and audiovisual materials. New resources are added regularly to keep the collection relevant and up to date.",
       image: {
-        src: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80&fm=webp",
-        alt: "School library with bookshelves",
+        src:            "https://res.cloudinary.com/h6erncmn/image/upload/v1794421176/tilak-global-school/facilities/library.jpg",
+        alt:            "School library at Tilak Global School",
+        objectPosition: "center",
       },
       href: "/about-us/infrastructure",
     },
     {
       id:          "sports",
-      title:       "Sports Facilities",
-      description: "Outdoor and indoor spaces for physical education and sports.",
+      title:       "Sports",
+      description: "The school believes in a healthy mind in a healthy body. Facilities and activities include Basketball, Table Tennis, Cricket, Badminton, Volleyball, Chess and other indoor and outdoor games. Students participate in sports activities during school hours and may take part in inter-school, state and national competitions.",
       image: {
-        src: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80&fm=webp",
-        alt: "Sports ground and facilities",
+        src:            "https://res.cloudinary.com/h6erncmn/image/upload/v1794421181/tilak-global-school/facilities/sports.jpg",
+        alt:            "Sports ground and facilities at Tilak Global School",
+        objectPosition: "center",
       },
       href: "/about-us/infrastructure",
     },
     {
-      id:          "auditorium",
-      title:       "Auditorium",
-      description: "A large hall for assemblies, events and cultural programmes.",
+      id:          "multi-purpose-hall",
+      title:       "Multi Purpose Hall",
+      description: "The school has a multi-purpose hall and auditorium for cultural programmes, school functions, assemblies and other events.",
       image: {
-        src: "https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=800&q=80&fm=webp",
-        alt: "School auditorium",
+        src:            "https://res.cloudinary.com/h6erncmn/image/upload/v1794421178/tilak-global-school/facilities/multi-purpose-hall.jpg",
+        alt:            "Multi-purpose hall and auditorium at Tilak Global School",
+        objectPosition: "center",
+      },
+      href: "/about-us/infrastructure",
+    },
+    // ── Unsplash temporary images (no local photo available) ────────────────
+    {
+      id:          "music-dance",
+      title:       "Music and Dance",
+      description: "Students have opportunities to learn vocal music, instrumental music and dance during school hours. Dedicated music and dance rooms provide space for students to practise and develop their creative abilities.",
+      image: {
+        // TEMPORARY — replace with actual school photo when available
+        src:            "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=800&q=80&fm=webp",
+        alt:            "Music and dance room at Tilak Global School",
+        objectPosition: "center",
       },
       href: "/about-us/infrastructure",
     },
     {
-      id:          "music-art",
-      title:       "Music & Art Rooms",
-      description: "Dedicated creative spaces for music, fine arts and crafts.",
+      id:          "transport",
+      title:       "Transport",
+      description: "The school provides transport facilities for students of different classes and for school-organised activities. School buses operate on multiple routes and are equipped with GPS tracking.",
       image: {
-        src: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80&fm=webp",
-        alt: "Music and art room",
+        src:            "https://res.cloudinary.com/h6erncmn/image/upload/v1794421434/tilak-global-school/facilities/transport.jpg",
+        alt:            "School transport bus at Tilak Global School",
+        objectPosition: "center",
       },
       href: "/about-us/infrastructure",
     },
     {
-      id:          "transport-security",
-      title:       "Transport & Security",
-      description: "Safe transport network and 24/7 campus security.",
+      id:          "art-room",
+      title:       "Art Room",
+      description: "A dedicated art room provides students with opportunities to explore drawing, painting, craft and other creative activities.",
       image: {
-        src: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80&fm=webp",
-        alt: "School bus transport",
+        // TEMPORARY — replace with actual school photo when available
+        src:            "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80&fm=webp",
+        alt:            "Art room at Tilak Global School",
+        objectPosition: "center",
       },
       href: "/about-us/infrastructure",
     },
@@ -200,8 +212,8 @@ export const whyChoose = {
       description: "A structured academic programme preparing students for board examinations.",
       highlight:   false,
       image: {
-        src: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=900&q=80&fm=webp",
-        alt: "Students studying with books",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794418739/tilak-global-school/why-us/ncert_curriculum.jpg",
+        alt: "NCERT CBSE Curriculum at Tilak Global School",
       },
     },
     {
@@ -211,8 +223,8 @@ export const whyChoose = {
       description: "A holistic, constructivist approach where every child can grow with confidence.",
       highlight:   false,
       image: {
-        src: "https://images.unsplash.com/photo-1472162072942-cd5147eb3902?auto=format&fit=crop&w=900&q=80&fm=webp",
-        alt: "Students in a relaxed learning environment",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794418741/tilak-global-school/why-us/stress_free_environment.jpg",
+        alt: "Stress-free learning environment at Tilak Global School",
       },
     },
     {
@@ -222,8 +234,8 @@ export const whyChoose = {
       description: "From the group that also runs Tilak Public School, Triveni Nagar, Jaipur.",
       highlight:   false,
       image: {
-        src: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=900&q=80&fm=webp",
-        alt: "School building representing legacy and trust",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794418742/tilak-global-school/why-us/tilak_legacy.jpg",
+        alt: "Tilak Group legacy and school building",
       },
     },
     {
@@ -233,8 +245,8 @@ export const whyChoose = {
       description: "Board results, achievements and awards — to be updated once verified by the school.",
       highlight:   true,
       image: {
-        src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80&fm=webp",
-        alt: "Students collaborating on a project",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794418743/tilak-global-school/why-us/achievements_results.jpg",
+        alt: "Student achievements and results at Tilak Global School",
       },
     },
   ],
@@ -253,11 +265,6 @@ export const faqs = {
       id: 1,
       question: "Which board is Tilak Global School affiliated to?",
       answer:   "The school follows the NCERT/CBSE curriculum and offers classes from Nursery to XII.",
-    },
-    {
-      id: 2,
-      question: "What is the medium of instruction?",
-      answer:   "English is the medium of instruction; the school is co-educational.",
     },
     {
       id: 3,

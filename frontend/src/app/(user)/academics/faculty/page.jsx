@@ -1,22 +1,36 @@
-import AcademicsHero from "@/components/academics/AcademicsHero";
-import { facultyPage, facultyHero } from "@/data/academics";
+import AcademicsHero      from "@/components/academics/AcademicsHero";
+import FacultyIntroduction from "@/components/academics/FacultyIntroduction";
+import TeachingMethodology from "@/components/academics/TeachingMethodology";
+import CtaBanner           from "@/components/shared/CtaBanner";
+import { facultyPage, facultyHero, academicsCta } from "@/data/academics";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: `${facultyPage.heading} — Tilak Global School`,
+  title:       `${facultyPage.heading} — Tilak Global School`,
   description: facultyPage.subtext,
 };
 
 export default function FacultyPage() {
   return (
     <>
+      {/* Hero */}
       <AcademicsHero data={facultyHero} />
 
-      {/* Placeholder content — to be replaced with full Faculty section */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-14 md:py-20">
-        <p className="text-[#5B6785] text-sm md:text-base leading-relaxed">
-          {facultyPage.subtext}
-        </p>
-      </div>
+      {/* Faculty Introduction — editorial text + classroom image */}
+      <FacultyIntroduction />
+
+      {/* Teaching Methodology — reused directly, on light-blue bg */}
+      <section className="w-full bg-[#F4F7FC] border-t border-[#0B3D91]/10 py-12 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <TeachingMethodology />
+        </div>
+      </section>
+
+      {/* Faculty profiles omitted — no verified names/photos available */}
+
+      {/* Admission CTA */}
+      <CtaBanner data={academicsCta} />
     </>
   );
 }

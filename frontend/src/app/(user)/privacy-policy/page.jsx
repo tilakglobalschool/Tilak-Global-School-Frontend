@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { privacyPolicyPage } from "@/data/contact";
 export const metadata = { title: `${privacyPolicyPage.heading} — Tilak Global School` };
 export default function PrivacyPolicyPage() {
@@ -8,3 +9,4 @@ export default function PrivacyPolicyPage() {
     </div>
   );
 }
+
