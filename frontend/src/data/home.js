@@ -119,7 +119,7 @@ export const facilities = {
     },
     {
       id:          "smart-classrooms",
-      title:       "Smart Classrooms",
+      title:       "Computer-Lab",
       description: "Computer-aided teaching through smart classrooms helps make the teaching and learning process more interactive, engaging and effective for students.",
       image: {
         src:            "https://res.cloudinary.com/h6erncmn/image/upload/v1794421180/tilak-global-school/facilities/smart-classrooms.jpg",
@@ -141,7 +141,7 @@ export const facilities = {
     },
     {
       id:          "sports",
-      title:       "Sports",
+      title:       "Playground",
       description: "The school believes in a healthy mind in a healthy body. Facilities and activities include Basketball, Table Tennis, Cricket, Badminton, Volleyball, Chess and other indoor and outdoor games. Students participate in sports activities during school hours and may take part in inter-school, state and national competitions.",
       image: {
         src:            "https://res.cloudinary.com/h6erncmn/image/upload/v1794421181/tilak-global-school/facilities/sports.jpg",
