@@ -154,9 +154,10 @@ export const admissionEnquiry = {
   description:   "Have a quick question? Share your details and our team will reach out to you.",
   demoMessage:   "Demo Preview: Form submitted locally. No enquiry has been sent to the school.",
   classOptions: [
-    "Nursery", "KG", "Class I", "Class II", "Class III", "Class IV",
-    "Class V", "Class VI", "Class VII", "Class VIII", "Class IX", "Class X",
-    "Class XI", "Class XII",
+    "Nursery", "LKG", "UKG",
+    "I", "II", "III", "IV", "V",
+    "VI", "VII", "VIII",
+    "IX", "X", "XI", "XII",
   ],
   fields: {
     studentName:   { label: "Student Full Name",      placeholder: "Enter student's full name"   },
@@ -179,9 +180,10 @@ export const onlineAdmission = {
     { number: 4, label: "Review & Submit"       },
   ],
   classOptions: [
-    "Nursery", "KG", "Class I", "Class II", "Class III", "Class IV",
-    "Class V", "Class VI", "Class VII", "Class VIII", "Class IX", "Class X",
-    "Class XI", "Class XII",
+    "Nursery", "LKG", "UKG",
+    "I", "II", "III", "IV", "V",
+    "VI", "VII", "VIII",
+    "IX", "X", "XI", "XII",
   ],
 };
 

@@ -108,14 +108,14 @@ export const academicStages = {
     {
       id:          "kindergarten",
       number:      "01",
-      range:       "Nursery – KG",
-      title:       "Kindergarten",
+      range:       "Nursery, KG and Prep",
+      title:       "Pre-Primary",
       description: "Meets the needs of young learners in a safe, family-like environment.",
       stats:       "20+ activities · 10+ classrooms",
       href:        "/academics/curriculum",
       image: {
         src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794408329/tilak-global-school/academic-stages/kindergarten.jpg",
-        alt: "Young children in a Kindergarten classroom at Tilak Global School",
+        alt: "Young children in a Pre-Primary classroom at Tilak Global School",
       },
     },
     {
