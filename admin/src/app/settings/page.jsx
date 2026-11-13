@@ -96,6 +96,9 @@ export default function SettingsPage() {
     input.onchange = async (e) => {
       const file = e.target.files[0];
       if (!file) return;
+
+      // Show uploading toast
+      const toastId = toast.loading('Uploading image...');
       const fd = new FormData();
       fd.append('media', file);
       try {
@@ -103,8 +106,22 @@ export default function SettingsPage() {
         if (field === 'logoUrl')         res = await adminApi.uploadLogo(fd);
         else if (field === 'faviconUrl') res = await adminApi.uploadFavicon(fd);
         else                              res = await adminApi.uploadDirectorPhoto(fd);
+
         setForm(f => ({ ...f, [field]: res.data.url }));
-      } catch { /* */ }
+        toast.success('Image uploaded successfully!', { id: toastId });
+      } catch (err) {
+        const msg = err?.message || 'Upload failed';
+        // Cloudinary not configured → show helpful message
+        const isCldError = msg.toLowerCase().includes('cloudinary') ||
+                           msg.toLowerCase().includes('cloud') ||
+                           err?.status >= 500;
+        toast.error(
+          isCldError
+            ? 'Upload failed — Cloudinary is not configured on this server. Add CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET to .env'
+            : msg,
+          { id: toastId, duration: 6000 }
+        );
+      }
     };
     input.click();
   };

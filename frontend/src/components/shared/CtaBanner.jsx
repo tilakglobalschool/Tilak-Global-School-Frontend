@@ -100,8 +100,8 @@ export default function CtaBanner({ data = defaultData, settings }) {
             {/* ── Red top-left corner accent — vertical ── */}
             <div aria-hidden="true" className="absolute top-0 left-0 w-1 h-12 bg-red-600" />
 
-            {/* ── Faint serif year watermark — bottom-right ── */}
-            {d.sessionYear && (
+            {/* ── Faint serif year watermark — bottom-right (hidden when empty) ── */}
+            {d.sessionYear && d.sessionYear.trim() && (
               <span
                 aria-hidden="true"
                 className="absolute bottom-2 right-4

@@ -286,10 +286,10 @@ export const faqs = {
 
 // ── Admission CTA Banner ───────────────────────────────────────────────────────
 export const ctaBanner = {
-  eyebrow:     "Admissions 2025-26",
+  eyebrow:     "Admissions 2026-27",
   heading:     "Give your child the Tilak Global advantage",
-  subtext:     "Admissions open · Nursery to Class XII · Session 2025-26",
-  sessionYear: "2025",
+  subtext:     "Admissions open · Nursery to Class XII · Session 2026-27",
+  sessionYear: "",
   points: [
     "Nursery to Class XII",
     "CBSE · English medium",
@@ -304,7 +304,7 @@ export const ctaBanner = {
     href:  "/contact-us",
   },
   image: {
-    src:  "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80&fm=webp",
-    alt:  "Tilak Global School building",
+    src:  "https://res.cloudinary.com/h6erncmn/image/upload/v1794421761/tilak-global-school/hero/homepage-hero.jpg",
+    alt:  "Tilak Global School campus — Bindayaka, Jaipur",
   },
 };
