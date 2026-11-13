@@ -191,7 +191,7 @@ export const facilities = {
       description: "A dedicated art room provides students with opportunities to explore drawing, painting, craft and other creative activities.",
       image: {
         // TEMPORARY — replace with actual school photo when available
-        src:            "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80&fm=webp",
+        src:            "https://res.cloudinary.com/h6erncmn/image/upload/v1794548140/tilak-global-school/gallery/kpiy0uexbm5cx2vbj3hz.jpg",
         alt:            "Art room at Tilak Global School",
         objectPosition: "center",
       },
