@@ -44,18 +44,25 @@ export default async function PrincipalsMessagePage() {
                 className="absolute -bottom-4 -right-4 w-full h-full border-2 border-red-600 z-0" />
 
               {/* Portrait */}
-              <div className="relative z-10 w-full aspect-[4/5] overflow-hidden shadow-2xl">
+              <div className="relative z-10 w-full aspect-[4/5] overflow-hidden shadow-2xl group">
                 <Image
                   src={photoSrc || d.image.src}
                   alt={d.image.alt}
                   fill
                   sizes="(max-width: 1024px) 70vw, 30vw"
-                  className="object-cover object-top"
+                  className="object-cover object-top
+                             transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 {/* Bottom overlay */}
                 <div aria-hidden="true"
                   className="absolute inset-x-0 bottom-0 h-1/3
                              bg-gradient-to-t from-[#0B3D91]/90 to-transparent pointer-events-none" />
+                {/* Red hover tint — desktop only */}
+                <div aria-hidden="true"
+                  className="absolute inset-0 bg-red-600 opacity-0
+                             md:group-hover:opacity-15
+                             transition-opacity duration-500
+                             mix-blend-multiply pointer-events-none" />
                 {/* Name tag */}
                 <div className="absolute bottom-4 left-4 border-l-2 border-red-500 pl-2">
                   <p className="text-sm font-serif font-bold text-white">{d.name}</p>
