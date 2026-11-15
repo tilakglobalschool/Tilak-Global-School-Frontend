@@ -114,7 +114,7 @@ export const academicStages = {
       stats:       "20+ activities · 10+ classrooms",
       href:        "/academics/curriculum",
       image: {
-        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794408329/tilak-global-school/academic-stages/kindergarten.jpg",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794548232/tilak-global-school/gallery/foikxh49kydcifi0dwag.jpg",
         alt: "Young children in a Pre-Primary classroom at Tilak Global School",
       },
     },
@@ -127,7 +127,7 @@ export const academicStages = {
       stats:       "15+ activities · 20+ classrooms",
       href:        "/academics/curriculum",
       image: {
-        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794408331/tilak-global-school/academic-stages/primary_school.jpg",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794548178/tilak-global-school/gallery/j7ltde5zsakh7jwdyarc.jpg",
         alt: "Primary school students in class at Tilak Global School",
       },
     },
@@ -140,7 +140,7 @@ export const academicStages = {
       stats:       "15+ activities · 20+ classrooms",
       href:        "/academics/curriculum",
       image: {
-        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794408332/tilak-global-school/academic-stages/middle_school.jpg",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794548208/tilak-global-school/gallery/wusq1boviqlolu7motc0.jpg",
         alt: "Middle school students in a classroom at Tilak Global School",
       },
     },
@@ -153,7 +153,7 @@ export const academicStages = {
       stats:       "15+ activities · 20+ classrooms",
       href:        "/academics/curriculum",
       image: {
-        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794408334/tilak-global-school/academic-stages/senior_school.jpg",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794548251/tilak-global-school/gallery/lfwz6a2wklmqty3cv9af.jpg",
         alt: "Senior school students studying at Tilak Global School",
       },
     },
