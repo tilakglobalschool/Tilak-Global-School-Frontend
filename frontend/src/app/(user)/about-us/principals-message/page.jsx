@@ -1,7 +1,6 @@
 import Image        from "next/image";
 import PageHero     from "@/components/shared/PageHero";
 import CtaBanner    from "@/components/shared/CtaBanner";
-import { getUploadUrl } from "@/lib/uploadUrl";
 import {
   principalsMessageHero,
   principalMessage as d,
@@ -16,7 +15,8 @@ export const metadata = {
 };
 
 export default async function PrincipalsMessagePage() {
-  const photoSrc = getUploadUrl(d.image.src);
+  // Static public path — served directly by Next.js, no backend needed
+  const photoSrc = d.image.src;
 
   return (
     <>

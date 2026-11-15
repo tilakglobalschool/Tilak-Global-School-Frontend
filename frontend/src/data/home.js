@@ -71,7 +71,7 @@ export const directorMessage = {
     href:  "/about-us/principals-message",
   },
   image: {
-    src:     "/uploads/media/chairman-rs-tanwar.jpg",
+    src:     "/images/chairman-rs-tanwar.jpg",
     alt:     "Mr. R. S. Tanwar – Chairman, Tilak Global School",
     caption: "Director",
   },

@@ -184,7 +184,7 @@ Let us continue this beautiful journey of learning, growth, and excellence toget
   designation: "Chairman, Tilak Global School",
   cta:         null,
   image: {
-    src:     "/uploads/media/chairman-rs-tanwar.jpg",
+    src:     "/images/chairman-rs-tanwar.jpg",
     alt:     "Mr. R. S. Tanwar – Chairman, Tilak Global School",
     caption: "Chairman",
   },
@@ -392,7 +392,7 @@ export const principalMessage = {
   ],
   closing: "With warm regards and best wishes,",
   image: {
-    src:     "/uploads/media/chairman-rs-tanwar.jpg",
+    src:     "/images/chairman-rs-tanwar.jpg",
     alt:     "Mr. R. S. Tanwar – Chairman, Tilak Global School",
     caption: "Chairman",
   },
