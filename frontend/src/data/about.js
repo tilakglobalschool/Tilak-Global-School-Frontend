@@ -21,8 +21,8 @@ export const visionMissionPage = {
 };
 
 export const principalsMessagePage = {
-  heading: "Principal's Message",
-  subtext: "[Principal / Director message — to be confirmed by school]",
+  heading: "Chairman's Message",
+  subtext: "A vision for excellence, a commitment to values — from the Chairman of Tilak Global School.",
 };
 
 export const infrastructurePage = {
@@ -79,12 +79,12 @@ export const visionMissionHero = {
 
 export const principalsMessageHero = {
   badge:   "Leadership",
-  heading: "Principal's Message",
-  subtext: "A message from the leadership of Tilak Global School.",
+  heading: "Chairman's Message",
+  subtext: "A vision for excellence, a commitment to values — from Mr. R. S. Tanwar, Chairman, Tilak Global School.",
   breadcrumb: [
-    { label: "Home",                href: "/" },
-    { label: "About Us",            href: "/about-us" },
-    { label: "Principal's Message", href: "/about-us/principals-message" },
+    { label: "Home",               href: "/" },
+    { label: "About Us",           href: "/about-us" },
+    { label: "Chairman's Message", href: "/about-us/principals-message" },
   ],
   image: {
     src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794421761/tilak-global-school/hero/homepage-hero.jpg",
@@ -159,19 +159,34 @@ export const whoWeAre = {
   },
 };
 
-// ── Director's Message (About Us page) ────────────────────────────────────────
+// ── Chairman's Message (About Us page) ───────────────────────────────────────
 export const aboutDirectorMessage = {
-  heading:     "Director's Message",
+  heading:     "Chairman's Message",
   quote:
-    "Our task is to make children aware of indigenous knowledge and prepare them to meet competition with creativity and innovation.",
-  note:        "Summarised from the school website – final wording to be approved",
-  name:        "R. S. Tanwar",
-  designation: "Director",
+    "Education is not merely about acquiring knowledge or achieving academic excellence; it is about shaping character, instilling values, and preparing young individuals to face life's challenges with confidence, compassion, and integrity.",
+  fullMessage: `Dear Parents, Students, and Well-Wishers,
+
+It gives me immense pleasure to welcome you to Tilak Global School, a place where young minds are nurtured, dreams are encouraged, and every child is inspired to discover their true potential.
+
+I firmly believe that education is not merely about acquiring knowledge or achieving academic excellence; it is about shaping character, instilling values, and preparing young individuals to face life's challenges with confidence, compassion, and integrity.
+
+At Tilak Global School, our vision is to create a nurturing and progressive learning environment where tradition meets innovation, knowledge inspires creativity, and values build character. We strive to provide holistic education that promotes intellectual curiosity, emotional well-being, leadership, and a strong sense of social responsibility.
+
+In today's rapidly evolving world, we are committed to embracing modern teaching methodologies and innovative learning experiences while remaining deeply rooted in our cultural heritage and moral values.
+
+I strongly believe that every child possesses unique talents and limitless possibilities. Our responsibility is to recognize those abilities, encourage their growth, and empower each student to become a confident, responsible, and compassionate individual.
+
+Together with our dedicated educators and supportive parents, we aspire to build not just successful students, but thoughtful individuals and responsible citizens who will contribute meaningfully to society and the nation.
+
+Let us continue this beautiful journey of learning, growth, and excellence together.`,
+  note:        "A Vision for Excellence, A Commitment to Values",
+  name:        "Mr. R. S. Tanwar",
+  designation: "Chairman, Tilak Global School",
   cta:         null,
   image: {
-    src:     "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80&fm=webp",
-    alt:     "R. S. Tanwar – Director, Tilak Global School",
-    caption: "Director",
+    src:     "/uploads/media/chairman-rs-tanwar.jpg",
+    alt:     "Mr. R. S. Tanwar – Chairman, Tilak Global School",
+    caption: "Chairman",
   },
 };
 
@@ -354,21 +369,32 @@ export const educationalPhilosophy = {
   note: "Educational philosophy summarised from the school website — final wording subject to school confirmation.",
 };
 
-// ── Principal's Message — placeholder (details not yet confirmed) ─────────────
+// ── Chairman's Message page data ─────────────────────────────────────────────
 export const principalMessage = {
-  heading:     "Principal's Message",
-  placeholder: true,   // set to false once verified details are available
-  placeholderNote:
-    "The Principal's message will be published here once details are confirmed by the school. Please check back soon or contact us for more information.",
-  // When placeholder is false, populate these fields:
-  name:        "",
-  designation: "Principal, Tilak Global School",
-  quote:       "",
-  note:        "",
+  heading:         "Chairman's Message",
+  subheading:      "A Vision for Excellence, A Commitment to Values",
+  placeholder:     false,
+  placeholderNote: "",
+  name:            "Mr. R. S. Tanwar",
+  designation:     "Chairman, Tilak Global School",
+  quote:
+    "Education is not merely about acquiring knowledge or achieving academic excellence; it is about shaping character, instilling values, and preparing young individuals to face life's challenges with confidence, compassion, and integrity.",
+  note: "A Vision for Excellence, A Commitment to Values",
+  fullMessage: [
+    "Dear Parents, Students, and Well-Wishers,",
+    "It gives me immense pleasure to welcome you to Tilak Global School, a place where young minds are nurtured, dreams are encouraged, and every child is inspired to discover their true potential.",
+    "I firmly believe that education is not merely about acquiring knowledge or achieving academic excellence; it is about shaping character, instilling values, and preparing young individuals to face life's challenges with confidence, compassion, and integrity.",
+    "At Tilak Global School, our vision is to create a nurturing and progressive learning environment where tradition meets innovation, knowledge inspires creativity, and values build character. We strive to provide holistic education that promotes intellectual curiosity, emotional well-being, leadership, and a strong sense of social responsibility.",
+    "In today's rapidly evolving world, we are committed to embracing modern teaching methodologies and innovative learning experiences while remaining deeply rooted in our cultural heritage and moral values.",
+    "I strongly believe that every child possesses unique talents and limitless possibilities. Our responsibility is to recognize those abilities, encourage their growth, and empower each student to become a confident, responsible, and compassionate individual.",
+    "Together with our dedicated educators and supportive parents, we aspire to build not just successful students, but thoughtful individuals and responsible citizens who will contribute meaningfully to society and the nation.",
+    "Let us continue this beautiful journey of learning, growth, and excellence together.",
+  ],
+  closing: "With warm regards and best wishes,",
   image: {
-    src:     "",
-    alt:     "Principal, Tilak Global School",
-    caption: "Principal",
+    src:     "/uploads/media/chairman-rs-tanwar.jpg",
+    alt:     "Mr. R. S. Tanwar – Chairman, Tilak Global School",
+    caption: "Chairman",
   },
 };
 

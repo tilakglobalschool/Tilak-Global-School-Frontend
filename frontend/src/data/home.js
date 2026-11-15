@@ -58,21 +58,21 @@ export const stats = [
   },
 ];
 
-// ── Director's Message ────────────────────────────────────────────────────────
+// ── Chairman's Message ────────────────────────────────────────────────────────
 export const directorMessage = {
-  heading:     "Director's Message",
+  heading:     "Chairman's Message",
   quote:
-    "Our vision is education with positive input, emphasising creativity and innovation, so every child can build strong character and meet a changing world with confidence.",
-  note:        "Message summarised from the school website – final wording to be approved by the school",
-  name:        "R. S. Tanwar",
-  designation: "Director, Tilak Global School",
+    "Our vision is to create a nurturing and progressive learning environment where tradition meets innovation, knowledge inspires creativity, and values build character.",
+  note:        "A Vision for Excellence, A Commitment to Values",
+  name:        "Mr. R. S. Tanwar",
+  designation: "Chairman, Tilak Global School",
   cta: {
     label: "Read Full Message",
     href:  "/about-us/principals-message",
   },
   image: {
-    src:     "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80&fm=webp",
-    alt:     "R. S. Tanwar – Director, Tilak Global School",
+    src:     "/uploads/media/chairman-rs-tanwar.jpg",
+    alt:     "Mr. R. S. Tanwar – Chairman, Tilak Global School",
     caption: "Director",
   },
 };

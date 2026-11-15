@@ -11,7 +11,7 @@ export const NAV_ITEMS = [
     children: [
       { label: "Our School",          href: "/about-us/our-school" },
       { label: "Vision & Mission",    href: "/about-us/vision-mission" },
-      { label: "Principal's Message", href: "/about-us/principals-message" },
+      { label: "Chairman's Message", href: "/about-us/principals-message" },
       { label: "Infrastructure",      href: "/about-us/infrastructure" },
     ],
   },
