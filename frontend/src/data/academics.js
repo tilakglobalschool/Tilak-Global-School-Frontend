@@ -287,7 +287,7 @@ export const academicsCta = {
   eyebrow:     "Admissions 2026–27",
   heading:     "Give your child the Tilak Global advantage",
   subtext:     "Admissions open · Nursery to Class XII · Session 2026–27 (subject to school confirmation)",
-  sessionYear: "2026",
+  sessionYear: "",
   points: [
     "Nursery to Class XII",
     "NCERT / CBSE Curriculum",

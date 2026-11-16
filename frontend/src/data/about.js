@@ -286,7 +286,7 @@ export const ourCampus = {
       caption:     "Main building & grounds",
       description: "Spacious main building set on open green grounds at Bindayaka.",
       image: {
-        src: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80&fm=webp",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794421761/tilak-global-school/hero/homepage-hero.jpg",
         alt: "Tilak Global School main building and grounds",
       },
     },
@@ -297,8 +297,8 @@ export const ourCampus = {
       caption:     "Smart, well-lit learning spaces",
       description: "Smart boards, natural light and ergonomic seating for every stage.",
       image: {
-        src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80&fm=webp",
-        alt: "Smart classroom at Tilak Global School",
+        src: "/images/classroom-tilak-global.jpg",
+        alt: "Students in classroom at Tilak Global School",
       },
     },
     {
@@ -308,8 +308,8 @@ export const ourCampus = {
       caption:     "Open space for sports & play",
       description: "Dedicated space for sports, assemblies and outdoor learning.",
       image: {
-        src: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1200&q=80&fm=webp",
-        alt: "Playground and sports area at Tilak Global School",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794421181/tilak-global-school/facilities/sports.jpg",
+        alt: "Sports ground at Tilak Global School",
       },
     },
   ],
@@ -317,10 +317,10 @@ export const ourCampus = {
 
 // ── About-page CTA banner ─────────────────────────────────────────────────────
 export const aboutCta = {
-  eyebrow:     "Admissions 2025-26",
+  eyebrow:     "Admissions 2026-27",
   heading:     "Give your child the Tilak Global advantage",
-  subtext:     "Admissions open · Nursery to Class XII · Session 2025-26",
-  sessionYear: "2025",
+  subtext:     "Admissions open · Nursery to Class XII · Session 2026-27",
+  sessionYear: "",
   points: [
     "Nursery to Class XII",
     "CBSE · English medium",
@@ -403,7 +403,7 @@ export const subpageCta = {
   eyebrow:     "Admissions 2026-27",
   heading:     "Give your child the Tilak Global advantage",
   subtext:     "Admissions open · Nursery to Class XII · Session 2026-27",
-  sessionYear: "2026",
+  sessionYear: "",
   points: [
     "Nursery to Class XII",
     "CBSE · English medium",

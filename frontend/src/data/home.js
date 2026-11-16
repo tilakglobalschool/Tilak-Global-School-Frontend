@@ -269,7 +269,7 @@ export const faqs = {
     {
       id: 3,
       question: "How can I apply for admission?",
-      answer:   "You can fill the online admission form or visit the school office at Bindayaka, Mukandpura Road, Jaipur. Admissions for Session 2025-26 are open.",
+      answer:   "You can fill the online admission form or visit the school office at Bindayaka, Mukandpura Road, Jaipur. Admissions for Session 2026-27 are open.",
     },
     {
       id: 4,

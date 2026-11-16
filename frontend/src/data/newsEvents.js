@@ -25,7 +25,7 @@ export const newsEvents = {
       title:   "New session will begin",
       summary: "The new academic session begins from 4 April.",
       content:
-        "Full notice: The new academic session 2025-26 will commence from 4 April. All students are requested to report by 8:00 AM in proper uniform. Book lists and timetables will be shared on the first day.",
+        "Full notice: The new academic session 2026-27 will commence from 4 April. All students are requested to report by 8:00 AM in proper uniform. Book lists and timetables will be shared on the first day.",
       type: "event",
     },
     {
@@ -151,7 +151,7 @@ export const newsAnnouncements = {
       month:   "Apr",
       year:    "2026",
       title:   "New Academic Session Begins",
-      summary: "The new academic session 2025-26 commences from 4 April.",
+      summary: "The new academic session 2026-27 commences from 4 April.",
       content:
         "All students are requested to report by 8:00 AM on the first day of the new session in proper school uniform. Updated timetables, book lists and fee schedules will be shared on the first day of school. Parents are requested to ensure their ward's attendance from day one.",
       category:      "Academic",
