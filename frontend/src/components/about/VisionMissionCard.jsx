@@ -44,8 +44,9 @@ export default function VisionMissionCard({ card }) {
           alt={card.image.alt}
           fill
           sizes="(max-width: 768px) 85vw, 33vw"
-          className="object-cover transition-transform duration-700 ease-out
-                     group-hover:scale-105"
+          className={`object-cover transition-transform duration-700 ease-out
+                     group-hover:scale-105`}
+          style={{ objectPosition: card.image.objectPosition || "center" }}
         />
 
         {/* Bottom gradient — transitions into white card body */}

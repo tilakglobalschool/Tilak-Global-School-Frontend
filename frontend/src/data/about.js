@@ -230,8 +230,9 @@ export const visionMission = {
       linkLabel:   "Learn more",
       href:        "/about-us/vision-mission",
       image: {
-        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794327932/tilak-global-school/events/tilak-global-school/events/teachers-day-portrait-ceremony.jpg",
-        alt: "Students looking ahead toward the horizon",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794327829/tilak-global-school/events/tilak-global-school/events/annual-day-kathak-dance.jpg",
+        alt: "Students performing at Tilak Global School Annual Day",
+        objectPosition: "center",
       },
     },
     {
@@ -246,6 +247,7 @@ export const visionMission = {
       image: {
         src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794327921/tilak-global-school/events/tilak-global-school/events/saraswati-puja-idol.jpg",
         alt: "Students collaborating on a project",
+        objectPosition: "center",
       },
     },
     {
@@ -260,6 +262,7 @@ export const visionMission = {
       image: {
         src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794327929/tilak-global-school/events/tilak-global-school/events/saraswati-vandana-singing.jpg",
         alt: "Hands together symbolising teamwork and shared values",
+        objectPosition: "center",
       },
     },
   ],
