@@ -1,4 +1,4 @@
-import "./globals.css";
+﻿import "./globals.css";
 
 export const metadata = {
   metadataBase: new URL("https://www.tilakglobalschool.com"),
@@ -7,14 +7,14 @@ export const metadata = {
     template: "%s | Tilak Global School",
   },
   description:
-    "Tilak Global School is an English-medium, co-educational CBSE-affiliated school in Jaipur offering classes from Play Group to Class XII. Admissions open for session 2026-27.",
+    "Tilak Global School is an English-medium, co-educational CBSE-affiliated school in Jaipur offering classes from Play Group to Class XII. Admissions open for session 2027-28.",
   keywords: [
     "Tilak Global School",
     "CBSE school Jaipur",
     "English medium school Jaipur",
     "Nursery to Class 12 Jaipur",
     "Bindayaka school Jaipur",
-    "admission 2026-27",
+    "admission 2027-28",
   ],
   openGraph: {
     type:        "website",
@@ -22,7 +22,7 @@ export const metadata = {
     url:         "https://www.tilakglobalschool.com",
     siteName:    "Tilak Global School",
     title:       "Tilak Global School | CBSE School Jaipur",
-    description: "English-medium CBSE school in Jaipur — Play Group to Class XII. Admissions open for 2026-27.",
+    description: "English-medium CBSE school in Jaipur — Play Group to Class XII. Admissions open for 2027-28.",
   },
   twitter: {
     card:        "summary_large_image",

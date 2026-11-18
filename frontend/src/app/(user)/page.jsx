@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Tilak Global School | CBSE School Jaipur — Nursery to Class XII",
   description:
-    "Tilak Global School is an English-medium, co-educational CBSE-affiliated school in Jaipur offering classes from Play Group to Class XII. Admissions open for 2026-27.",
+    "Tilak Global School is an English-medium, co-educational CBSE-affiliated school in Jaipur offering classes from Play Group to Class XII. Admissions open for 2027-28.",
 };
 
 export default async function HomePage() {

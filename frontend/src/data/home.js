@@ -6,7 +6,7 @@
 // ── Hero Section ─────────────────────────────────────────────────────────────
 export const hero = {
   eyebrow:      "Tilak Global School · Jaipur",
-  badge:        "Admissions Open · Session 2026-27",
+  badge:        "Admissions Open · Session 2027-28",
   headingLine1: "A stress-free place where",
   headingLine2: "every child grows with character.",
   // Keep full heading for SEO / non-visual use
@@ -269,7 +269,7 @@ export const faqs = {
     {
       id: 3,
       question: "How can I apply for admission?",
-      answer:   "You can fill the online admission form or visit the school office at Bindayaka, Mukandpura Road, Jaipur. Admissions for Session 2026-27 are open.",
+      answer:   "You can fill the online admission form or visit the school office at Bindayaka, Mukandpura Road, Jaipur. Admissions for Session 2027-28 are open.",
     },
     {
       id: 4,
@@ -286,9 +286,9 @@ export const faqs = {
 
 // ── Admission CTA Banner ───────────────────────────────────────────────────────
 export const ctaBanner = {
-  eyebrow:     "Admissions 2026-27",
+  eyebrow:     "Admissions 2027-28",
   heading:     "Give your child the Tilak Global advantage",
-  subtext:     "Admissions open · Nursery to Class XII · Session 2026-27",
+  subtext:     "Admissions open · Nursery to Class XII · Session 2027-28",
   sessionYear: "",
   points: [
     "Nursery to Class XII",

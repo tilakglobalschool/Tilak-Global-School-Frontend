@@ -1,4 +1,4 @@
-/**
+﻿/**
  * about.js
  * Feeds all pages under app/(user)/about-us/.
  */
@@ -320,9 +320,9 @@ export const ourCampus = {
 
 // ── About-page CTA banner ─────────────────────────────────────────────────────
 export const aboutCta = {
-  eyebrow:     "Admissions 2026-27",
+  eyebrow:     "Admissions 2027-28",
   heading:     "Give your child the Tilak Global advantage",
-  subtext:     "Admissions open · Nursery to Class XII · Session 2026-27",
+  subtext:     "Admissions open · Nursery to Class XII · Session 2027-28",
   sessionYear: "",
   points: [
     "Nursery to Class XII",
@@ -403,9 +403,9 @@ export const principalMessage = {
 
 // ── Subpage CTA objects ───────────────────────────────────────────────────────
 export const subpageCta = {
-  eyebrow:     "Admissions 2026-27",
+  eyebrow:     "Admissions 2027-28",
   heading:     "Give your child the Tilak Global advantage",
-  subtext:     "Admissions open · Nursery to Class XII · Session 2026-27",
+  subtext:     "Admissions open · Nursery to Class XII · Session 2027-28",
   sessionYear: "",
   points: [
     "Nursery to Class XII",

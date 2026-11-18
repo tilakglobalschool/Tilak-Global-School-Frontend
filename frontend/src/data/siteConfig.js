@@ -35,7 +35,7 @@ export const siteConfig = {
 
   cbseAffiliationNo: "1730870",
   schoolCode:        "11224",
-  admissionSession:  "2026-27",
+  admissionSession:  "2027-28",
   officeTimings:     "8:00 AM – 2:00 PM",
 
   // Social media — pending CF-14 (not yet confirmed by client)

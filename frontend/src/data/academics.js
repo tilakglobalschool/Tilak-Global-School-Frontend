@@ -1,4 +1,4 @@
-/**
+﻿/**
  * academics.js
  * Feeds all pages under app/(user)/academics/ and the AcademicStages homepage section.
  */
@@ -223,7 +223,7 @@ export const teachingMethodology = {
 export const academicCalendar = {
   heading:     "Academic Calendar",
   description: "Stay informed about important academic dates, examinations and school activities throughout the academic session.",
-  session:     "2026–27",
+  session:     "2027-28",
   events: [
     {
       id:            1,
@@ -284,9 +284,9 @@ export const examinationInformation = {
 
 // ── Academics page CTA banner ─────────────────────────────────────────────────
 export const academicsCta = {
-  eyebrow:     "Admissions 2026–27",
+  eyebrow:     "Admissions 2027-28",
   heading:     "Give your child the Tilak Global advantage",
-  subtext:     "Admissions open · Nursery to Class XII · Session 2026–27 (subject to school confirmation)",
+  subtext:     "Admissions open · Nursery to Class XII · Session 2027-28 (subject to school confirmation)",
   sessionYear: "",
   points: [
     "Nursery to Class XII",
