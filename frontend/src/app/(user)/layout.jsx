@@ -5,8 +5,8 @@ import WhatsAppButton   from "@/components/ui/WhatsAppButton";
 import { getSettings }  from "@/lib/api";
 
 export const metadata = {
-  title: "Tilak Global School",
-  description: "Quality CBSE education in Jaipur — Nursery to Class XII",
+  title: "Tilak Global School | CBSE Affiliated School Jaipur",
+  description: "Tilak Global School — English-medium CBSE school in Jaipur. Nursery to Class XII. Admissions open 2027-28.",
 };
 
 export default async function UserLayout({ children }) {

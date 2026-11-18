@@ -5,7 +5,12 @@ export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Downloads & Mandatory Disclosure — Tilak Global School",
-  description: "Download CBSE mandatory disclosures, notices, academic documents, policies and forms.",
+  description: "Download CBSE mandatory disclosures, school policies, fee structure, academic documents and forms from Tilak Global School, Jaipur. CBSE Affiliation No. 1730870.",
+  openGraph: {
+    title:       "Downloads | Tilak Global School",
+    description: "CBSE mandatory disclosures and school documents — Tilak Global School Jaipur.",
+    url:         "https://www.tilakglobalschool.com/downloads",
+  },
 };
 
 const CATEGORY_ORDER = [

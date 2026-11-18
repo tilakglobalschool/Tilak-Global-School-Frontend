@@ -11,7 +11,13 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Admissions 2027-28 — Tilak Global School | CBSE School Jaipur",
   description:
-    "Apply for admission at Tilak Global School, Jaipur for session 2027-28. CBSE-affiliated school offering Play Group to Class XII. Easy 4-step process.",
+    "Apply for admission at Tilak Global School, Jaipur for session 2027-28. CBSE-affiliated school offering Play Group to Class XII. Simple 4-step process. Contact: +91 9119112335.",
+  keywords: ["Tilak Global School admission 2027-28", "school admission Jaipur", "CBSE school admission Jaipur", "Nursery admission Jaipur"],
+  openGraph: {
+    title:       "Admissions 2027-28 | Tilak Global School",
+    description: "CBSE school admissions open for 2027-28. Play Group to Class XII, Jaipur.",
+    url:         "https://www.tilakglobalschool.com/admissions",
+  },
 };
 
 export default function AdmissionsPage() {

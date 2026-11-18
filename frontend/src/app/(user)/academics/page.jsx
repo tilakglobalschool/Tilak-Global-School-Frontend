@@ -12,7 +12,12 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Academics — Tilak Global School | CBSE Curriculum Jaipur",
   description:
-    "Explore the CBSE/NCERT academic programme at Tilak Global School, Jaipur — Nursery through Class XII. Smart classrooms, experienced faculty, board exam preparation.",
+    "Explore the CBSE/NCERT academic programme at Tilak Global School, Jaipur. Pre-Primary to Senior School (Class XII). Smart classrooms, science labs, experienced faculty and board exam preparation.",
+  openGraph: {
+    title:       "Academics | Tilak Global School Jaipur",
+    description: "CBSE curriculum from Pre-Primary to Class XII at Tilak Global School, Jaipur.",
+    url:         "https://www.tilakglobalschool.com/academics",
+  },
 };
 
 export default async function AcademicsPage() {

@@ -17,7 +17,17 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Tilak Global School | CBSE School Jaipur — Nursery to Class XII",
   description:
-    "Tilak Global School is an English-medium, co-educational CBSE-affiliated school in Jaipur offering classes from Play Group to Class XII. Admissions open for 2027-28.",
+    "Tilak Global School — English-medium, co-educational CBSE school in Jaipur. Classes from Play Group to Class XII. CBSE Affiliation No. 1730870. Admissions open for session 2027-28. Located at Bindayaka (Bhutawali), Mukundpura Road, Jaipur.",
+  keywords: [
+    "Tilak Global School", "CBSE school Jaipur", "school admissions Jaipur 2027-28",
+    "English medium school Jaipur", "Bindayaka school", "Nursery to Class 12 Jaipur",
+  ],
+  openGraph: {
+    title:       "Tilak Global School | CBSE School Jaipur",
+    description: "English-medium CBSE school — Play Group to Class XII. Admissions open 2027-28.",
+    url:         "https://www.tilakglobalschool.com",
+    images:      [{ url: "https://res.cloudinary.com/h6erncmn/image/upload/v1794421761/tilak-global-school/hero/homepage-hero.jpg", width: 1200, height: 630 }],
+  },
 };
 
 export default async function HomePage() {

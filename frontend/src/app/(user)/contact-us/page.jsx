@@ -6,8 +6,13 @@ import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Contact Us — Tilak Global School",
-  description: "Get in touch with Tilak Global School, Jaipur. Phone, email, address and enquiry form.",
+  title: "Contact Us — Tilak Global School Jaipur",
+  description: "Contact Tilak Global School, Jaipur. Phone: +91 9119112335 | Email: schooltilak@gmail.com | Address: Bindayaka (Bhutawali), Mukundpura Road, Jaipur - 302041. Office: Mon–Sat 8AM–2PM.",
+  openGraph: {
+    title:       "Contact Tilak Global School",
+    description: "Phone: +91 9119112335 | Bindayaka, Mukundpura Road, Jaipur - 302041.",
+    url:         "https://www.tilakglobalschool.com/contact-us",
+  },
 };
 
 /** Strip country code safely — only removes leading 91 when number is 12 digits */

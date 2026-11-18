@@ -16,7 +16,12 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: "About Us — Tilak Global School | CBSE School Jaipur",
   description:
-    "Learn about Tilak Global School — a co-educational English-medium CBSE school in Jaipur offering classes from Nursery to Class XII. Our vision, mission and values.",
+    "Learn about Tilak Global School — a co-educational English-medium CBSE school established in 2016 in Jaipur. CBSE Affiliation No. 1730870. Our vision, mission, management and values.",
+  openGraph: {
+    title:       "About Tilak Global School",
+    description: "English-medium CBSE school established 2016. Vision, mission and values.",
+    url:         "https://www.tilakglobalschool.com/about-us",
+  },
 };
 
 export default async function AboutUsPage() {

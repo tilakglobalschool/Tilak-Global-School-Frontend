@@ -11,8 +11,13 @@ import { newsEventsHero, newsEventsPage, newsEventsCta } from "@/data/newsEvents
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: `${newsEventsPage.heading} — Tilak Global School`,
-  description: newsEventsPage.subtext,
+  title: "News & Events — Tilak Global School Jaipur",
+  description: "Latest news, upcoming events, notices and annual function updates from Tilak Global School, Jaipur. Stay updated with school activities, celebrations and announcements.",
+  openGraph: {
+    title:       "News & Events | Tilak Global School",
+    description: "Latest news, events and notices from Tilak Global School, Jaipur.",
+    url:         "https://www.tilakglobalschool.com/news-events",
+  },
 };
 
 /**
