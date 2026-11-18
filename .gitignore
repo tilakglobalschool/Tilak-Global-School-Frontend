@@ -63,3 +63,21 @@ pnpm-debug.log*
 # ── Misc ───────────────────────────────────────────────────────────────────────
 *.pem
 .vercel
+
+# ── Root-level junk files (temp/test/content files) ───────────────────────────
+Content-Files/
+gallery-verify.txt
+page-results.txt
+page-test.txt
+page-test.txt
+url-test.txt
+build-check.txt
+temp_academics.txt
+*.txt
+package.json
+package-lock.json
+
+# ── Old docs removed from tracking ────────────────────────────────────────────
+PROJECT_STATUS.md
+PROJECT_BRIEF.md
+UPDATES.md
