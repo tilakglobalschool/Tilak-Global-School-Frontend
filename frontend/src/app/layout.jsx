@@ -77,6 +77,15 @@ export const metadata = {
   //   google: "your-google-site-verification-code",
   // },
 
+  // ── Icons / Favicon ───────────────────────────────────────────────────────
+  // Static fallback favicon from public/ folder.
+  // When admin uploads a favicon via Settings panel, it overrides via <head> inject.
+  icons: {
+    icon:        "/favicon.ico",
+    shortcut:    "/favicon.ico",
+    apple:       "/apple-touch-icon.png",
+  },
+
   // ── Robots ────────────────────────────────────────────────────────────────
   robots: {
     index:               true,

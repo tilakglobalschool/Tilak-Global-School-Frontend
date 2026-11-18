@@ -92,7 +92,11 @@ export default function SettingsPage() {
   const handleUpload = async (endpoint, field) => {
     const input = document.createElement('input');
     input.type = 'file';
-    input.accept = 'image/*';
+    // For favicon: accept .ico + standard image formats
+    // For logo/director: standard images only
+    input.accept = field === 'faviconUrl'
+      ? 'image/*,.ico'
+      : 'image/jpeg,image/png,image/webp,image/svg+xml';
     input.onchange = async (e) => {
       const file = e.target.files[0];
       if (!file) return;
@@ -232,6 +236,7 @@ export default function SettingsPage() {
             Upload Favicon
           </button>
           {form.faviconUrl && <span className="text-xs text-success">Favicon set</span>}
+          <span className="text-xs text-muted">(.ico, .png, .svg)</span>
         </div>
       </Section>
 

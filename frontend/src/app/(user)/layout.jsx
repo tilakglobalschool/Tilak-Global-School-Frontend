@@ -10,13 +10,25 @@ export const metadata = {
 };
 
 export default async function UserLayout({ children }) {
-  // Fetch settings once here so the WhatsApp button gets the correct number
   const { data } = await getSettings();
-  const phone   = data?.settings?.whatsappNumber || data?.settings?.phone || "9119112335";
-  const message = data?.settings?.whatsappMessage || "Hello, I would like to enquire about admission to Tilak Global School.";
+  const settings = data?.settings || null;
+
+  const phone   = settings?.whatsappNumber || settings?.phone || "9119112335";
+  const message = settings?.whatsappMessage || "Hello, I would like to enquire about admission to Tilak Global School.";
+
+  // Dynamic favicon from admin Settings panel
+  // When admin uploads favicon via Settings → faviconUrl is set → injected here
+  const faviconUrl = settings?.faviconUrl || null;
 
   return (
     <>
+      {/* Dynamic favicon from CMS — overrides static public/favicon.ico */}
+      {faviconUrl && (
+        <head>
+          <link rel="icon"       href={faviconUrl} />
+          <link rel="shortcut icon" href={faviconUrl} />
+        </head>
+      )}
       <ToasterProvider />
       <HeaderServer />
       <main className="min-h-screen">{children}</main>
