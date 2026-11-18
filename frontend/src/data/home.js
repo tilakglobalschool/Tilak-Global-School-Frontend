@@ -155,7 +155,7 @@ export const facilities = {
       title:       "Multi Purpose Hall",
       description: "The school has a multi-purpose hall and auditorium for cultural programmes, school functions, assemblies and other events.",
       image: {
-        src:            "https://res.cloudinary.com/h6erncmn/image/upload/v1794421178/tilak-global-school/facilities/multi-purpose-hall.jpg",
+        src:            "https://res.cloudinary.com/h6erncmn/image/upload/v1794978541/tilak-global-school/gallery/nsdcdqcyfnksihag1jve.jpg",
         alt:            "Multi-purpose hall and auditorium at Tilak Global School",
         objectPosition: "center",
       },
@@ -168,7 +168,7 @@ export const facilities = {
       description: "Students have opportunities to learn vocal music, instrumental music and dance during school hours. Dedicated music and dance rooms provide space for students to practise and develop their creative abilities.",
       image: {
         // TEMPORARY — replace with actual school photo when available
-        src:            "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=800&q=80&fm=webp",
+        src:            "https://res.cloudinary.com/h6erncmn/image/upload/v1794978374/tilak-global-school/gallery/rufluqfhljzwtzodldhc.jpg",
         alt:            "Music and dance room at Tilak Global School",
         objectPosition: "center",
       },

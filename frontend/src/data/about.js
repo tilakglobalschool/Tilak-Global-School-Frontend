@@ -153,7 +153,7 @@ export const whoWeAre = {
     href:  "/about-us/vision-mission",
   },
   image: {
-    src:     "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1600&q=80&fm=webp",
+    src:     "https://res.cloudinary.com/h6erncmn/image/upload/v1794977696/tilak-global-school/gallery/tia17gm00g0tdlowyuab.jpg",
     alt:     "Students of Tilak Global School in classroom",
     caption: "Tilak Global School, Bindayaka · Est. 2016",
   },
@@ -204,7 +204,7 @@ export const ourJourney = {
     href:  "/about-us/our-school",
   },
   image: {
-    src:     "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80&fm=webp",
+    src:     "https://res.cloudinary.com/h6erncmn/image/upload/v1794327697/tilak-global-school/campus/tilak-global-school/campus/school-main-gate.jpg",
     alt:     "Tilak Global School campus building",
     caption: "Tilak Global School, Bindayaka · Est. 2016",
   },
@@ -230,7 +230,7 @@ export const visionMission = {
       linkLabel:   "Learn more",
       href:        "/about-us/vision-mission",
       image: {
-        src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=80&fm=webp",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794327932/tilak-global-school/events/tilak-global-school/events/teachers-day-portrait-ceremony.jpg",
         alt: "Students looking ahead toward the horizon",
       },
     },
@@ -244,7 +244,7 @@ export const visionMission = {
       linkLabel:   "Learn more",
       href:        "/about-us/vision-mission",
       image: {
-        src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80&fm=webp",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794327921/tilak-global-school/events/tilak-global-school/events/saraswati-puja-idol.jpg",
         alt: "Students collaborating on a project",
       },
     },
@@ -258,7 +258,7 @@ export const visionMission = {
       linkLabel:   "Learn more",
       href:        "/about-us/vision-mission",
       image: {
-        src: "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=900&q=80&fm=webp",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1794327929/tilak-global-school/events/tilak-global-school/events/saraswati-vandana-singing.jpg",
         alt: "Hands together symbolising teamwork and shared values",
       },
     },
