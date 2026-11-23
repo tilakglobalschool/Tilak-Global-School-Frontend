@@ -111,6 +111,13 @@ export const adminApi = {
   uploadGallery:       (fd)        => http('POST',   '/admin/gallery',         fd),
   updateGallery:       (id, body)  => http('PUT',    `/admin/gallery/${id}`,   body),
   deleteGallery:       (id)        => http('DELETE', `/admin/gallery/${id}`),
+
+  // ── Image Assignments ─────────────────────────────────────────────────────
+  imageSlotRegistry:   ()                       => http('GET',    '/admin/image-assignments/registry'),
+  imageAssignments:    ()                       => http('GET',    '/admin/image-assignments'),
+  assignImage:         (body)                   => http('PUT',    '/admin/image-assignments', body),
+  removeAssignment:    (sectionKey, slotKey)    => http('DELETE', `/admin/image-assignments/${sectionKey}/${slotKey}`),
+  imageMediaUsages:    (mediaId)                => http('GET',    `/admin/image-assignments/media/${mediaId}/usages`),
   // ── News & Events ────────────────────────────────────────────────────────────
   news:                (q = '')    => http('GET',    `/admin/news${q}`),
   newsItem:            (id)        => http('GET',    `/admin/news/${id}`),

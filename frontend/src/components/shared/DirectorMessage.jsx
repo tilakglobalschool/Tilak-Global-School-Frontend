@@ -1,29 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { resolveImage, resolveAlt } from "@/lib/sectionImages";
 
-/**
- * DirectorMessage — shared editorial component.
- * Used on Homepage (data/home.js → directorMessage, with CTA)
- * and About Us page (data/about.js → aboutDirectorMessage, no CTA).
- *
- * Props:
- *   data: {
- *     heading      — eyebrow / section label
- *     quote        — main blockquote text
- *     note         — small disclaimer caption
- *     name         — speaker's name (rendered inside photo + signature row)
- *     designation  — role / title
- *     cta?         — { label, href } | null  → button omitted when falsy
- *     image        — { src, alt, caption }   → caption used as subtitle in photo
- *   }
- *   bg?  — Tailwind bg-* class to override the section tint (default bg-[#EAF0FB])
- *
- * Design rules (must stay true):
- *   • Zero rounded-* anywhere — every corner is sharp.
- *   • Zero literal text in JSX — every string from `data`.
- *   • Image composition matches OurJourney: backing plate + outline frame.
- */
-export default function DirectorMessage({ data, bg = "bg-[#EAF0FB]" }) {
+export default function DirectorMessage({ data, bg = "bg-[#EAF0FB]", sectionImages = {} }) {
+  // Portrait: prefer admin-assigned image, then data.image.src
+  const portraitSrc = resolveImage(sectionImages, 'directorMessage', 'portrait', data.image.src);
+  const portraitAlt = resolveAlt(sectionImages,   'directorMessage', 'portrait', data.image.alt);
   return (
     <section
       className={`relative overflow-hidden ${bg} py-16 md:py-24`}
@@ -97,8 +79,8 @@ export default function DirectorMessage({ data, bg = "bg-[#EAF0FB]" }) {
                          overflow-hidden shadow-2xl group"
             >
               <Image
-                src={data.image.src}
-                alt={data.image.alt}
+                src={portraitSrc}
+                alt={portraitAlt}
                 fill
                 sizes="(max-width: 1024px) 70vw, 35vw"
                 className="object-cover object-top

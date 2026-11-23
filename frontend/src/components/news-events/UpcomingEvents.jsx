@@ -1,22 +1,24 @@
 "use client";
 
-import MobileSlider  from "@/components/ui/MobileSlider";
-import EventCard      from "@/components/news-events/EventCard";
+import MobileSlider     from "@/components/ui/MobileSlider";
+import EventCard        from "@/components/news-events/EventCard";
 import { getUploadUrl } from "@/lib/uploadUrl";
+import { resolveImage, resolveAlt, resolvePosition } from "@/lib/sectionImages";
 import { upcomingEvents as d } from "@/data/newsEvents";
 
 /**
  * UpcomingEvents — client component (MobileSlider needs useState/useRef).
  *
  * Props:
- *   apiItems — array of NewsPost docs from the API (category=Event, date>=today)
+ *   apiItems      — NewsPost docs from API (category=Event, date>=today)
+ *   sectionImages — admin image assignments map from /api/section-images
  *
- * When apiItems is non-empty, they replace the static placeholder items.
- * Falls back to static data/newsEvents.js when API returns empty.
+ * Image resolution per card:
+ *   1. Admin-assigned image for sectionKey:'upcomingEvents', slotKey: item.id
+ *   2. API post imageUrl (if post came from admin)
+ *   3. Static fallback from data/newsEvents.js
  */
-export default function UpcomingEvents({ apiItems = [] }) {
-
-  // Map API posts to the shape EventCard expects
+export default function UpcomingEvents({ apiItems = [], sectionImages = {} }) {
   const apiCards = apiItems.map(p => ({
     id:            p._id,
     title:         p.title,
@@ -32,50 +34,53 @@ export default function UpcomingEvents({ apiItems = [] }) {
   }));
 
   const items = apiCards.length > 0 ? apiCards : d.items;
-
-  // Don't render the section at all if there are no upcoming events and no static items
   if (!items || items.length === 0) return null;
 
   return (
     <section className="w-full bg-white py-12 md:py-20">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-
-        {/* Header */}
         <div className="text-center mb-10 md:mb-14">
           <span className="inline-flex items-center justify-center gap-2 text-[11px] md:text-xs font-semibold uppercase tracking-[0.2em] text-red-600">
             <span aria-hidden="true" className="w-8 h-[2px] bg-red-600 shrink-0" />
             {d.eyebrow}
             <span aria-hidden="true" className="w-8 h-[2px] bg-red-600 shrink-0" />
           </span>
-          <h2 className="mt-4 text-2xl md:text-4xl font-serif font-bold text-[#0B3D91]">
-            {d.heading}
-          </h2>
+          <h2 className="mt-4 text-2xl md:text-4xl font-serif font-bold text-[#0B3D91]">{d.heading}</h2>
           <div aria-hidden="true" className="w-12 h-[2px] md:h-1 bg-red-600 mx-auto mt-4" />
-          {d.description && (
-            <p className="mt-4 text-xs md:text-base text-gray-600 max-w-xl mx-auto">
-              {d.description}
-            </p>
-          )}
+          {d.description && <p className="mt-4 text-xs md:text-base text-gray-600 max-w-xl mx-auto">{d.description}</p>}
         </div>
 
-        {/* Mobile slider */}
         <MobileSlider
           items={items}
           breakpoint="md"
           slideWidth="w-[calc(100vw-2.5rem)]"
           activeDotClass="w-6 h-2 bg-red-600"
           inactiveDotClass="w-2 h-2 bg-gray-300"
-          renderItem={(item) => <EventCard item={item} showDetails={true} />}
+          renderItem={(item) => {
+            const resolved = resolveEventImage(item, 'upcomingEvents', sectionImages);
+            return <EventCard item={{ ...item, image: resolved }} showDetails={true} />;
+          }}
         />
 
-        {/* Desktop grid */}
         <div className="hidden md:grid md:grid-cols-3 gap-6 lg:gap-8">
-          {items.map((item) => (
-            <EventCard key={item.id} item={item} showDetails={true} />
-          ))}
+          {items.map((item) => {
+            const resolved = resolveEventImage(item, 'upcomingEvents', sectionImages);
+            return <EventCard key={item.id} item={{ ...item, image: resolved }} showDetails={true} />;
+          })}
         </div>
-
       </div>
     </section>
   );
+}
+
+/**
+ * Resolves the image for one event card.
+ * Priority: admin assignment → item's own image src
+ */
+function resolveEventImage(item, sectionKey, sectionImages) {
+  const slotKey = item.id;
+  const src = resolveImage(sectionImages,   sectionKey, slotKey, item.image.src);
+  const alt = resolveAlt(sectionImages,     sectionKey, slotKey, item.image.alt);
+  const pos = resolvePosition(sectionImages, sectionKey, slotKey, 'center');
+  return { src, alt, objectPosition: pos };
 }

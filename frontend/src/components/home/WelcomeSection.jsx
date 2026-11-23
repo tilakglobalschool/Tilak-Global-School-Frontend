@@ -1,16 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { welcome as d } from "@/data/home";
+import { resolveImage, resolveAlt } from "@/lib/sectionImages";
 
-/**
- * WelcomeSection — server component.
- * Props: content — from /api/content/home (optional, falls back to static)
- */
-export default function WelcomeSection({ content }) {
-  // Dynamic overrides from CMS
+export default function WelcomeSection({ content, sectionImages = {} }) {
   const label   = content?.["home.welcome.title"]?.value || d.label;
   const heading = content?.["home.welcome.title"]?.value || d.heading;
   const body    = content?.["home.welcome.body"]?.value  || null;
+
+  const imgSrc = resolveImage(sectionImages, 'welcomeSection', 'mainImage', d.image.src);
+  const imgAlt = resolveAlt(sectionImages,   'welcomeSection', 'mainImage', d.image.alt);
   return (
     <section className="relative overflow-hidden bg-white pt-16 md:pt-24 pb-10 md:pb-14">
       <div
@@ -160,8 +159,8 @@ export default function WelcomeSection({ content }) {
                          overflow-hidden shadow-2xl group"
             >
               <Image
-                src={d.image.src}
-                alt={d.image.alt}
+                src={imgSrc}
+                alt={imgAlt}
                 fill
                 sizes="(max-width: 1024px) 90vw, 45vw"
                 className="object-cover transition-transform duration-700 ease-out

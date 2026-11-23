@@ -1,20 +1,17 @@
 import Image from "next/image";
+import { resolveImage, resolveAlt } from "@/lib/sectionImages";
 
-/**
- * WhyChooseCard — server component.
- * Sharp split card: image strip top, body bottom.
- * Consistent with AcademicStages / FacilityCard / ManagementCard style.
- *
- * Props:
- *   item — { id, number, title, description, highlight, image: { src, alt } }
- *
- * Design rules:
- *   • Zero rounded-* anywhere.
- *   • Zero emojis or icon boxes.
- *   • highlight=true → border-red-600/40, bg-red-50/40 tint on body.
- *   • Every string from data — zero literals.
- */
-export default function WhyChooseCard({ item }) {
+const WHY_SLOT = {
+  'curriculum':   'curriculum',
+  'environment':  'environment',
+  'legacy':       'legacy',
+  'achievements': 'achievements',
+};
+
+export default function WhyChooseCard({ item, sectionImages = {} }) {
+  const slotKey = WHY_SLOT[item.id] || item.id;
+  const imgSrc  = resolveImage(sectionImages, 'whyChooseUs', slotKey, item.image.src);
+  const imgAlt  = resolveAlt(sectionImages,   'whyChooseUs', slotKey, item.image.alt);
   const isHighlight = item.highlight;
 
   return (
@@ -38,8 +35,8 @@ export default function WhyChooseCard({ item }) {
       {/* ── Image strip ── */}
       <div className="relative h-40 md:h-44 overflow-hidden shrink-0">
         <Image
-          src={item.image.src}
-          alt={item.image.alt}
+          src={imgSrc}
+          alt={imgAlt}
           fill
           sizes="(max-width: 768px) 85vw, 25vw"
           className="object-cover transition-transform duration-700 ease-out

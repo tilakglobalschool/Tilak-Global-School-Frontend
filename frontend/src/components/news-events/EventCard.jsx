@@ -26,6 +26,7 @@ export default function EventCard({ item, showDetails = true }) {
           sizes="(max-width: 768px) 90vw, 33vw"
           className="object-cover transition-transform duration-700 ease-out
                      group-hover:scale-105"
+          style={{ objectPosition: item.image.objectPosition || 'center' }}
         />
 
         {/* Bottom gradient */}

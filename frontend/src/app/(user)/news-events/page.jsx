@@ -5,7 +5,7 @@ import UpcomingEvents     from "@/components/news-events/UpcomingEvents";
 import NewsNoticesLayout  from "@/components/news-events/NewsNoticesLayout";
 import PreviousEvents     from "@/components/news-events/PreviousEvents";
 import CtaBanner          from "@/components/shared/CtaBanner";
-import { getNews }        from "@/lib/api";
+import { getNews, getSectionImages } from "@/lib/api";
 import { newsEventsHero, newsEventsPage, newsEventsCta } from "@/data/newsEvents";
 
 export const dynamic = "force-dynamic";
@@ -29,8 +29,12 @@ export const metadata = {
  *   News + Notices → Previous Events → CTA
  */
 export default async function NewsEventsPage() {
-  const { data } = await getNews("?limit=100&status=published");
-  const allPosts = data?.posts || [];
+  const [{ data }, sectionImagesRes] = await Promise.all([
+    getNews("?limit=100&status=published"),
+    getSectionImages(),
+  ]);
+  const allPosts      = data?.posts            || [];
+  const sectionImages = sectionImagesRes.data?.sections || {};
 
   const now = new Date();
 
@@ -94,9 +98,9 @@ export default async function NewsEventsPage() {
       {/* Annual Day — Blog card + image slider */}
       <AnnualDaySection data={annualDayData} />
 
-      <UpcomingEvents    apiItems={upcoming} />
+      <UpcomingEvents    apiItems={upcoming} sectionImages={sectionImages} />
       <NewsNoticesLayout apiNews={news} apiNotices={notices} />
-      <PreviousEvents    apiItems={previous} />
+      <PreviousEvents    apiItems={previous} sectionImages={sectionImages} />
       <CtaBanner data={newsEventsCta} />
     </>
   );

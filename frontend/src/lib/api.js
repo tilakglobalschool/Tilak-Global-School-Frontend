@@ -140,4 +140,13 @@ export function submitContact(data) {
   });
 }
 
+/**
+ * Section images — admin-assigned images grouped by section and slot.
+ * Returns { sectionKey: { slotKey: { imageUrl, alt, objectPosition } } }
+ * Falls back gracefully to {} on error so static data-file images are used.
+ */
+export function getSectionImages() {
+  return apiFetch('/section-images');
+}
+
 export default apiFetch;

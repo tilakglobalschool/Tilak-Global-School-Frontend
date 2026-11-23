@@ -9,7 +9,7 @@ import NewsGallerySection from "@/components/home/NewsGallerySection";
 import FaqSection from "@/components/home/FaqSection";
 import CtaBanner from "@/components/home/CtaBanner";
 
-import { getSettings, getContent, getNews, getGallery, getFaqs } from "@/lib/api";
+import { getSettings, getContent, getNews, getGallery, getFaqs, getSectionImages } from "@/lib/api";
 import { directorMessage as staticDirectorMsg } from "@/data/home";
 
 export const dynamic = "force-dynamic";
@@ -32,19 +32,21 @@ export const metadata = {
 
 export default async function HomePage() {
   // Fetch all dynamic data in parallel — graceful fallback on error
-  const [settingsRes, contentRes, newsRes, galleryRes, faqsRes] = await Promise.all([
+  const [settingsRes, contentRes, newsRes, galleryRes, faqsRes, sectionImagesRes] = await Promise.all([
     getSettings(),
     getContent("home"),
     getNews("?limit=4&status=published"),
     getGallery("?limit=4&status=published"),
     getFaqs(),
+    getSectionImages(),
   ]);
 
-  const settings = settingsRes.data?.settings || null;
-  const content  = contentRes.data?.content   || {};
-  const news     = newsRes.data?.posts         || [];
-  const gallery  = galleryRes.data?.images     || [];
-  const faqs     = faqsRes.data?.faqs          || [];
+  const settings      = settingsRes.data?.settings       || null;
+  const content       = contentRes.data?.content         || {};
+  const news          = newsRes.data?.posts              || [];
+  const gallery       = galleryRes.data?.images          || [];
+  const faqs          = faqsRes.data?.faqs               || [];
+  const sectionImages = sectionImagesRes.data?.sections  || {};
 
   // Build director data: prefer DB settings, fall back to static
   const directorData = settings ? {
@@ -67,11 +69,11 @@ export default async function HomePage() {
       {/* ── Homepage sections ── */}
       <HeroSection settings={settings} content={content} />
       <StatsBar />
-      <WelcomeSection content={content} />
-      <AcademicStages />
-      <DirectorMessage data={directorData} />
-      <FacilitiesSection />
-      <WhyChooseSection />
+      <WelcomeSection content={content} sectionImages={sectionImages} />
+      <AcademicStages sectionImages={sectionImages} />
+      <DirectorMessage data={directorData} sectionImages={sectionImages} />
+      <FacilitiesSection sectionImages={sectionImages} />
+      <WhyChooseSection sectionImages={sectionImages} />
       <NewsGallerySection news={news} gallery={gallery} />
       <FaqSection apiFaqs={faqs} />
       <CtaBanner settings={settings} />

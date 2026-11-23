@@ -14,7 +14,7 @@ import { whyChoose as d } from "@/data/home";
  * border-t border-[#0B3D91]/10 separates it cleanly from FacilitiesSection
  * (bg-[#EEF3FB]) above and NewsGallerySection (bg-[#EEF3FB]) below.
  */
-export default function WhyChooseSection() {
+export default function WhyChooseSection({ sectionImages = {} }) {
   return (
     <section
       className="relative overflow-hidden
@@ -102,7 +102,7 @@ export default function WhyChooseSection() {
           breakpoint="md"
           slideWidth="w-[calc(100vw-2.5rem)]"
           activeDotClass="w-6 h-2 bg-red-600"
-          renderItem={(item) => <WhyChooseCard item={item} />}
+          renderItem={(item) => <WhyChooseCard item={item} sectionImages={sectionImages} />}
         />
 
         {/* Desktop grid — hidden below md */}
@@ -111,7 +111,7 @@ export default function WhyChooseSection() {
                      gap-6 md:gap-8 items-stretch"
         >
           {d.items.map((item) => (
-            <WhyChooseCard key={item.id} item={item} />
+            <WhyChooseCard key={item.id} item={item} sectionImages={sectionImages} />
           ))}
         </div>
 
