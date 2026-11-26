@@ -63,8 +63,8 @@ export const curriculumHero = {
     { label: "Curriculum", href: "/academics/curriculum" },
   ],
   image: {
-    src: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1800&q=80&fm=webp",
-    alt: "Students studying books and curriculum materials",
+    src: "https://res.cloudinary.com/h6erncmn/image/upload/v1795696239/tilak-global-school/curriculum/our-curriculum-hero.jpg",
+    alt: "Our Curriculum — Tilak Global School",
   },
 };
 
@@ -190,8 +190,8 @@ export const teachingMethodology = {
       description:
         "We encourage students to understand fundamental concepts through interactive lessons, meaningful discussions and practical examples.",
       image: {
-        src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80&fm=webp",
-        alt: "Students engaged in concept-based classroom learning",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1795696244/tilak-global-school/curriculum/concept-led-learning.jpg",
+        alt: "Concept-led learning at Tilak Global School",
       },
     },
     {
@@ -201,8 +201,8 @@ export const teachingMethodology = {
       description:
         "Hands-on activities, group projects and experiential learning help students develop curiosity, teamwork and problem-solving skills.",
       image: {
-        src: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=900&q=80&fm=webp",
-        alt: "Students participating in classroom activities and projects",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1795696266/tilak-global-school/curriculum/activity-based-learning.jpg",
+        alt: "Activity-based learning at Tilak Global School",
       },
     },
     {
@@ -212,8 +212,8 @@ export const teachingMethodology = {
       description:
         "Students receive academic guidance and support in exploring higher education opportunities, competitive examinations and future career pathways.",
       image: {
-        src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80&fm=webp",
-        alt: "Students receiving educational guidance and career counselling",
+        src: "https://res.cloudinary.com/h6erncmn/image/upload/v1795696268/tilak-global-school/curriculum/career-guidance.jpg",
+        alt: "Career guidance at Tilak Global School",
       },
     },
   ],
